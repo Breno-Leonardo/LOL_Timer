@@ -3,26 +3,20 @@ package com.example.timerlol;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.DrawableContainer;
-import android.media.AudioManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 
 import com.example.timerlol.ui.main.MainViewModel;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         MainViewModel viewModel = getViewModel();
         viewModel.showImages.setValue(true);
-
-
+        ImageView icon = findViewById(R.id.imageTime);
+        ArrayList<Drawable> drawables = new ArrayList<>();
         AssetManager am = getApplicationContext().getAssets();
         String[] images = null;
         try {
@@ -56,25 +50,55 @@ public class MainActivity extends AppCompatActivity {
         }
 
         View v = findViewById(R.id.containerMain);
-
+        ImageView thumb = findViewById(R.id.imageThumb);
         int tam = inputStreams.size();
         viewModel.countImage.observe(this, countImage -> {// observe for change image
             if (getViewModel().countImage.getValue() == tam) {
                 getViewModel().countImage.setValue(0);
             }
 
-                Drawable d = Drawable.createFromStream(inputStreams.get(getViewModel().countImage.getValue()), null);
-                v.setBackground(d);
+
+            drawables.add(Drawable.createFromStream(inputStreams.get(getViewModel().countImage.getValue()), null));
+            thumb.setScaleX(1);
+            thumb.setScaleY(1);
+            if(getViewModel().countImage.getValue()<drawables.size())
+            thumb.setBackground(drawables.get(getViewModel().countImage.getValue()));
 
         });
-        if (inputStreams.size() > 0) {
+
+
+        if (inputStreams.size() > 0) {//thread thumbs and icon
             Thread thread = new Thread() {
                 public void run() {
-
+                    boolean sand = false;
                     while (getViewModel().showImages.getValue()) {
                         getViewModel().countImage.postValue(getViewModel().countImage.getValue() + 1);
                         try {
-                            Thread.currentThread().sleep(5000);
+                            int t = 1000;
+                            int millis = 4000;
+                            for (int i = 0; i < t; i++) {
+                                icon.setRotation(icon.getRotation() + 0.27f);
+
+                                if (!sand && icon.getRotation() > 135 && icon.getRotation() < 180) {
+                                    icon.setImageDrawable(getDrawable(R.drawable.timer_sand_paused));
+                                    sand = true;
+                                } else if (sand && icon.getRotation() > 180 && icon.getRotation() < 305) {
+                                    icon.setImageDrawable(getDrawable(R.drawable.timer_sand));
+                                    sand = false;
+                                } else if (!sand && icon.getRotation() > 305 && icon.getRotation() < 360) {
+                                    icon.setImageDrawable(getDrawable(R.drawable.timer_sand_paused));
+                                    sand = true;
+                                } else if (sand && icon.getRotation() > 360) {
+                                    icon.setRotation(0);
+                                    icon.setImageDrawable(getDrawable(R.drawable.timer_sand_complete));
+                                    sand = false;
+                                }
+                                thumb.setScaleX(thumb.getScaleX() + 0.00005f);
+                                thumb.setScaleY(thumb.getScaleY() + 0.00005f);
+                                Thread.currentThread().sleep(4000 / t);
+                            }
+
+
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -84,8 +108,8 @@ public class MainActivity extends AppCompatActivity {
 
             thread.start();
         }
-        else
-            v.setBackgroundColor(getResources().getColor(R.color.white));
+//        else
+//            v.setBackgroundColor(getResources().getColor(R.color.white));
 
         findViewById(R.id.btnStart).setOnTouchListener((view, motionEvent) -> {
             viewModel.showImages.setValue(false);
@@ -113,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         return new ViewModelProvider(this).get(MainViewModel.class);
     }
 
-//    @Override
+    //    @Override
 //    protected void onResume() {
 //        super.onResume();
 //        AudioManager audioManager =
@@ -131,6 +155,18 @@ public class MainActivity extends AppCompatActivity {
 //        audioManager.adjustStreamVolume(AudioManager.STREAM_NOTIFICATION,AudioManager.ADJUST_UNMUTE,
 //                AudioManager.FLAG_VIBRATE);
 //    }
+    public void rotateIcon(ImageView icon) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                icon.animate().rotation(90).setDuration(1000);
+                icon.animate().rotation(180).setDuration(1000);
+                icon.animate().rotation(270).setDuration(1000);
+                icon.animate().rotation(360).setDuration(1000);
+
+            }
+        });
+    }
 
     @Override
     public void onBackPressed() {
@@ -141,19 +177,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        System.out.println("MainActivity.onResume resume main aqui");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        System.out.println("MainActivity.onStop stop main aqui");
 
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        System.out.println("MainActivity.onDestroy aqui");
     }
 }

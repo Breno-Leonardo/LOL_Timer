@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -13,12 +12,11 @@ import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.speech.tts.TextToSpeech;
-import android.view.MotionEvent;
-import android.view.ViewTreeObserver;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,17 +28,16 @@ import com.example.timerlol.ui.main.MainViewModel;
 
 import java.util.ArrayList;
 import java.util.Locale;
-import java.util.Timer;
 
 public class TimerActivity extends AppCompatActivity {
     private static final int RECORD_AUDIO_REQUEST_CODE = 1;
     private EditText editText;
-    private Button button,button2;
-    private TextView textView;
     private SpeechRecognizer speechRecognizer;
     private TextToSpeech textToSpeech;
     private Intent srIntent;
     private CountDownTimer timer;
+    private LinearLayout container;
+    private View containerTimer;
     private long time;
 
     @Override
@@ -54,10 +51,14 @@ public class TimerActivity extends AppCompatActivity {
 
 //        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_timer);
+
+        container=findViewById(R.id.timersContainer);
+
+containerTimer=  getLayoutInflater().inflate(R.layout.view_timer,container , false);
+container.addView(containerTimer);
         editText = findViewById(R.id.textTimer);
-        button = findViewById(R.id.btnSpeak);
-        button2 = findViewById(R.id.btnSpeak2);
-        textView = findViewById(R.id.timer);
+
+
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             checkPermission();
         }
@@ -75,7 +76,7 @@ public class TimerActivity extends AppCompatActivity {
             @Override
             public void onTick(long l) {
                 time = l;
-                updateTextTime();
+//                updateTextTime();
             }
 
             @Override
@@ -84,25 +85,7 @@ public class TimerActivity extends AppCompatActivity {
             }
         }.start();
 
-        button.setOnTouchListener((view, motionEvent) -> {
-            AudioManager audioManager =
-                    (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-            audioManager.adjustStreamVolume(AudioManager.STREAM_NOTIFICATION,AudioManager.ADJUST_MUTE,
-                    AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);
 
-
-//
-            return false;
-        });
-        button2.setOnTouchListener((view, motionEvent) -> {
-            AudioManager audioManager =
-                    (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-            audioManager.adjustStreamVolume(AudioManager.STREAM_NOTIFICATION,AudioManager.ADJUST_UNMUTE,
-                    AudioManager.FLAG_VIBRATE);
-
-//
-            return false;
-        });
 
         StartListening();
 
@@ -148,7 +131,7 @@ public class TimerActivity extends AppCompatActivity {
 
             @Override
             public void onError(int i) {
-                System.out.println("TimerActivity.onError erro "+i);
+//                System.out.println("TimerActivity.onError erro "+i);
                 if(i==7|| i==8) {
                 speechRecognizer.destroy();
                 speechRecognizer = null;
@@ -165,10 +148,9 @@ public class TimerActivity extends AppCompatActivity {
                 String[] commandCheck = result.split(" ");
                 System.out.println("TimerActivity.onResults comand " + result);
                 if (commandCheck.length >= 3) {
-                    System.out.println("TimerActivity.onResults clenei ");
 
-                    if (command != null)
-                        editText.setText(command.get(0));
+//                    if (command != null)
+//                        editText.setText(command.get(0));
 
 
 // o textToSpeak faz o delay entre comandos seguidos aumentar.
@@ -176,6 +158,8 @@ public class TimerActivity extends AppCompatActivity {
 
 
                 }
+                if (command != null)
+                        editText.setText(command.get(0));
 
                 speechRecognizer.destroy();
                 speechRecognizer = null;
@@ -209,7 +193,7 @@ public class TimerActivity extends AppCompatActivity {
         }
     }
 
-    private void updateTextTime() {
+    private void updateTextTime(TextView textView) {
         int minutes = (int) (time / 1000) / 60;
         int seconds = (int) (time / 1000) % 60;
 //        int seconds= (int) (time/1000);

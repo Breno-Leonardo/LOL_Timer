@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutTimer"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/heightLayoutTimer"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="10dp"
+    app:cardElevation="40dp"
+    app:cardCornerRadius="20dp"
+    android:outlineAmbientShadowColor="@color/black"
+    android:outlineSpotShadowColor="@color/black"
+
+    android:background="@color/white"
+    android:fillViewport="true"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:gravity="center|center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/spellAndPositions"
+            android:layout_height="@dimen/spellAndPositions"
+            android:src="@drawable/position_jungle"
+            ></ImageView>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="@dimen/spellAndPositions"
+            android:layout_height="@dimen/spellAndPositions"
+            android:layout_gravity="center"
+            app:cardElevation="10dp"
+            app:cardCornerRadius="2dp"
+            app:cardBackgroundColor="@color/white"
+            android:background="@color/white"
+            android:layout_marginLeft="7dp"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/flash"
+                ></ImageView>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@id/layoutTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="14dp"
+            android:text="00:00"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="65dp"
+            android:textStyle="bold"></TextView>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

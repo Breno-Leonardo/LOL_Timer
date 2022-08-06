@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.timerlol">
+    package="com.onerb.timerlol">
     <uses-permission android:name="android.permission.RECORD_AUDIO"></uses-permission>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <queries>
@@ -20,7 +20,7 @@
         android:theme="@style/Theme.TimerLol"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name="com.onerb.timerlol.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -29,10 +29,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TimerActivity"
+        <activity android:name="com.onerb.timerlol.TimerActivity"
             android:screenOrientation="portrait" android:launchMode="singleInstance" ></activity>
-        <activity android:name=".CommandsActivity" android:launchMode="singleInstance"  android:screenOrientation="portrait"></activity>
-        <activity android:name=".SettingsActivity" android:launchMode="singleInstance" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.onerb.timerlol.CommandsActivity" android:launchMode="singleInstance"  android:screenOrientation="portrait"></activity>
+        <activity android:name="com.onerb.timerlol.SettingsActivity" android:launchMode="singleInstance" android:screenOrientation="portrait"></activity>
 
     </application>
 

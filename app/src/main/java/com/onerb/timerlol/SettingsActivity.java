@@ -1,4 +1,4 @@
-package com.example.timerlol;
+package com.onerb.timerlol;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +8,7 @@ import android.view.Window;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class CommandsActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,7 +16,7 @@ public class CommandsActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getSupportActionBar().hide();
 //        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_commands);
+        setContentView(R.layout.activity_settings);
 
 
     }
@@ -25,15 +25,30 @@ public class CommandsActivity extends AppCompatActivity {
         Intent intent=new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        try{
+        AudioManager audioManager =
+                (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        audioManager.adjustStreamVolume(AudioManager.STREAM_NOTIFICATION,AudioManager.ADJUST_MUTE,
+                AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);}catch (IllegalArgumentException e) {
 
+        }
+
+    }
 
     @Override
     protected void onStop() {
         super.onStop();
+        try{
         AudioManager audioManager =
                 (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         audioManager.adjustStreamVolume(AudioManager.STREAM_NOTIFICATION,AudioManager.ADJUST_UNMUTE,
-                AudioManager.FLAG_VIBRATE);
+                AudioManager.FLAG_VIBRATE);}
+        catch (IllegalArgumentException e) {
+
+        }
     }
 
 }

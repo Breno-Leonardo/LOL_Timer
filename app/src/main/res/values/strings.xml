@@ -3,8 +3,12 @@
     <string name="title_app">LOL TIMER</string>
     <string name="settings">Settings</string>
     <string name="commands">Commands</string>
+    <string name="inicial_commands_text">Command: Speak Your Command</string>
     <string name="permissionDenied">Permission Denied</string>
     <string name="givePermission">Give Permission</string>
     <string name="start">Start</string>
+    <string name="tipStart">Speak your command like for example:</string>
+    <string name="tipEnd">Hint: Speak slowly between each word or change recognition language in settings.</string>
+    <string name="tipCustomizeCommands">You can create custom commands in settings.</string>
 
 </resources>

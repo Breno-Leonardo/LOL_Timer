@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("MainActivity.run tamanho antes" + images.length);
 
          thumb = findViewById(R.id.imageThumb);
         rotateIcon();
@@ -118,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                             icon.setImageDrawable(getDrawable(R.drawable.timer_sand_paused));
                         else if (p>=0.5f && p<0.84f)
                             icon.setImageDrawable(getDrawable(R.drawable.timer_sand));
-                        else if (p>=0.84f && p<1f)
+                        else if (p>=0.8f && p<1f)
                             icon.setImageDrawable(getDrawable(R.drawable.timer_sand_paused));
 
 
@@ -154,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
                         thumb.setScaleX(1);
                         thumb.setScaleX(1);
                         thumb.animate().scaleX(1+scaleImage).setDuration(timeImage2);
-                        thumb.animate().scaleY(1+scaleImage/2).setDuration(timeImage2);
+                        thumb.animate().scaleY(1+scaleImage).setDuration(timeImage2);
 
                         currentImage++;
                         if(currentImage==images.length)

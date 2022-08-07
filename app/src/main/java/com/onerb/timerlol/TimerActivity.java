@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Build;
@@ -33,7 +34,9 @@ import androidx.lifecycle.ViewModelProvider;
 import com.onerb.timerlol.ui.main.MainViewModel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class TimerActivity extends AppCompatActivity {
     private static final int RECORD_AUDIO_REQUEST_CODE = 1;
@@ -53,7 +56,7 @@ public class TimerActivity extends AppCompatActivity {
     private static final int TELEPORT = 13;
     private static final int CLEANSE = 14;
 
-    private static final int FLASH_TIME = 300;
+    private static final int FLASH_TIME = 50;
     private static final int IGNITE_TIME = 180;
     private static final int HEAL_TIME = 240;
     private static final int GHOST_TIME = 210;
@@ -119,6 +122,10 @@ public class TimerActivity extends AppCompatActivity {
     private String commandsAdcCleanse = "af adccleanse bf botcleanse";
     private String commandsSupportCleanse = "sf supportcleanse ";
 
+    //Kindred Mark
+    private String commandsKindred = "k30 k45 kindred45 kindred30 ";
+
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private boolean topBoots = false;
     private boolean jungleBoots = false;
@@ -140,6 +147,8 @@ public class TimerActivity extends AppCompatActivity {
     private Intent intent;
     private CountDownTimer timer2;
     private LinearLayout container;
+    private CardView currentTouch;//to know which timer is playing
+    private HashMap<CardView,CountDownTimer> timers=new HashMap<>();//to cancel the timer by dragging to the right
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -322,7 +331,7 @@ public class TimerActivity extends AppCompatActivity {
 
     }
 
-    public void createTimer(int lane, int spell, View containerTimer, String speakLane, String speakSpell) {
+    public void createTimer(int lane, int spell, CardView containerTimer, String speakLane, String speakSpell) {
         TextView textView = containerTimer.findViewById(R.id.textTimer);
         CardView btnBoots = containerTimer.findViewById(R.id.btnBoots);
         CountDownTimer timer;
@@ -368,17 +377,24 @@ public class TimerActivity extends AppCompatActivity {
         time[0] = time[0] * 1000;
         time[0] -= originalTime[0] * (haste[0] / (haste[0] + 100));
         long diferencaInicial = originalTime[0] - time[0];
-        long diferencaBoots = (long) (diferencaInicial+ (originalTime[0] * (hasteRune[0] / (hasteRune[0] + 100))) - originalTime[0] * ((hasteBoots[0]+hasteRune[0]) / ((hasteBoots[0]+hasteRune[0]) + 100)));
-        if(diferencaBoots<0)
-            diferencaBoots=-diferencaBoots;
+        long diferencaBoots = (long) (diferencaInicial + (originalTime[0] * (hasteRune[0] / (hasteRune[0] + 100))) - originalTime[0] * ((hasteBoots[0] + hasteRune[0]) / ((hasteBoots[0] + hasteRune[0]) + 100)));
+        if (diferencaBoots < 0)
+            diferencaBoots = -diferencaBoots;
         long finalDiferencaBoots = diferencaBoots;
         timer = new CountDownTimer(time[0], 1000) {
+            CardView conTi= containerTimer;
+
             boolean finishing = false;//to not have an onFinish() loop
             ImageView iconBoots = containerTimer.findViewById(R.id.iconBoots);
             boolean change = false;
 
             @Override
             public void onTick(long l) {
+                TextView textTi= containerTimer.findViewById(R.id.textTimer);
+                if(textTi==null){
+                    cancel();
+                    System.out.println("TimerActivity.onTick cancel timer");
+                }
                 if (lane == TOP) {
                     if (topBoots && !change) {
                         haste[0] += 12;
@@ -458,8 +474,9 @@ public class TimerActivity extends AppCompatActivity {
                 }
 
                 if (time[0] <= 0 && !finishing) {
-                    finishing = true;
                     onFinish();
+                    finishing = true;
+                    cancel();
                 } else if (time[0] > 0)
                     time[0] -= 1000;
                 updateTextTime(time[0], textView);
@@ -502,14 +519,16 @@ public class TimerActivity extends AppCompatActivity {
                     @Override
                     public void onFinish() {
                         containerTimer.animate().alpha(0).setDuration(500);
-
                         StartListening();
                         container.removeView(containerTimer);
+                        cancel();
+
                     }
                 }.start();
-
+                timers.remove(currentTouch);
             }
         }.start();
+        timers.put(containerTimer,timer);
     }
 
     public boolean verifyCommands(String command, String commands) {
@@ -698,14 +717,38 @@ public class TimerActivity extends AppCompatActivity {
             lane = SUPPORT;
             spell = CLEANSE;
         }
+
+        //Kindred Mark
+        if (verifyCommands(command, commandsTopFlash) || ((inicialLetter1 == 't' && inicialLetter2 == 'f') && (word1.equals("top") || word2.equals("flash")))) {
+            lane = TOP;
+            spell = FLASH;
+        }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if (lane != 0 && spell != 0) {
-            View containerTimer;
+            CardView containerTimer;
             CardView btnRune, btnBoots;
             String speakLane = "", speakSpell = "";
-            containerTimer = getLayoutInflater().inflate(R.layout.view_timer, container, false);
+            containerTimer = (CardView) getLayoutInflater().inflate(R.layout.view_timer, container, false);
             btnBoots = containerTimer.findViewById(R.id.btnBoots);
 
+            float largura = containerTimer.getWidth();
+            containerTimer.setOnTouchListener((view, motionEvent) -> {
+                System.out.println("TimerActivity.checkCommand containertimer" + motionEvent.getAction());
+                currentTouch = containerTimer;
+                return false;
+            });
+
+//            float x,y;
+//            float dx,dy;
+//            @Override
+//            public boolean onTouchEvent(MotionEvent event) {
+//                int action =event.getAction();
+//                if(action==MotionEvent.ACTION_DOWN){
+////            x.even
+//                }
+//                return super.onTouchEvent(event);
+//
+//            }
 
             int finalLane = lane;
 
@@ -807,6 +850,43 @@ public class TimerActivity extends AppCompatActivity {
 
     }
 
+
+    private float lastX;
+    private LinearLayout layoutContainerTimer;
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        int action = event.getAction();
+        if (action == MotionEvent.ACTION_DOWN) {
+            lastX = event.getX();
+        } else if (action == MotionEvent.ACTION_MOVE) {
+            if(currentTouch!=null) {
+                 layoutContainerTimer=currentTouch.findViewById(R.id.layoutContainerTimer);
+                currentTouch.setTranslationX(currentTouch.getTranslationX() + (event.getX() - lastX));
+                if (currentTouch.getTranslationX() >= currentTouch.getWidth() * 0.4f)
+                    layoutContainerTimer.setBackgroundColor(Color.RED);
+                else
+                    layoutContainerTimer.setBackgroundColor(Color.WHITE);
+            }
+
+            lastX= event.getX();
+        } else if (action == MotionEvent.ACTION_UP) {
+            if(currentTouch!=null) {
+                if (currentTouch.getTranslationX() >= currentTouch.getWidth() * 0.4f){
+                    container.removeView(currentTouch);
+                    if(timers.get(currentTouch)!=null)
+                        timers.get(currentTouch).cancel();
+                    timers.remove(currentTouch);
+                }
+                currentTouch.setTranslationX(0);
+                currentTouch = null;
+            }
+        }
+//        System.out.println("TimerActivity.onTouchEvent touching " + touchingTimer);
+//        System.out.println("current: " + currentTouch);
+
+        return super.onTouchEvent(event);
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -845,6 +925,7 @@ public class TimerActivity extends AppCompatActivity {
         unmute();
 
     }
+
     //    public void timerStart(TimerActivity timerActivity) {
 //        time = 1000;
 //        timer = new CountDownTimer(time, time) {

@@ -32,6 +32,7 @@
 
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardSpell"
             android:layout_width="@dimen/spellAndPositions"
             android:layout_height="@dimen/spellAndPositions"
             android:layout_gravity="center"
@@ -64,6 +65,7 @@
             android:textStyle="bold"></TextView>
 
         <LinearLayout
+            android:id="@+id/layoutBootsAndRune"
             android:layout_width="65dp"
             android:layout_marginTop="3dp"
             android:layout_height="match_parent"

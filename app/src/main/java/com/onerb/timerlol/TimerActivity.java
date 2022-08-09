@@ -56,7 +56,7 @@ public class TimerActivity extends AppCompatActivity {
     private static final int TELEPORT = 13;
     private static final int CLEANSE = 14;
 
-    private static final int FLASH_TIME = 50;
+    private static final int FLASH_TIME = 300;
     private static final int IGNITE_TIME = 180;
     private static final int HEAL_TIME = 240;
     private static final int GHOST_TIME = 210;
@@ -64,6 +64,12 @@ public class TimerActivity extends AppCompatActivity {
     private static final int EXHAUST_TIME = 210;
     private static final int TELEPORT_TIME = 360;
     private static final int CLEANSE_TIME = 210;
+
+    private static final int KINDRED = 1;
+    private static final int ANIVIA = 15;
+    private static final int ANIVIA_TIME = 240;
+    private static final int NORMAL_TIMER = 16;
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //put the commands glued
     //FLASH
@@ -74,11 +80,11 @@ public class TimerActivity extends AppCompatActivity {
     private String commandsSupportFlash = "sf supportflash ";
 
     //HEAL
-    private String commandsTopHeal = "th topheal ";
-    private String commandsJungleHeal = "jh jungleheal djangoheal ";
-    private String commandsMidHeal = "mh midheal ";
-    private String commandsAdcHeal = "ah adcheal bh botheal";
-    private String commandsSupportHeal = "sh supportheal ";
+    private String commandsTopHeal = "th topheal topcurar";
+    private String commandsJungleHeal = "jh jungleheal djangoheal junglecurar";
+    private String commandsMidHeal = "mh midheal midcurar";
+    private String commandsAdcHeal = "ah adcheal bh botheal adcrio botrio adccurar botcurar";
+    private String commandsSupportHeal = "sh supportheal suprio supcurar";
 
     //IGNITE
     private String commandsTopIgnite = "ti topignite ";
@@ -95,11 +101,11 @@ public class TimerActivity extends AppCompatActivity {
     private String commandsSupportBarrier = "sb supportbarrier ";
 
     //GHOST
-    private String commandsTopGhost = "tg topghost ";
-    private String commandsJungleGhost = "jg jungleghost djangoghost ";
-    private String commandsMidGhost = "mg midghost ";
-    private String commandsAdcGhost = "ag adcghost bg botghost";
-    private String commandsSupportGhost = "sg supportghost ";
+    private String commandsTopGhost = "tg topghost topfantasma ";
+    private String commandsJungleGhost = "jg jungleghost djangoghost junglefantasma ";
+    private String commandsMidGhost = "mg midghost midfantasma ";
+    private String commandsAdcGhost = "ag adcghost bg botghost adcfantasma botfantasma";
+    private String commandsSupportGhost = "sg supportghost suportfantasma";
 
     //EXHAUST
     private String commandsTopExhaust = "te topexhaust ";
@@ -116,16 +122,17 @@ public class TimerActivity extends AppCompatActivity {
     private String commandsSupportTeleport = "st supportteleport ";
 
     //CLEANSE
-    private String commandsTopCleanse = "tf topcleanse ";
-    private String commandsJungleCleanse = "jf junglecleanse djangocleanse ";
-    private String commandsMidCleanse = "mf midcleanse ";
-    private String commandsAdcCleanse = "af adccleanse bf botcleanse";
-    private String commandsSupportCleanse = "sf supportcleanse ";
+    private String commandsTopCleanse = "tf topcleanse toppurificar";
+    private String commandsJungleCleanse = "jf junglecleanse djangocleanse junglepurifica";
+    private String commandsMidCleanse = "mf midcleanse midpurificar";
+    private String commandsAdcCleanse = "af adccleanse bf botcleanse botpurificar";
+    private String commandsSupportCleanse = "sf supportcleanse suportepurificar";
 
     //Kindred Mark
     private String commandsKindred = "k30 k45 kindred45 kindred30 ";
 
-
+    //Anivia Passive
+    private String commandsAnivia = "aniviapassive aniviaegg aniviaovo aníviapassive aníviaegg aníviaovo";
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private boolean topBoots = false;
     private boolean jungleBoots = false;
@@ -148,7 +155,7 @@ public class TimerActivity extends AppCompatActivity {
     private CountDownTimer timer2;
     private LinearLayout container;
     private CardView currentTouch;//to know which timer is playing
-    private HashMap<CardView,CountDownTimer> timers=new HashMap<>();//to cancel the timer by dragging to the right
+    private HashMap<CardView, CountDownTimer> timers = new HashMap<>();//to cancel the timer by dragging to the right
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,7 +166,6 @@ public class TimerActivity extends AppCompatActivity {
 
 //        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_timer);
-        System.out.println("TimerActivity.onCreate teste " + ("tfg".contains("tf")));
 
         container = findViewById(R.id.timersContainer);
 
@@ -373,6 +379,11 @@ public class TimerActivity extends AppCompatActivity {
         } else if (spell == IGNITE) {
             time[0] = IGNITE_TIME;
         }
+        if (lane == KINDRED || lane == NORMAL_TIMER) {
+            time[0] = -spell;
+        } else if (lane == ANIVIA) {
+            time[0] = ANIVIA_TIME;
+        }
         originalTime[0] = time[0] * 1000;
         time[0] = time[0] * 1000;
         time[0] -= originalTime[0] * (haste[0] / (haste[0] + 100));
@@ -382,7 +393,7 @@ public class TimerActivity extends AppCompatActivity {
             diferencaBoots = -diferencaBoots;
         long finalDiferencaBoots = diferencaBoots;
         timer = new CountDownTimer(time[0], 1000) {
-            CardView conTi= containerTimer;
+            CardView conTi = containerTimer;
 
             boolean finishing = false;//to not have an onFinish() loop
             ImageView iconBoots = containerTimer.findViewById(R.id.iconBoots);
@@ -390,8 +401,8 @@ public class TimerActivity extends AppCompatActivity {
 
             @Override
             public void onTick(long l) {
-                TextView textTi= containerTimer.findViewById(R.id.textTimer);
-                if(textTi==null){
+                TextView textTi = containerTimer.findViewById(R.id.textTimer);
+                if (textTi == null) {
                     cancel();
                     System.out.println("TimerActivity.onTick cancel timer");
                 }
@@ -496,7 +507,10 @@ public class TimerActivity extends AppCompatActivity {
                     v.vibrate(1000);
                 }
                 final boolean[] secondVibrate = {true};
-                textToSpeech.speak(speak, TextToSpeech.QUEUE_FLUSH, null, null);
+                if (lane != NORMAL_TIMER)
+                    textToSpeech.speak(speak, TextToSpeech.QUEUE_FLUSH, null, null);
+                else if (lane == NORMAL_TIMER)
+                    textToSpeech.speak("Timer Over. Timer Over", TextToSpeech.QUEUE_FLUSH, null, null);
 
                 timerSpeaker[0] = new CountDownTimer(3000, 300) {
 
@@ -528,7 +542,7 @@ public class TimerActivity extends AppCompatActivity {
                 timers.remove(currentTouch);
             }
         }.start();
-        timers.put(containerTimer,timer);
+        timers.put(containerTimer, timer);
     }
 
     public boolean verifyCommands(String command, String commands) {
@@ -719,10 +733,38 @@ public class TimerActivity extends AppCompatActivity {
         }
 
         //Kindred Mark
-        if (verifyCommands(command, commandsTopFlash) || ((inicialLetter1 == 't' && inicialLetter2 == 'f') && (word1.equals("top") || word2.equals("flash")))) {
-            lane = TOP;
-            spell = FLASH;
+        String timeMark = command.replace("k", "");
+        if (verifyCommands(command, commandsKindred) || (inicialLetter1 == 'k' && timeMark.matches("[+-]?\\d*(\\.\\d+)?"))) {
+            lane = KINDRED;
+            spell = -(Integer.parseInt(timeMark));
+
         }
+        //Anivia Egg
+        else if (verifyCommands(command, commandsAnivia) || (word1.equals("anivia") || word2.equals("passive"))) {
+            lane = ANIVIA;
+            spell = ANIVIA_TIME;
+
+        }
+
+        //Timer
+//        String TimerComum= command.
+        String ultimaLetra, resto;
+        if (command.substring(command.length() - 1).equals("s")) {
+            String normalTimer = command.replace("s", "");
+            if (normalTimer.matches("[+-]?\\d*(\\.\\d+)?")) {
+                lane = NORMAL_TIMER;
+                spell = -(Integer.parseInt(normalTimer));
+            }
+        }
+        if ((word2.equals("segundos") || word2.equals("seconds"))) {
+            if (word1.matches("[+-]?\\d*(\\.\\d+)?")) {
+                lane = NORMAL_TIMER;
+                spell = -(Integer.parseInt(word1));
+            }
+
+
+        }
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if (lane != 0 && spell != 0) {
             CardView containerTimer;
@@ -731,27 +773,14 @@ public class TimerActivity extends AppCompatActivity {
             containerTimer = (CardView) getLayoutInflater().inflate(R.layout.view_timer, container, false);
             btnBoots = containerTimer.findViewById(R.id.btnBoots);
 
-            float largura = containerTimer.getWidth();
+
             containerTimer.setOnTouchListener((view, motionEvent) -> {
                 System.out.println("TimerActivity.checkCommand containertimer" + motionEvent.getAction());
                 currentTouch = containerTimer;
                 return false;
             });
 
-//            float x,y;
-//            float dx,dy;
-//            @Override
-//            public boolean onTouchEvent(MotionEvent event) {
-//                int action =event.getAction();
-//                if(action==MotionEvent.ACTION_DOWN){
-////            x.even
-//                }
-//                return super.onTouchEvent(event);
-//
-//            }
-
             int finalLane = lane;
-
 
             btnBoots.setOnTouchListener((view, motionEvent) -> {
                 CountDownTimer btnTimer;
@@ -789,11 +818,11 @@ public class TimerActivity extends AppCompatActivity {
             } else if (lane == ADC) {
                 laneIcon.setImageDrawable(getDrawable(R.drawable.adc));
                 speakLane = "Adc";
-            }
-            if (lane == SUPPORT) {
+            } else if (lane == SUPPORT) {
                 laneIcon.setImageDrawable(getDrawable(R.drawable.support));
                 speakLane = "Support";
             }
+
 
             if (spell == FLASH) {
                 spellIcon.setImageDrawable(getDrawable(R.drawable.flash));
@@ -819,7 +848,26 @@ public class TimerActivity extends AppCompatActivity {
             } else if (spell == IGNITE) {
                 spellIcon.setImageDrawable(getDrawable(R.drawable.ignite));
                 speakSpell = "Ignite";
+            } else if (lane == KINDRED) {
+                laneIcon.setImageDrawable(getDrawable(R.drawable.kindred));
+                speakLane = "Kindred";
+                spellIcon.setImageDrawable(getDrawable(R.drawable.kindred_passive));
+                speakSpell = "Mark";
+                containerTimer.findViewById(R.id.layoutBootsAndRune).setVisibility(View.GONE);
+            } else if (lane == ANIVIA) {
+                laneIcon.setImageDrawable(getDrawable(R.drawable.anivia));
+                speakLane = "Anivia";
+                spellIcon.setImageDrawable(getDrawable(R.drawable.anivia_passive));
+                speakSpell = "Passive";
+                containerTimer.findViewById(R.id.layoutBootsAndRune).setVisibility(View.GONE);
+
+            } else if (lane == NORMAL_TIMER) {
+                spellIcon.setImageDrawable(getDrawable(R.drawable.icone_verde));
+                containerTimer.findViewById(R.id.iconLane).setVisibility(View.GONE);
+                containerTimer.findViewById(R.id.layoutBootsAndRune).setVisibility(View.GONE);
+
             }
+
             createTimer(lane, spell, containerTimer, speakLane, speakSpell);
             container.addView(containerTimer);
         }
@@ -853,14 +901,15 @@ public class TimerActivity extends AppCompatActivity {
 
     private float lastX;
     private LinearLayout layoutContainerTimer;
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int action = event.getAction();
         if (action == MotionEvent.ACTION_DOWN) {
             lastX = event.getX();
         } else if (action == MotionEvent.ACTION_MOVE) {
-            if(currentTouch!=null) {
-                 layoutContainerTimer=currentTouch.findViewById(R.id.layoutContainerTimer);
+            if (currentTouch != null) {
+                layoutContainerTimer = currentTouch.findViewById(R.id.layoutContainerTimer);
                 currentTouch.setTranslationX(currentTouch.getTranslationX() + (event.getX() - lastX));
                 if (currentTouch.getTranslationX() >= currentTouch.getWidth() * 0.4f)
                     layoutContainerTimer.setBackgroundColor(Color.RED);
@@ -868,12 +917,12 @@ public class TimerActivity extends AppCompatActivity {
                     layoutContainerTimer.setBackgroundColor(Color.WHITE);
             }
 
-            lastX= event.getX();
+            lastX = event.getX();
         } else if (action == MotionEvent.ACTION_UP) {
-            if(currentTouch!=null) {
-                if (currentTouch.getTranslationX() >= currentTouch.getWidth() * 0.4f){
+            if (currentTouch != null) {
+                if (currentTouch.getTranslationX() >= currentTouch.getWidth() * 0.4f) {
                     container.removeView(currentTouch);
-                    if(timers.get(currentTouch)!=null)
+                    if (timers.get(currentTouch) != null)
                         timers.get(currentTouch).cancel();
                     timers.remove(currentTouch);
                 }

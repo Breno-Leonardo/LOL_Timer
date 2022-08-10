@@ -33,6 +33,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.onerb.timerlol.ui.main.MainViewModel;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
@@ -55,6 +56,7 @@ public class TimerActivity extends AppCompatActivity {
     private static final int EXHAUST = 12;
     private static final int TELEPORT = 13;
     private static final int CLEANSE = 14;
+    private static final int BOOTS=17;
 
     private static final int FLASH_TIME = 300;
     private static final int IGNITE_TIME = 180;
@@ -75,64 +77,71 @@ public class TimerActivity extends AppCompatActivity {
     //FLASH
     private String commandsTopFlash = "tf topflash ";
     private String commandsJungleFlash = "jf jungleflash djangoflash ";
-    private String commandsMidFlash = "mf midflash ";
+    private String commandsMidFlash = "mf midflash mediaflash ";
     private String commandsAdcFlash = "af adcflash bf botflash";
     private String commandsSupportFlash = "sf supportflash ";
 
     //HEAL
-    private String commandsTopHeal = "th topheal topcurar";
-    private String commandsJungleHeal = "jh jungleheal djangoheal junglecurar";
-    private String commandsMidHeal = "mh midheal midcurar";
+    private String commandsTopHeal = "th topheal topcurar toprio";
+    private String commandsJungleHeal = "jh jungleheal djangoheal junglecurar junglerio djangorio";
+    private String commandsMidHeal = "mh midheal midcurar midrio mediaheal mediacurar mediario";
     private String commandsAdcHeal = "ah adcheal bh botheal adcrio botrio adccurar botcurar";
     private String commandsSupportHeal = "sh supportheal suprio supcurar";
 
     //IGNITE
     private String commandsTopIgnite = "ti topignite ";
     private String commandsJungleIgnite = "ji jungleignite djangoignite ";
-    private String commandsMidIgnite = "mi midignite ";
+    private String commandsMidIgnite = "mi midignite mediaignite ";
     private String commandsAdcIgnite = "ai adcignite bf botignite";
     private String commandsSupportIgnite = "si supportignite ";
 
     //BARRIER
     private String commandsTopBarrier = "tb topbarrier ";
     private String commandsJungleBarrier = "jb junglebarrier djangobarrier ";
-    private String commandsMidBarrier = "mb midbarrier ";
+    private String commandsMidBarrier = "mb midbarrier mediabarrier";
     private String commandsAdcBarrier = "ab adcbarrier bb botbarrier";
     private String commandsSupportBarrier = "sb supportbarrier ";
 
     //GHOST
     private String commandsTopGhost = "tg topghost topfantasma ";
     private String commandsJungleGhost = "jg jungleghost djangoghost junglefantasma ";
-    private String commandsMidGhost = "mg midghost midfantasma ";
+    private String commandsMidGhost = "mg midghost midfantasma mediaghost mediafantasma ";
     private String commandsAdcGhost = "ag adcghost bg botghost adcfantasma botfantasma";
     private String commandsSupportGhost = "sg supportghost suportfantasma";
 
     //EXHAUST
-    private String commandsTopExhaust = "te topexhaust ";
-    private String commandsJungleExhaust = "je jungleexhaust djangoexhaust ";
-    private String commandsMidExhaust = "me midexhaust ";
-    private String commandsAdcExhaust = "ae adcexhaust be botexhaust";
-    private String commandsSupportExhaust = "se supportexhaust ";
+    private String commandsTopExhaust = "te topexhaust topexausto ";
+    private String commandsJungleExhaust = "je jungleexhaust djangoexhaust jungleexausto djangoexausto ";
+    private String commandsMidExhaust = "me midexhaust midexausto mediaexausto mediaexhaust";
+    private String commandsAdcExhaust = "ae adcexhaust be botexhaust adcexausto botexausto";
+    private String commandsSupportExhaust = "se supportexhaust suporteexhaust suporteexausto supportexausto";
 
     //TELEPORT
     private String commandsTopTeleport = "tt topteleport ";
     private String commandsJungleTeleport = "jt jungleteleport djangoteleport ";
-    private String commandsMidTeleport = "mt midteleport ";
+    private String commandsMidTeleport = "mt midteleport mediateleport ";
     private String commandsAdcTeleport = "at adcteleport bt botteleport";
     private String commandsSupportTeleport = "st supportteleport ";
 
     //CLEANSE
-    private String commandsTopCleanse = "tf topcleanse toppurificar";
-    private String commandsJungleCleanse = "jf junglecleanse djangocleanse junglepurifica";
-    private String commandsMidCleanse = "mf midcleanse midpurificar";
-    private String commandsAdcCleanse = "af adccleanse bf botcleanse botpurificar";
-    private String commandsSupportCleanse = "sf supportcleanse suportepurificar";
+    private String commandsTopCleanse = "tf topcleanse toppurificar topklinse";
+    private String commandsJungleCleanse = "jf junglecleanse djangocleanse junglepurifica jungleklinse";
+    private String commandsMidCleanse = "mf midcleanse midpurificar mediacleanse mediapurificar mediaklinse midklinse";
+    private String commandsAdcCleanse = "af adccleanse bf botcleanse botpurificar botklinse adcklinse";
+    private String commandsSupportCleanse = "sf supportcleanse suportepurificar suporteklinse suportecleanse suportpurificar";
 
     //Kindred Mark
-    private String commandsKindred = "k30 k45 kindred45 kindred30 ";
+    private String commandsKindred = "k30 k45 kindred45 kindred30 cá30 cá45 ca30 ca45 ";
 
     //Anivia Passive
     private String commandsAnivia = "aniviapassive aniviaegg aniviaovo aníviapassive aníviaegg aníviaovo";
+
+    //BOOTS
+    private String commandsTopBoots = "bootstop bottop boottop bt ";
+    private String commandsJungleBoots = "bootsjungle botjungle bootjungle bj  ";
+    private String commandsMidBoots = "bootsmid botmid bootmid bm  ";
+    private String commandsAdcBoots = "bootsbot botbot bootbot bootsadc botadc bootadc";
+    private String commandsSupportBoots = "botsuport botsuporte bootssuport bootssuporte ";
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private boolean topBoots = false;
     private boolean jungleBoots = false;
@@ -216,7 +225,9 @@ public class TimerActivity extends AppCompatActivity {
     public MainViewModel getViewModel() {
         return new ViewModelProvider(this).get(MainViewModel.class);
     }
-
+    public static String removerAcentos(String str) {
+        return Normalizer.normalize(str, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+    }
 
     private void StartListening() {
 
@@ -270,7 +281,7 @@ public class TimerActivity extends AppCompatActivity {
                 String command = c.get(0);
                 tipText.setVisibility(View.GONE);
 
-                checkCommand(command);
+                checkCommand(removerAcentos(command));
 
                 if (command != null) {// set max length text command in screen
                     String[] commandMax = command.split(" ");
@@ -339,7 +350,6 @@ public class TimerActivity extends AppCompatActivity {
 
     public void createTimer(int lane, int spell, CardView containerTimer, String speakLane, String speakSpell) {
         TextView textView = containerTimer.findViewById(R.id.textTimer);
-        CardView btnBoots = containerTimer.findViewById(R.id.btnBoots);
         CountDownTimer timer;
         final double[] haste = {0};
         final double[] hasteBoots = {12};
@@ -732,6 +742,35 @@ public class TimerActivity extends AppCompatActivity {
             spell = CLEANSE;
         }
 
+        //Boots
+
+
+
+        else if (verifyCommands(command, commandsTopBoots)  ) {
+
+            topBoots = !topBoots;
+            return;
+        } else if (verifyCommands(command, commandsJungleBoots) ) {
+
+        jungleBoots = !jungleBoots;
+            return;
+
+        } else if (verifyCommands(command, commandsMidBoots) ) {
+
+        midBoots = !midBoots;
+            return;
+
+    } else if (verifyCommands(command, commandsAdcBoots) ) {
+
+        adcBoots = !adcBoots;
+            return;
+
+    } else if (verifyCommands(command, commandsSupportBoots) ) {
+
+        supportBoots = !supportBoots;
+            return;
+
+    }
         //Kindred Mark
         String timeMark = command.replace("k", "");
         if (verifyCommands(command, commandsKindred) || (inicialLetter1 == 'k' && timeMark.matches("[+-]?\\d*(\\.\\d+)?"))) {
@@ -747,16 +786,13 @@ public class TimerActivity extends AppCompatActivity {
         }
 
         //Timer
-//        String TimerComum= command.
-        String ultimaLetra, resto;
-        if (command.substring(command.length() - 1).equals("s")) {
+        else if (command.substring(command.length() - 1).equals("s")) {
             String normalTimer = command.replace("s", "");
-            if (normalTimer.matches("[+-]?\\d*(\\.\\d+)?")) {
+            if (normalTimer.matches("[+-]?\\d*(\\.\\d+)?") && normalTimer != "") {
                 lane = NORMAL_TIMER;
                 spell = -(Integer.parseInt(normalTimer));
             }
-        }
-        if ((word2.equals("segundos") || word2.equals("seconds"))) {
+        } else if ((word2.equals("segundos") || word2.equals("seconds"))) {
             if (word1.matches("[+-]?\\d*(\\.\\d+)?")) {
                 lane = NORMAL_TIMER;
                 spell = -(Integer.parseInt(word1));
@@ -764,6 +800,7 @@ public class TimerActivity extends AppCompatActivity {
 
 
         }
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if (lane != 0 && spell != 0) {
@@ -867,6 +904,7 @@ public class TimerActivity extends AppCompatActivity {
                 containerTimer.findViewById(R.id.layoutBootsAndRune).setVisibility(View.GONE);
 
             }
+
 
             createTimer(lane, spell, containerTimer, speakLane, speakSpell);
             container.addView(containerTimer);

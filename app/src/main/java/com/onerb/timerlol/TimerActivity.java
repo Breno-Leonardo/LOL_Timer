@@ -78,56 +78,56 @@ public class TimerActivity extends AppCompatActivity {
     private String commandsTopFlash = "tf topflash ";
     private String commandsJungleFlash = "jf jungleflash djangoflash ";
     private String commandsMidFlash = "mf midflash mediaflash midiflash";
-    private String commandsAdcFlash = "af adcflash bf botflash";
+    private String commandsAdcFlash = "af adcflash bf botflash abcflash";
     private String commandsSupportFlash = "sf supportflash ";
 
     //HEAL
     private String commandsTopHeal = "th topheal topcurar toprio";
     private String commandsJungleHeal = "jh jungleheal djangoheal junglecurar junglerio djangorio";
     private String commandsMidHeal = "mh midheal midcurar midrio mediaheal mediacurar mediario midiheal midicurar midirio";
-    private String commandsAdcHeal = "ah adcheal bh botheal adcrio botrio adccurar botcurar";
+    private String commandsAdcHeal = "ah adcheal bh botheal adcrio botrio adccurar botcurar abcrio abccurar abcheal";
     private String commandsSupportHeal = "sh supportheal suprio supcurar";
 
     //IGNITE
     private String commandsTopIgnite = "ti topignite ";
     private String commandsJungleIgnite = "ji jungleignite djangoignite ";
     private String commandsMidIgnite = "mi midignite mediaignite ";
-    private String commandsAdcIgnite = "ai adcignite bf botignite";
+    private String commandsAdcIgnite = "ai adcignite bf botignite abcignite";
     private String commandsSupportIgnite = "si supportignite ";
 
     //BARRIER
     private String commandsTopBarrier = "tb topbarrier ";
     private String commandsJungleBarrier = "jb junglebarrier djangobarrier junglebarriera djangobarriera";
     private String commandsMidBarrier = "mb midbarrier mediabarrier midibarrier midbarriera mediabarriera midibarriera ";
-    private String commandsAdcBarrier = "ab adcbarrier bb botbarrier adcbarriera bb botbarriera";
+    private String commandsAdcBarrier = "ab adcbarrier bb botbarrier adcbarriera bb botbarriera abcbarrier abcbarreira";
     private String commandsSupportBarrier = "sb supportbarrier ";
 
     //GHOST
     private String commandsTopGhost = "tg topghost topfantasma ";
     private String commandsJungleGhost = "jg jungleghost djangoghost junglefantasma ";
     private String commandsMidGhost = "mg midghost midfantasma mediaghost mediafantasma midighost midifantasma ";
-    private String commandsAdcGhost = "ag adcghost bg botghost adcfantasma botfantasma";
+    private String commandsAdcGhost = "ag adcghost bg botghost adcfantasma botfantasma abcghost abcfantasma";
     private String commandsSupportGhost = "sg supportghost suportfantasma";
 
     //EXHAUST
     private String commandsTopExhaust = "te topexhaust topexausto ";
     private String commandsJungleExhaust = "je jungleexhaust djangoexhaust jungleexausto djangoexausto ";
     private String commandsMidExhaust = "me midexhaust midexausto mediaexausto mediaexhaust midiexausto";
-    private String commandsAdcExhaust = "ae adcexhaust be botexhaust adcexausto botexausto";
+    private String commandsAdcExhaust = "ae adcexhaust be botexhaust adcexausto botexausto abcexausto abcexaust";
     private String commandsSupportExhaust = "se supportexhaust suporteexhaust suporteexausto supportexausto";
 
     //TELEPORT
     private String commandsTopTeleport = "tt topteleport ";
     private String commandsJungleTeleport = "jt jungleteleport djangoteleport ";
     private String commandsMidTeleport = "mt  midteleport mediateleport miditeleport ";
-    private String commandsAdcTeleport = "at adcteleport bt botteleport";
+    private String commandsAdcTeleport = "at adcteleport bt botteleport abcteleport";
     private String commandsSupportTeleport = "st supportteleport ";
 
     //CLEANSE
     private String commandsTopCleanse = "tf topcleanse toppurificar topklinse";
     private String commandsJungleCleanse = "jf junglecleanse djangocleanse junglepurifica jungleklinse";
     private String commandsMidCleanse = "mf midcleanse midpurificar mediacleanse mediapurificar mediaklinse midklinse midicleanse midipurificar mediacleanse mediapurificar mediaklinse midiklinse";
-    private String commandsAdcCleanse = "af adccleanse bf botcleanse botpurificar botklinse adcklinse";
+    private String commandsAdcCleanse = "af adccleanse bf botcleanse botpurificar botklinse adcklinse abccleanse adcpurificar abcpurificar abcklinse";
     private String commandsSupportCleanse = "sf supportcleanse suportepurificar suporteklinse suportecleanse suportpurificar";
 
     //Kindred Mark
@@ -140,7 +140,7 @@ public class TimerActivity extends AppCompatActivity {
     private String commandsTopBoots = "bootstop bottop boottop bt ";
     private String commandsJungleBoots = "bootsjungle botjungle bootjungle bj bootsdjango botdjango bootdjango  ";
     private String commandsMidBoots = "bootsmid botmid bootmid bm bootsmedia botmedia bootmedia ";
-    private String commandsAdcBoots = "bootsbot botbot bootbot bootsadc botadc bootadc ba";
+    private String commandsAdcBoots = "bootsbot botbot bootbot bootsadc botadc bootadc ba botabc bootabc bootsabc";
     private String commandsSupportBoots = "botsuport botsuporte bootssuport bootssuporte ";
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private boolean topBoots = false;

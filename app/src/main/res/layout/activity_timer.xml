@@ -5,9 +5,10 @@
     android:id="@+id/timersContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".TimerActivity">
+
 
     <TextView
         android:id="@+id/textTimer"
@@ -23,49 +24,72 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:id="@+id/containerInfos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/layoutPermission"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/permissionDenied"
-            android:textSize="30dp"
             android:layout_marginTop="150dp"
             android:layout_marginBottom="10dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/permissionDenied"
             android:textColor="@color/black"
-            android:textStyle="bold"
-            android:gravity="center_vertical|center_horizontal">
+            android:textSize="30dp"
+            android:textStyle="bold">
 
         </TextView>
+
         <Button
             android:id="@+id/btnPermission"
             android:layout_width="300dp"
             android:layout_height="60dp"
-            android:textSize="20dp"
-            android:backgroundTint="@color/greenTime"
             android:layout_gravity="center"
+            android:backgroundTint="@color/greenTime"
+            android:gravity="center"
             android:text="@string/givePermission"
             android:textColor="@color/black"
-            android:gravity="center">
+            android:textSize="20dp">
 
         </Button>
 
     </LinearLayout>
+
     <TextView
         android:id="@+id/tipText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="30dp"
         android:layout_marginTop="150dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:text=""
         android:textColor="@color/black"
+        android:textSize="30dp"
+        android:textStyle="bold">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/spellReturn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="MID FLASH RETURN"
         android:textStyle="bold"
-        android:gravity="center_vertical|center_horizontal">
+        android:textColor="@color/black"
+        android:textSize="40dp"
+        android:visibility="gone">
 
     </TextView>
 

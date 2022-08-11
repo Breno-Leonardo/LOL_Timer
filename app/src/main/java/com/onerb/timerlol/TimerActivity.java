@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Build;
@@ -17,6 +18,7 @@ import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.speech.tts.TextToSpeech;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -58,7 +60,7 @@ public class TimerActivity extends AppCompatActivity {
     private static final int CLEANSE = 14;
     private static final int BOOTS=17;
 
-    private static final int FLASH_TIME = 300;
+    private static final int FLASH_TIME = 5;
     private static final int IGNITE_TIME = 180;
     private static final int HEAL_TIME = 240;
     private static final int GHOST_TIME = 210;
@@ -75,11 +77,11 @@ public class TimerActivity extends AppCompatActivity {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //put the commands glued
     //FLASH
-    private String commandsTopFlash = "tf topflash ";
-    private String commandsJungleFlash = "jf jungleflash djangoflash ";
-    private String commandsMidFlash = "mf midflash mediaflash midiflash";
-    private String commandsAdcFlash = "af adcflash bf botflash abcflash";
-    private String commandsSupportFlash = "sf supportflash ";
+    private String commandsTopFlash = "tf topflash topfashion ";
+    private String commandsJungleFlash = "jf jungleflash djangoflash junglefashion";
+    private String commandsMidFlash = "mf midflash mediaflash midiflash midfashion";
+    private String commandsAdcFlash = "af adcflash bf botflash abcflash adcfashion botfashion abcfashion ";
+    private String commandsSupportFlash = "sf supportflash suporteflash supportfashion suportefashion ";
 
     //HEAL
     private String commandsTopHeal = "th topheal topcurar toprio";
@@ -131,15 +133,15 @@ public class TimerActivity extends AppCompatActivity {
     private String commandsSupportCleanse = "sf supportcleanse suportepurificar suporteklinse suportecleanse suportpurificar";
 
     //Kindred Mark
-    private String commandsKindred = "k30 k45 kindred45 kindred30 cá30 cá45 ca30 ca45 ";
+    private String commandsKindred = "k30 k45 kindred45 kindred30 ca30 ca45 ";
 
     //Anivia Passive
-    private String commandsAnivia = "aniviapassive aniviaegg aniviaovo aníviapassive aníviaegg aníviaovo";
+    private String commandsAnivia = "aniviapassive aniviaegg aniviaovo ";
 
     //BOOTS
     private String commandsTopBoots = "bootstop bottop boottop bt ";
     private String commandsJungleBoots = "bootsjungle botjungle bootjungle bj bootsdjango botdjango bootdjango  ";
-    private String commandsMidBoots = "bootsmid botmid bootmid bm bootsmedia botmedia bootmedia ";
+    private String commandsMidBoots = "bootsmid botmid bootmid bm bootsmedia botmedia bootmedia bootmidi botmidi bootsmidi ";
     private String commandsAdcBoots = "bootsbot botbot bootbot bootsadc botadc bootadc ba botabc bootabc bootsabc";
     private String commandsSupportBoots = "botsuport botsuporte bootssuport bootssuporte ";
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -162,7 +164,7 @@ public class TimerActivity extends AppCompatActivity {
     private TextToSpeech textToSpeech;
     private Intent intent;
     private CountDownTimer timer2;
-    private LinearLayout container;
+    private LinearLayout container, containerInfos;
     private CardView currentTouch;//to know which timer is playing
     private HashMap<CardView, CountDownTimer> timers = new HashMap<>();//to cancel the timer by dragging to the right
 
@@ -177,7 +179,7 @@ public class TimerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_timer);
 
         container = findViewById(R.id.timersContainer);
-
+        containerInfos = findViewById(R.id.containerInfos);
 
         textCommand = findViewById(R.id.textTimer);
         tipText = findViewById(R.id.tipText);
@@ -354,7 +356,7 @@ public class TimerActivity extends AppCompatActivity {
         final double[] haste = {0};
         final double[] hasteBoots = {12};
         final double[] hasteRune = {0};
-        final CountDownTimer[] timerSpeaker = new CountDownTimer[1];
+        final CountDownTimer[] timerSpeaker = new CountDownTimer[2];
         final long[] time = new long[1];
         final long[] originalTime = new long[1];
 
@@ -403,7 +405,6 @@ public class TimerActivity extends AppCompatActivity {
             diferencaBoots = -diferencaBoots;
         long finalDiferencaBoots = diferencaBoots;
         timer = new CountDownTimer(time[0], 1000) {
-            CardView conTi = containerTimer;
 
             boolean finishing = false;//to not have an onFinish() loop
             ImageView iconBoots = containerTimer.findViewById(R.id.iconBoots);
@@ -508,8 +509,12 @@ public class TimerActivity extends AppCompatActivity {
                 if (speechRecognizer != null)
                     speechRecognizer.destroy();
                 speechRecognizer = null;
-                String speak = speakLane + " " + speakSpell + " return. ";
-                speak += speak;
+                TextView txtReturnSpell= findViewById(R.id.spellReturn);
+                String speak = speakLane + " " + speakSpell + " return ";
+
+                txtReturnSpell.setText(speak);
+                txtReturnSpell.setVisibility(View.VISIBLE);
+
                 Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     v.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
@@ -517,19 +522,30 @@ public class TimerActivity extends AppCompatActivity {
                     v.vibrate(1000);
                 }
                 final boolean[] secondVibrate = {true};
-                if (lane != NORMAL_TIMER)
-                    textToSpeech.speak(speak, TextToSpeech.QUEUE_FLUSH, null, null);
-                else if (lane == NORMAL_TIMER)
-                    textToSpeech.speak("Timer Over. Timer Over", TextToSpeech.QUEUE_FLUSH, null, null);
+                final TextView[] txtHistory = {null};
+                if (lane != NORMAL_TIMER) {
+                    textToSpeech.speak(speak+speak, TextToSpeech.QUEUE_FLUSH, null, null);
 
-                timerSpeaker[0] = new CountDownTimer(3000, 300) {
+                }
 
+                else if (lane == NORMAL_TIMER){
+                    textToSpeech.speak("Timer Is Over. Timer Is Over", TextToSpeech.QUEUE_FLUSH, null, null);
+                    txtReturnSpell.setText("Timer Is Over");
+
+                }
+
+
+                timerSpeaker[0] = new CountDownTimer(4000, 300) {
                     @Override
                     public void onTick(long l) {
-                        if (textView.getAlpha() > 0)
+                        if (textView.getAlpha() > 0){
                             textView.animate().alpha(0).setDuration(250);
-                        else
+                            txtReturnSpell.animate().alpha(0).setDuration(250);
+                        }
+                        else{
                             textView.animate().alpha(1).setDuration(250);
+                            txtReturnSpell.animate().alpha(1).setDuration(250);
+                        }
                         if (l <= 1500 && secondVibrate[0]) {
                             secondVibrate[0] = false;
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -540,16 +556,50 @@ public class TimerActivity extends AppCompatActivity {
                         }
                     }
 
+
                     @Override
                     public void onFinish() {
                         containerTimer.animate().alpha(0).setDuration(500);
                         StartListening();
+                        txtReturnSpell.setVisibility(View.GONE);
+                        txtHistory[0] = new TextView(getApplicationContext());
+                        txtHistory[0].setText(speak);
+                        txtHistory[0].setTextSize(20);
+                        txtHistory[0].setGravity(Gravity.CENTER);
+                        txtHistory[0].setTypeface(txtHistory[0].getTypeface(), Typeface.BOLD);
+                        txtHistory[0].setVisibility(View.VISIBLE);
+                        txtHistory[0].setTextColor(Color.BLACK);
+                        containerInfos.addView(txtHistory[0]);
+
+                        timerSpeaker[1] = new CountDownTimer(11000, 1000) {
+
+
+                            @Override
+                            public void onTick(long l) {
+                                if(l<1100)
+                                txtHistory[0].animate().alpha(0).setDuration(1000);
+                            }
+
+
+                            @Override
+                            public void onFinish() {
+                                if(txtHistory[0] !=null){
+
+                                    containerInfos.removeView(txtHistory[0]);
+                                    System.out.println("TimerActivity.onFinish removi");
+                                }
+
+                            }
+                        }.start();
                         container.removeView(containerTimer);
                         cancel();
 
                     }
                 }.start();
+                TextView finalTxtHistory = txtHistory[0];
+
                 timers.remove(currentTouch);
+
             }
         }.start();
         timers.put(containerTimer, timer);
@@ -792,7 +842,8 @@ public class TimerActivity extends AppCompatActivity {
                 lane = NORMAL_TIMER;
                 spell = -(Integer.parseInt(normalTimer));
             }
-        } else if ((word2.equals("segundos") || word2.equals("seconds"))) {
+        }
+         if ((word2.equals("segundos") || word2.equals("seconds"))) {
             if (word1.matches("[+-]?\\d*(\\.\\d+)?")) {
                 lane = NORMAL_TIMER;
                 spell = -(Integer.parseInt(word1));

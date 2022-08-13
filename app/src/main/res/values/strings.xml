@@ -7,7 +7,9 @@
     <string name="permissionDenied">Permission Denied</string>
     <string name="givePermission">Give Permission</string>
     <string name="start">Start</string>
-    <string name="tipStart">Speak your command like for example:</string>
+    <string name="tipStart">Speak your command, </string>
+    <string name="like_for_example">like for example:</string>
+
     <string name="tipEnd">Hint: Speak slowly between each word or change recognition language in settings.</string>
     <string name="tipCustomizeCommands">You can create custom commands in settings.</string>
 

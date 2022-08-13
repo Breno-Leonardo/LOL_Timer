@@ -25,6 +25,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -58,9 +59,9 @@ public class TimerActivity extends AppCompatActivity {
     private static final int EXHAUST = 12;
     private static final int TELEPORT = 13;
     private static final int CLEANSE = 14;
-    private static final int BOOTS=17;
+    private static final int BOOTS = 17;
 
-    private static final int FLASH_TIME = 5;
+    private static final int FLASH_TIME = 300;
     private static final int IGNITE_TIME = 180;
     private static final int HEAL_TIME = 240;
     private static final int GHOST_TIME = 210;
@@ -79,58 +80,58 @@ public class TimerActivity extends AppCompatActivity {
     //FLASH
     private String commandsTopFlash = "tf topflash topfashion ";
     private String commandsJungleFlash = "jf jungleflash djangoflash junglefashion";
-    private String commandsMidFlash = "mf midflash mediaflash midiflash midfashion";
+    private String commandsMidFlash = "mf midflash mediaflash midiflash midfashion miniflash minifashion";
     private String commandsAdcFlash = "af adcflash bf botflash abcflash adcfashion botfashion abcfashion ";
-    private String commandsSupportFlash = "sf supportflash suporteflash supportfashion suportefashion ";
+    private String commandsSupportFlash = "sf supportflash suporteflash supportfashion suportefashion supflash supfashion ";
 
     //HEAL
     private String commandsTopHeal = "th topheal topcurar toprio";
     private String commandsJungleHeal = "jh jungleheal djangoheal junglecurar junglerio djangorio";
-    private String commandsMidHeal = "mh midheal midcurar midrio mediaheal mediacurar mediario midiheal midicurar midirio";
+    private String commandsMidHeal = "mh midheal midcurar midrio mediaheal mediacurar mediario midiheal midicurar midirio minicurar minirio miniheal";
     private String commandsAdcHeal = "ah adcheal bh botheal adcrio botrio adccurar botcurar abcrio abccurar abcheal";
-    private String commandsSupportHeal = "sh supportheal suprio supcurar";
+    private String commandsSupportHeal = "sh supportheal suprio supcurar suporterio suportecurar suporteheal";
 
     //IGNITE
     private String commandsTopIgnite = "ti topignite ";
     private String commandsJungleIgnite = "ji jungleignite djangoignite ";
-    private String commandsMidIgnite = "mi midignite mediaignite ";
+    private String commandsMidIgnite = "mi midignite mediaignite modnight midnight miniiginite mininight ";
     private String commandsAdcIgnite = "ai adcignite bf botignite abcignite";
-    private String commandsSupportIgnite = "si supportignite ";
+    private String commandsSupportIgnite = "si supportignite  suporteignite supignite";
 
     //BARRIER
     private String commandsTopBarrier = "tb topbarrier ";
     private String commandsJungleBarrier = "jb junglebarrier djangobarrier junglebarriera djangobarriera";
-    private String commandsMidBarrier = "mb midbarrier mediabarrier midibarrier midbarriera mediabarriera midibarriera ";
+    private String commandsMidBarrier = "mb midbarrier mediabarrier midibarrier midbarriera mediabarriera midibarriera minibarreira minibarrier ";
     private String commandsAdcBarrier = "ab adcbarrier bb botbarrier adcbarriera bb botbarriera abcbarrier abcbarreira";
-    private String commandsSupportBarrier = "sb supportbarrier ";
+    private String commandsSupportBarrier = "sb supportbarrier suportebarrier suportebarreira supbarrier supbarreira suportebehringer suportbarreira ";
 
     //GHOST
     private String commandsTopGhost = "tg topghost topfantasma ";
     private String commandsJungleGhost = "jg jungleghost djangoghost junglefantasma ";
-    private String commandsMidGhost = "mg midghost midfantasma mediaghost mediafantasma midighost midifantasma ";
+    private String commandsMidGhost = "mg midghost midfantasma mediaghost mediafantasma midighost midifantasma minighost minifantasma ";
     private String commandsAdcGhost = "ag adcghost bg botghost adcfantasma botfantasma abcghost abcfantasma";
-    private String commandsSupportGhost = "sg supportghost suportfantasma";
+    private String commandsSupportGhost = "sg supportghost suportfantasma suporteghost suportefantasma supghost supfantasma";
 
     //EXHAUST
     private String commandsTopExhaust = "te topexhaust topexausto ";
     private String commandsJungleExhaust = "je jungleexhaust djangoexhaust jungleexausto djangoexausto ";
-    private String commandsMidExhaust = "me midexhaust midexausto mediaexausto mediaexhaust midiexausto";
+    private String commandsMidExhaust = "me midexhaust midexausto mediaexausto mediaexhaust midiexausto miniexhaust miniexausto";
     private String commandsAdcExhaust = "ae adcexhaust be botexhaust adcexausto botexausto abcexausto abcexaust";
-    private String commandsSupportExhaust = "se supportexhaust suporteexhaust suporteexausto supportexausto";
+    private String commandsSupportExhaust = "se supportexhaust suporteexhaust suporteexausto supportexausto supexaust supexausto";
 
     //TELEPORT
     private String commandsTopTeleport = "tt topteleport ";
     private String commandsJungleTeleport = "jt jungleteleport djangoteleport ";
-    private String commandsMidTeleport = "mt  midteleport mediateleport miditeleport ";
+    private String commandsMidTeleport = "mt  midteleport mediateleport miditeleport miniteleport miniteleporte meteleporte";
     private String commandsAdcTeleport = "at adcteleport bt botteleport abcteleport";
-    private String commandsSupportTeleport = "st supportteleport ";
+    private String commandsSupportTeleport = "st supportteleport  suporteteleporte supteleport supteleporte";
 
     //CLEANSE
     private String commandsTopCleanse = "tf topcleanse toppurificar topklinse";
     private String commandsJungleCleanse = "jf junglecleanse djangocleanse junglepurifica jungleklinse";
-    private String commandsMidCleanse = "mf midcleanse midpurificar mediacleanse mediapurificar mediaklinse midklinse midicleanse midipurificar mediacleanse mediapurificar mediaklinse midiklinse";
+    private String commandsMidCleanse = "mf midcleanse midpurificar mediacleanse mediapurificar mediaklinse midklinse midicleanse midipurificar mediacleanse mediapurificar mediaklinse midiklinse midlince miniprince minicleanse minipurificar miniklinse minicleanse minipurificar";
     private String commandsAdcCleanse = "af adccleanse bf botcleanse botpurificar botklinse adcklinse abccleanse adcpurificar abcpurificar abcklinse";
-    private String commandsSupportCleanse = "sf supportcleanse suportepurificar suporteklinse suportecleanse suportpurificar";
+    private String commandsSupportCleanse = "sf supportcleanse suportepurificar suporteklinse suportecleanse suportpurificar suportklinse";
 
     //Kindred Mark
     private String commandsKindred = "k30 k45 kindred45 kindred30 ca30 ca45 ";
@@ -139,11 +140,11 @@ public class TimerActivity extends AppCompatActivity {
     private String commandsAnivia = "aniviapassive aniviaegg aniviaovo ";
 
     //BOOTS
-    private String commandsTopBoots = "bootstop bottop boottop bt ";
-    private String commandsJungleBoots = "bootsjungle botjungle bootjungle bj bootsdjango botdjango bootdjango  ";
-    private String commandsMidBoots = "bootsmid botmid bootmid bm bootsmedia botmedia bootmedia bootmidi botmidi bootsmidi ";
+    private String commandsTopBoots = "bootstop bottop boottop bt bootstrap footstop butstop ";
+    private String commandsJungleBoots = "bootsjungle botjungle bootjungle bj bootsdjango botdjango bootdjango butsjungle butsdjango bootjango bootsjango botjango  ";
+    private String commandsMidBoots = "bootsmid botmid bootmid bm bootsmedia botmedia bootmedia bootmidi botmidi bootsmidi botmini bootsmini bootmini butibuti";
     private String commandsAdcBoots = "bootsbot botbot bootbot bootsadc botadc bootadc ba botabc bootabc bootsabc";
-    private String commandsSupportBoots = "botsuport botsuporte bootssuport bootssuporte ";
+    private String commandsSupportBoots = "botsuport botsuporte bootssuport bootssuporte botsup bootsup bootssup bootsuporte bootsuporte ";
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private boolean topBoots = false;
     private boolean jungleBoots = false;
@@ -160,6 +161,7 @@ public class TimerActivity extends AppCompatActivity {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private TextView textCommand, tipText;
+    ScrollView scrollView;
     private SpeechRecognizer speechRecognizer;
     private TextToSpeech textToSpeech;
     private Intent intent;
@@ -184,8 +186,41 @@ public class TimerActivity extends AppCompatActivity {
         textCommand = findViewById(R.id.textTimer);
         tipText = findViewById(R.id.tipText);
 
-        tipText.setText(getResources().getString(R.string.tipStart) + " \"Mid Flash \". \n " + "\n" + getResources().getString(R.string.tipEnd) + "\n" + "\n" + getResources().getString(R.string.tipCustomizeCommands));
+        tipText.setText(getResources().getString(R.string.tipStart) + " Lane + Spell, " + getResources().getString(R.string.like_for_example) + " \"Mid Flash \". \n " + "\n" + getResources().getString(R.string.tipEnd) + "\n" + "\n" + getResources().getString(R.string.tipCustomizeCommands));
+        scrollView = findViewById(R.id.scrollViewActivityTimer);
+        scrollView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                System.out.println("TimerActivity.onTouch scroltouch " + event.getAction()+" current"+currentTouch);
+                int action = event.getAction();
+                if (action == MotionEvent.ACTION_DOWN) {
+                    lastX = event.getX();
+                } else if (action == MotionEvent.ACTION_MOVE) {
+                    if (currentTouch != null) {
+                        layoutContainerTimer = currentTouch.findViewById(R.id.layoutContainerTimer);
+                        currentTouch.setTranslationX(currentTouch.getTranslationX() + (event.getX() - lastX));
+                        if (currentTouch.getTranslationX() >= currentTouch.getWidth() * 0.4f)
+                            layoutContainerTimer.setBackgroundColor(Color.RED);
+                        else
+                            layoutContainerTimer.setBackgroundColor(Color.WHITE);
+                    }
 
+                    lastX = event.getX();
+                } else if (action == MotionEvent.ACTION_UP) {
+                    if (currentTouch != null) {
+                        if (currentTouch.getTranslationX() >= currentTouch.getWidth() * 0.4f) {
+                            container.removeView(currentTouch);
+                            if (timers.get(currentTouch) != null)
+                                timers.get(currentTouch).cancel();
+                            timers.remove(currentTouch);
+                        }
+                        currentTouch.setTranslationX(0);
+                        currentTouch = null;
+                    }
+                }
+                return false;
+            }
+        });
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             checkPermission();
         }
@@ -227,6 +262,7 @@ public class TimerActivity extends AppCompatActivity {
     public MainViewModel getViewModel() {
         return new ViewModelProvider(this).get(MainViewModel.class);
     }
+
     public static String removerAcentos(String str) {
         return Normalizer.normalize(str, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
     }
@@ -282,7 +318,7 @@ public class TimerActivity extends AppCompatActivity {
                 ArrayList<String> c = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                 String command = c.get(0);
                 tipText.setVisibility(View.GONE);
-                command=removerAcentos(command);
+                command = removerAcentos(command);
                 checkCommand(command);
 
                 if (command != null) {// set max length text command in screen
@@ -509,7 +545,7 @@ public class TimerActivity extends AppCompatActivity {
                 if (speechRecognizer != null)
                     speechRecognizer.destroy();
                 speechRecognizer = null;
-                TextView txtReturnSpell= findViewById(R.id.spellReturn);
+                TextView txtReturnSpell = findViewById(R.id.spellReturn);
                 String speak = speakLane + " " + speakSpell + " return ";
 
                 txtReturnSpell.setText(speak);
@@ -524,11 +560,9 @@ public class TimerActivity extends AppCompatActivity {
                 final boolean[] secondVibrate = {true};
                 final TextView[] txtHistory = {null};
                 if (lane != NORMAL_TIMER) {
-                    textToSpeech.speak(speak+speak, TextToSpeech.QUEUE_FLUSH, null, null);
+                    textToSpeech.speak(speak + speak, TextToSpeech.QUEUE_FLUSH, null, null);
 
-                }
-
-                else if (lane == NORMAL_TIMER){
+                } else if (lane == NORMAL_TIMER) {
                     textToSpeech.speak("Timer Is Over. Timer Is Over", TextToSpeech.QUEUE_FLUSH, null, null);
                     txtReturnSpell.setText("Timer Is Over");
 
@@ -538,11 +572,10 @@ public class TimerActivity extends AppCompatActivity {
                 timerSpeaker[0] = new CountDownTimer(4000, 300) {
                     @Override
                     public void onTick(long l) {
-                        if (textView.getAlpha() > 0){
+                        if (textView.getAlpha() > 0) {
                             textView.animate().alpha(0).setDuration(250);
                             txtReturnSpell.animate().alpha(0).setDuration(250);
-                        }
-                        else{
+                        } else {
                             textView.animate().alpha(1).setDuration(250);
                             txtReturnSpell.animate().alpha(1).setDuration(250);
                         }
@@ -576,14 +609,14 @@ public class TimerActivity extends AppCompatActivity {
 
                             @Override
                             public void onTick(long l) {
-                                if(l<1100)
-                                txtHistory[0].animate().alpha(0).setDuration(1000);
+                                if (l < 1100)
+                                    txtHistory[0].animate().alpha(0).setDuration(1000);
                             }
 
 
                             @Override
                             public void onFinish() {
-                                if(txtHistory[0] !=null){
+                                if (txtHistory[0] != null) {
 
                                     containerInfos.removeView(txtHistory[0]);
                                     System.out.println("TimerActivity.onFinish removi");
@@ -795,32 +828,31 @@ public class TimerActivity extends AppCompatActivity {
         //Boots
 
 
-
-        else if (verifyCommands(command, commandsTopBoots)  ) {
+        else if (verifyCommands(command, commandsTopBoots)) {
 
             topBoots = !topBoots;
             return;
-        } else if (verifyCommands(command, commandsJungleBoots) ) {
+        } else if (verifyCommands(command, commandsJungleBoots)) {
 
-        jungleBoots = !jungleBoots;
+            jungleBoots = !jungleBoots;
             return;
 
-        } else if (verifyCommands(command, commandsMidBoots) ) {
+        } else if (verifyCommands(command, commandsMidBoots)) {
 
-        midBoots = !midBoots;
+            midBoots = !midBoots;
             return;
 
-    } else if (verifyCommands(command, commandsAdcBoots) ) {
+        } else if (verifyCommands(command, commandsAdcBoots)) {
 
-        adcBoots = !adcBoots;
+            adcBoots = !adcBoots;
             return;
 
-    } else if (verifyCommands(command, commandsSupportBoots) ) {
+        } else if (verifyCommands(command, commandsSupportBoots)) {
 
-        supportBoots = !supportBoots;
+            supportBoots = !supportBoots;
             return;
 
-    }
+        }
         //Kindred Mark
         String timeMark = command.replace("k", "");
         if (verifyCommands(command, commandsKindred) || (inicialLetter1 == 'k' && timeMark.matches("[+-]?\\d*(\\.\\d+)?"))) {
@@ -843,7 +875,7 @@ public class TimerActivity extends AppCompatActivity {
                 spell = -(Integer.parseInt(normalTimer));
             }
         }
-         if ((word2.equals("segundos") || word2.equals("seconds"))) {
+        if ((word2.equals("segundos") || word2.equals("seconds"))) {
             if (word1.matches("[+-]?\\d*(\\.\\d+)?")) {
                 lane = NORMAL_TIMER;
                 spell = -(Integer.parseInt(word1));

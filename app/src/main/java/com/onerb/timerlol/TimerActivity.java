@@ -34,13 +34,14 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.onerb.timerlol.api.ApiUtil;
 import com.onerb.timerlol.ui.main.MainViewModel;
 
 import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 public class TimerActivity extends AppCompatActivity {
     private static final int RECORD_AUDIO_REQUEST_CODE = 1;
@@ -176,6 +177,20 @@ public class TimerActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         getSupportActionBar().hide();
+        ApiUtil apiUtil=new ApiUtil(getViewModel(), "The Kindred");
+
+        String respApi=null;
+        try {
+            respApi=apiUtil.execute().get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("TimerActivity.onCreate resposta "+ respApi);
+
+
+
 
 //        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_timer);

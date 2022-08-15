@@ -103,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.btnStartInCard).setOnTouchListener((view, motionEvent) -> {
+            System.out.println("MainActivity.onCreate route: "+InfosGameApiUtil.REGIONS_ROUTES[dropdownPosition]);
             MatchApiUtil matchApiUtil = new MatchApiUtil(getViewModel(), etSummonerName.getText().toString(), InfosGameApiUtil.REGIONS_ROUTES[dropdownPosition]);
 
                 try {

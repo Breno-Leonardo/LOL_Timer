@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.onerb.timerlol.BuildConfig;
 import com.onerb.timerlol.ui.main.MainViewModel;
 
 import java.io.IOException;
@@ -22,7 +23,7 @@ public class MatchApiUtil extends AsyncTask<Void, Void, String> {
     private String summonerId = null;
     private String summonerName = null;
     private String summonerRegionRoute = null;
-    private String keyApi = "RGAPI-e0d60ef6-717f-470d-8822-b4834ef0d2ae";
+    private String keyApi = BuildConfig.API_KEY;
     private int respCode = -1;
     private StringBuilder respSummonerId;
     private StringBuilder respParticipants;

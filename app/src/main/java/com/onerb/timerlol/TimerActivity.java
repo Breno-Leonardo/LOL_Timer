@@ -34,7 +34,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.onerb.timerlol.api.ApiUtil;
+import com.onerb.timerlol.api.InfosGameApiUtil;
+import com.onerb.timerlol.api.MatchApiUtil;
+import com.onerb.timerlol.api.SummonerInfos;
 import com.onerb.timerlol.ui.main.MainViewModel;
 
 import java.text.Normalizer;
@@ -170,6 +172,8 @@ public class TimerActivity extends AppCompatActivity {
     private LinearLayout container, containerInfos;
     private CardView currentTouch;//to know which timer is playing
     private HashMap<CardView, CountDownTimer> timers = new HashMap<>();//to cancel the timer by dragging to the right
+    private SummonerInfos.Participants[] participantsInfos = null;
+    private int apiRespCode = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -177,36 +181,43 @@ public class TimerActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         getSupportActionBar().hide();
-        ApiUtil apiUtil=new ApiUtil(getViewModel(), "The Kindred");
+        MatchApiUtil matchApiUtil = new MatchApiUtil(getViewModel(), "the kindred ", InfosGameApiUtil.BRAZIL_ROUTE);
 
-        String respApi=null;
+
         try {
-            respApi=apiUtil.execute().get();
+            matchApiUtil.execute().get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("TimerActivity.onCreate resposta "+ respApi);
 
 
+        participantsInfos = matchApiUtil.getParticipantsInfos();
+        System.out.println("TimerActivity.onCreate participantsInfos" + participantsInfos);
+        apiRespCode = matchApiUtil.getRespCode();
+        System.out.println("TimerActivity.onCreate coderesposta " + apiRespCode);
+        if (participantsInfos != null) {
+
+        }else if(apiRespCode == 200 && participantsInfos==null ){
+            System.out.println("Game not begin");
+        }
+        else if (apiRespCode == 404) {
+            System.out.println("TimerActivity.onCreate summoner not found");
+        }
 
 
 //        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_timer);
-
         container = findViewById(R.id.timersContainer);
         containerInfos = findViewById(R.id.containerInfos);
-
         textCommand = findViewById(R.id.textTimer);
         tipText = findViewById(R.id.tipText);
-
         tipText.setText(getResources().getString(R.string.tipStart) + " Lane + Spell, " + getResources().getString(R.string.like_for_example) + " \"Mid Flash \". \n " + "\n" + getResources().getString(R.string.tipEnd) + "\n" + "\n" + getResources().getString(R.string.tipCustomizeCommands));
         scrollView = findViewById(R.id.scrollViewActivityTimer);
         scrollView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                System.out.println("TimerActivity.onTouch scroltouch " + event.getAction()+" current"+currentTouch);
                 int action = event.getAction();
                 if (action == MotionEvent.ACTION_DOWN) {
                     lastX = event.getX();
@@ -919,7 +930,6 @@ public class TimerActivity extends AppCompatActivity {
 
             btnBoots.setOnTouchListener((view, motionEvent) -> {
                 CountDownTimer btnTimer;
-                System.out.println("TimerActivity.checkCommand clicou");
 
 
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {

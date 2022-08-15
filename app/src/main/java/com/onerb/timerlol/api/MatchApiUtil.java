@@ -12,59 +12,58 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 
-public class ApiUtil extends AsyncTask<Void, Void, String> {
+public class MatchApiUtil extends AsyncTask<Void, Void, String> {
     public static final int CODE_SUMMONER_ID = 1;
     public static final int CODE_PARTICIPANTS = 2;
 
     private MainViewModel viewModel;
+    private SummonerInfos.Participants[] participantsInfos = null;
+
     private String summonerId = null;
     private String summonerName = null;
-    private String name = "mainmidbr";
-    private String keyApi = "RGAPI-055128c3-7447-4bf0-a0be-ab1f69624c66";
-
-    public ApiUtil(MainViewModel viewModel, String summonerName) {
-        this.viewModel = viewModel;
-
-        this.summonerName = summonerName;
-    }
-
-    public String getSummonerName() {
-        return summonerName;
-    }
-
-    public void setSummonerName(String summonerName) {
-        this.summonerName = summonerName;
-    }
-
+    private String summonerRegionRoute = null;
+    private String keyApi = "RGAPI-e0d60ef6-717f-470d-8822-b4834ef0d2ae";
+    private int respCode = -1;
     private StringBuilder respSummonerId;
     private StringBuilder respParticipants;
+
+
+    public MatchApiUtil(MainViewModel viewModel, String summonerName, String summonerRegionRoute) {
+        this.viewModel = viewModel;
+        this.summonerName = summonerName;
+        this.summonerRegionRoute = summonerRegionRoute;
+    }
+
 
     @Override
     protected String doInBackground(Void... voids) {
         if (summonerId == null)
             summonerId = getSummonerId();
-        return getPaticipants();
+        if (summonerId == null)
+            return getPaticipants();
+
+        return null;
 //        return getPaticipants();
 
     }
 
     public String getSummonerId() {
 
-        name = summonerName.toLowerCase();
-        name = summonerName.replace(" ", "");
+        summonerName = summonerName.toLowerCase();
+        summonerName = summonerName.replace(" ", "");
         respSummonerId = new StringBuilder();
 
         try {
-            URL url = new URL("https://br1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + name);
+            URL url = new URL("https://" + summonerRegionRoute + "/lol/summoner/v4/summoners/by-name/" + summonerName);
             HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
             conexao.setRequestMethod("GET");
             conexao.setRequestProperty("X-Riot-Token", keyApi);
             conexao.setRequestProperty("Content-type", "application-json");
             conexao.setDoInput(true);
-            conexao.setConnectTimeout(5000);
+            conexao.setConnectTimeout(1000);
             conexao.connect();
-            int responseCode = conexao.getResponseCode();
-            System.out.println("ApiUtil.getSummonerId code conexao:" + responseCode);
+            respCode = conexao.getResponseCode();
+            System.out.println("ApiUtil.getSummonerId code conexao:" + respCode);
             Scanner scanner = new Scanner(conexao.getInputStream());
             while (scanner.hasNext()) {
                 respSummonerId.append(scanner.next());
@@ -83,19 +82,19 @@ public class ApiUtil extends AsyncTask<Void, Void, String> {
 
     }
 
-    public String getPaticipants() {
+    private String getPaticipants() {
 
         respParticipants = new StringBuilder();
 
         try {
-            URL url = new URL("https://br1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/" + summonerId);
+            URL url = new URL("https://" + summonerRegionRoute + "/lol/spectator/v4/active-games/by-summoner/" + summonerId);
             HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
             conexao.setRequestMethod("GET");
             conexao.setRequestProperty("Content-type", "application-json");
             conexao.setRequestProperty("X-Riot-Token", keyApi);
 //            conexao.setDoOutput(true);
             conexao.setDoInput(true);
-            conexao.setConnectTimeout(5000);
+            conexao.setConnectTimeout(1000);
             conexao.connect();
             Scanner scanner = new Scanner(conexao.getInputStream());
             while (scanner.hasNext()) {
@@ -109,10 +108,14 @@ public class ApiUtil extends AsyncTask<Void, Void, String> {
         if (respParticipants.length() != 0) {
             Gson gsonResp = new GsonBuilder().setPrettyPrinting().create();
             SummonerInfos.Participants[] participants = gsonResp.fromJson(respParticipants.toString(), SummonerInfos.class).getParticipants();
-            for (int i = 0; i < participants.length; i++) {
+            participantsInfos = participants;
+            for (int i = 5; i < participants.length; i++) {
                 System.out.println("TimerActivity.onCreate paticipant " + i + " names:" + participants[i].getSummonerName());
             }
-            for (int i = 0; i < participants.length; i++) {
+            for (int i = 5; i < participants.length; i++) {
+                System.out.println("TimerActivity.onCreate paticipant " + i + " perks:" + participants[i].getPerks().perkIds.toString());
+            }
+            for (int i = 5; i < participants.length; i++) {
                 System.out.println("TimerActivity.onCreate paticipant " + i + " perks:" + participants[i].getPerks().perkIds.toString());
             }
 
@@ -120,6 +123,23 @@ public class ApiUtil extends AsyncTask<Void, Void, String> {
             return "null";
 
         return "null";
+    }
+
+    public String getSummonerName() {
+        return summonerName;
+    }
+
+    public void setSummonerName(String summonerName) {
+        this.summonerName = summonerName;
+    }
+
+    public int getRespCode() {
+        return respCode;
+    }
+
+
+    public SummonerInfos.Participants[] getParticipantsInfos() {
+        return participantsInfos;
     }
 
 }

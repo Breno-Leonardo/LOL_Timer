@@ -9,8 +9,15 @@
     <string name="start">Start</string>
     <string name="tipStart">Speak your command, </string>
     <string name="like_for_example">like for example:</string>
-
     <string name="tipEnd">Hint: Speak slowly between each word or change recognition language in settings.</string>
     <string name="tipCustomizeCommands">You can create custom commands in settings.</string>
+    <string name="summonerName">Summoner Name:</string>
+    <string name="error">Incorrect Summoner Or Region</string>
+    <string name="putSummonerName">The Kindred</string>
+
+    <!--    <string name="putSummonerName">Put Your Summoner Name</string>-->
+    <string name="region">Region:</string>
+
+
 
 </resources>

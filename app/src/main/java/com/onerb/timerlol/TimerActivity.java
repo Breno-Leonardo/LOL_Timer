@@ -48,21 +48,21 @@ import java.util.concurrent.ExecutionException;
 public class TimerActivity extends AppCompatActivity {
     private static final int RECORD_AUDIO_REQUEST_CODE = 1;
 
-    private static final int TOP = 2;
-    private static final int JUNGLE = 3;
-    private static final int MID = 4;
-    private static final int ADC = 5;
-    private static final int SUPPORT = 6;
+    public static final int TOP = 2;
+    public static final int JUNGLE = 3;
+    public static final int MID = 4;
+    public static final int ADC = 5;
+    public static final int SUPPORT = 6;
 
-    private static final int FLASH = 7;
-    private static final int IGNITE = 8;
-    private static final int HEAL = 9;
-    private static final int GHOST = 10;
-    private static final int BARRIER = 11;
-    private static final int EXHAUST = 12;
-    private static final int TELEPORT = 13;
-    private static final int CLEANSE = 14;
-    private static final int BOOTS = 17;
+    public static final int FLASH = 7;
+    public static final int IGNITE = 8;
+    public static final int HEAL = 9;
+    public static final int GHOST = 10;
+    public static final int BARRIER = 11;
+    public static final int EXHAUST = 12;
+    public static final int TELEPORT = 13;
+    public static final int CLEANSE = 14;
+    public static final int BOOTS = 15;
 
     private static final int FLASH_TIME = 300;
     private static final int IGNITE_TIME = 180;
@@ -73,8 +73,8 @@ public class TimerActivity extends AppCompatActivity {
     private static final int TELEPORT_TIME = 360;
     private static final int CLEANSE_TIME = 210;
 
-    private static final int KINDRED = 1;
-    private static final int ANIVIA = 15;
+    private static final int KINDRED = 0;
+    private static final int ANIVIA = 17;
     private static final int ANIVIA_TIME = 240;
     private static final int NORMAL_TIMER = 16;
 
@@ -164,7 +164,7 @@ public class TimerActivity extends AppCompatActivity {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private TextView textCommand, tipText;
-    ScrollView scrollView;
+    private ScrollView scrollView;
     private SpeechRecognizer speechRecognizer;
     private TextToSpeech textToSpeech;
     private Intent intent;
@@ -181,30 +181,31 @@ public class TimerActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         getSupportActionBar().hide();
-        MatchApiUtil matchApiUtil = new MatchApiUtil(getViewModel(), "the kindred ", InfosGameApiUtil.BRAZIL_ROUTE);
 
-
-        try {
-            matchApiUtil.execute().get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-
-        participantsInfos = matchApiUtil.getParticipantsInfos();
-        System.out.println("TimerActivity.onCreate participantsInfos" + participantsInfos);
-        apiRespCode = matchApiUtil.getRespCode();
-        System.out.println("TimerActivity.onCreate coderesposta " + apiRespCode);
-        if (participantsInfos != null) {
-
-        }else if(apiRespCode == 200 && participantsInfos==null ){
-            System.out.println("Game not begin");
-        }
-        else if (apiRespCode == 404) {
-            System.out.println("TimerActivity.onCreate summoner not found");
-        }
+//        MatchApiUtil matchApiUtil = new MatchApiUtil(getViewModel(), "the kindred ", InfosGameApiUtil.BRAZIL_ROUTE);
+//
+//
+//        try {
+//            matchApiUtil.execute().get();
+//        } catch (ExecutionException e) {
+//            e.printStackTrace();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//        participantsInfos = matchApiUtil.getParticipantsInfos();
+//        System.out.println("TimerActivity.onCreate participantsInfos" + participantsInfos);
+//        apiRespCode = matchApiUtil.getRespCode();
+//        System.out.println("TimerActivity.onCreate coderesposta " + apiRespCode);
+//        if (participantsInfos != null) {
+//
+//        }else if(apiRespCode == 200 && participantsInfos==null ){
+//            System.out.println("Game not begin");
+//        }
+//        else if (apiRespCode == 404) {
+//            System.out.println("TimerActivity.onCreate summoner not found");
+//        }
 
 
 //        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);

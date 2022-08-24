@@ -82,7 +82,7 @@ public class TimerActivity extends AppCompatActivity {
     //put the commands glued
     //FLASH
     private String commandsTopFlash = "tf topflash topfashion ";
-    private String commandsJungleFlash = "jf jungleflash djangoflash junglefashion";
+    private String commandsJungleFlash = "jf jungleflash djangoflash junglefashion jogodoflash jogodeflash";
     private String commandsMidFlash = "mf midflash mediaflash midiflash midfashion miniflash minifashion";
     private String commandsAdcFlash = "af adcflash bf botflash abcflash adcfashion botfashion abcfashion ";
     private String commandsSupportFlash = "sf supportflash suporteflash supportfashion suportefashion supflash supfashion ";

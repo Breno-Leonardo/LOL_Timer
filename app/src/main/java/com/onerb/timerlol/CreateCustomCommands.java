@@ -260,7 +260,7 @@ public class CreateCustomCommands extends AppCompatActivity {
                 editor.putString(originalCommandsCode, originalCommands + " " + separator + " " + originalCommand);
 
         }
-        editor.apply();
+        editor.commit();
         getCommands(lane, spell);
 
     }
@@ -270,7 +270,7 @@ public class CreateCustomCommands extends AppCompatActivity {
         String commandsCode, originalCommandsCode;
         LinearLayout containerCustomCommandsExisting = findViewById(R.id.containerCustomCommandsExistings);
         containerCustomCommandsExisting.removeAllViews();
-        System.out.println("CreateCustomCommands.getCommands commands "+sharedPref.getAll());
+        System.out.println("CreateCustomCommands.getCommands commands " + sharedPref.getAll());
         String spellName = "", laneName = "";
         if (spell == TimerActivity.FLASH) {
             spellName = "Flash";
@@ -319,9 +319,10 @@ public class CreateCustomCommands extends AppCompatActivity {
         originalCommandsCode = laneName + spellName + "OriginalCommands";
         commands = sharedPref.getString(commandsCode, null);
         originalCommands = sharedPref.getString(originalCommandsCode, null);
+        System.out.println("CreateCustomCommands.getCommands  new original commands " + originalCommands);
+        System.out.println("CreateCustomCommands.getCommands  new  commands " + commands);
         if (commands != null) {
             String[] aux = originalCommands.split("&7&");
-            String[] aux2 = originalCommands.split(" ");
             for (int i = 0; i < aux.length; i++) {
 
 
@@ -329,32 +330,35 @@ public class CreateCustomCommands extends AppCompatActivity {
                 TextView textCommand = containerCard.findViewById(R.id.textCommand);
                 Button btnRemove = containerCard.findViewById(R.id.btnRemoveCommand);
                 btnRemove.setOnTouchListener((view, motionEvent) -> {
-                    String[] a1 = originalCommands.split("&7&");
-                    String[] a2 = originalCommands.split(" ");
+
+                    String[] a1 = sharedPref.getString(originalCommandsCode, null).split("&7&");
+                    String[] a2 = sharedPref.getString(commandsCode, null).split(" ");
                     TextView txtCommand = containerCard.findViewById(R.id.textCommand);
                     String newOriginalCommand = "", newCommand = "";
 
                     for (int j = 0; j < a1.length; j++) {
-                        if(!a1[j].equals(txtCommand.getText().toString()))
-                        newOriginalCommand = newOriginalCommand + a1[j] + "&7&";
+                        if (!a1[j].equals(txtCommand.getText().toString()))
+                            newOriginalCommand = newOriginalCommand + a1[j] + "&7&";
                     }
 
 
                     for (int j = 0; j < a2.length; j++) {
-                        if(!a2[j].equals(txtCommand.getText().toString().replace(" ","")))
-                        newCommand = newCommand + a2[j] + " ";
+                        if (!a2[j].equals(txtCommand.getText().toString().replace(" ", "")))
+                            newCommand = newCommand + a2[j] + " ";
                     }
 
                     containerCustomCommandsExisting.removeView(containerCard);
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putString(commandsCode, newCommand);// add command
                     editor.putString(originalCommandsCode, newOriginalCommand);
-                    editor.apply();
+                    editor.commit();
+
 
                     return true;
                 });
                 textCommand.setText(aux[i]);
-                containerCustomCommandsExisting.addView(containerCard);
+                if (aux[i] != "")
+                    containerCustomCommandsExisting.addView(containerCard);
             }
         }
     }

@@ -70,6 +70,7 @@
                 android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:text="@string/custom_commands"
+                android:typeface="monospace"
                 android:textColor="@color/black"
                 android:textSize="30dp"
                 android:textStyle="bold">
@@ -239,6 +240,7 @@
                     android:text="@string/custom_commands_existings"
                     android:textColor="@color/black"
                     android:textSize="20dp"
+                    android:typeface="monospace"
                     android:textStyle="bold">
 
                 </TextView>

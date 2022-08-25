@@ -1,8 +1,880 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
+    android:id="@+id/scrollViewCreateCustomCommands"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CommandsActivity"/>
+    android:background="@color/white"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="7dp"
+
+            app:cardCornerRadius="20dp"
+            android:backgroundTint="@color/white"
+
+            app:cardElevation="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:text="@string/custom_commands"
+                    android:textColor="@color/black"
+
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:typeface="monospace">
+
+                </TextView>
+
+                <Button
+                    android:id="@+id/btnCreateCommandInCommands"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="40dp"
+                    android:backgroundTint="@color/greenTime"
+                    android:text="@string/create"
+
+                    android:textColor="@color/black"
+                    android:textSize="30dp"
+                    android:textStyle="bold">
+
+                </Button>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="7dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp"
+            android:backgroundTint="@color/white"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginBottom="7dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:text="@string/list_commands"
+                        android:textColor="@color/black"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:typeface="monospace">
+
+                    </TextView>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="1dp"
+                        android:gravity="center"
+                        android:text="@string/list_commands"
+                        android:textColor="@color/greenTime"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:typeface="monospace">
+
+                    </TextView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="5dp"
+                            android:text="Lanes"
+                            android:textColor="@color/black"
+                            android:textSize="17dp"
+                            android:textStyle="bold"
+                            android:typeface="monospace">
+
+                        </TextView>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="6dp"
+                            android:layout_marginTop="6dp"
+                            android:text="Lanes"
+                            android:textColor="@color/greenTime"
+                            android:textSize="17dp"
+                            android:textStyle="bold"
+                            android:typeface="monospace">
+
+                        </TextView>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp">
+
+                        <ImageView
+                            android:layout_width="@dimen/spellAndPositions"
+                            android:layout_height="@dimen/spellAndPositions"
+                            android:src="@drawable/top"></ImageView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:gravity="center_vertical"
+                            android:text="Top"
+                            android:textColor="@color/black"
+                            android:textSize="17dp"
+                            android:textStyle="bold"
+                            android:typeface="monospace">
+
+                        </TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp">
+
+                        <ImageView
+                            android:layout_width="@dimen/spellAndPositions"
+                            android:layout_height="@dimen/spellAndPositions"
+                            android:src="@drawable/jungle"></ImageView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:gravity="center_vertical"
+                            android:text="Jungle"
+                            android:textColor="@color/black"
+                            android:textSize="17dp"
+                            android:textStyle="bold"
+                            android:typeface="monospace">
+
+                        </TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp">
+
+                        <ImageView
+                            android:layout_width="@dimen/spellAndPositions"
+                            android:layout_height="@dimen/spellAndPositions"
+                            android:src="@drawable/mid"></ImageView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:gravity="center_vertical"
+                            android:text="Mid"
+                            android:textColor="@color/black"
+                            android:textSize="17dp"
+                            android:textStyle="bold"
+                            android:typeface="monospace">
+
+                        </TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp">
+
+                        <ImageView
+                            android:layout_width="@dimen/spellAndPositions"
+                            android:layout_height="@dimen/spellAndPositions"
+                            android:src="@drawable/adc"></ImageView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:gravity="center_vertical"
+                            android:text=" Adc | Bot"
+                            android:textColor="@color/black"
+                            android:textSize="17dp"
+                            android:textStyle="bold"
+                            android:typeface="monospace">
+
+                        </TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp">
+
+                        <ImageView
+                            android:layout_width="@dimen/spellAndPositions"
+                            android:layout_height="@dimen/spellAndPositions"
+                            android:src="@drawable/support"></ImageView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:gravity="center_vertical"
+                            android:text="Support"
+                            android:textColor="@color/black"
+                            android:textSize="17dp"
+                            android:textStyle="bold"
+                            android:typeface="monospace">
+
+                        </TextView>
+                    </LinearLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="5dp"
+                            android:text="Spells"
+                            android:textColor="@color/black"
+                            android:textSize="17dp"
+                            android:textStyle="bold"
+                            android:typeface="monospace">
+
+                        </TextView>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="6dp"
+                            android:layout_marginTop="6dp"
+                            android:text="Spells"
+                            android:textColor="@color/greenTime"
+                            android:textSize="17dp"
+                            android:textStyle="bold"
+                            android:typeface="monospace">
+
+                        </TextView>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            app:cardCornerRadius="5dp"
+                            app:cardElevation="10dp">
+
+                            <ImageView
+                                android:layout_width="45dp"
+                                android:layout_height="45dp"
+                                android:src="@drawable/flash"></ImageView>
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:gravity="center_vertical"
+                            android:text="Flash"
+                            android:textColor="@color/black"
+                            android:textSize="17dp"
+                            android:textStyle="bold"
+                            android:typeface="monospace">
+
+                        </TextView>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            app:cardCornerRadius="5dp"
+                            app:cardElevation="10dp">
+
+                            <ImageView
+                                android:layout_width="45dp"
+                                android:layout_height="45dp"
+                                android:src="@drawable/ignite"></ImageView>
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:gravity="center_vertical"
+                            android:text="Ignite"
+                            android:textColor="@color/black"
+                            android:textSize="17dp"
+                            android:textStyle="bold"
+                            android:typeface="monospace">
+
+                        </TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            app:cardCornerRadius="5dp"
+                            app:cardElevation="10dp">
+
+                            <ImageView
+                                android:layout_width="45dp"
+                                android:layout_height="45dp"
+                                android:src="@drawable/teleport"></ImageView>
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:gravity="center_vertical"
+                            android:text="Teleport"
+                            android:textColor="@color/black"
+                            android:textSize="17dp"
+                            android:textStyle="bold"
+                            android:typeface="monospace">
+
+                        </TextView>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            app:cardCornerRadius="5dp"
+                            app:cardElevation="10dp">
+
+                            <ImageView
+                                android:layout_width="45dp"
+                                android:layout_height="45dp"
+                                android:src="@drawable/heal"></ImageView>
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:gravity="center_vertical"
+                            android:text="Heal"
+                            android:textColor="@color/black"
+                            android:textSize="17dp"
+                            android:textStyle="bold"
+                            android:typeface="monospace">
+
+                        </TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            app:cardCornerRadius="5dp"
+                            app:cardElevation="10dp">
+
+                            <ImageView
+                                android:layout_width="45dp"
+                                android:layout_height="45dp"
+                                android:src="@drawable/exhaust"></ImageView>
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:gravity="center_vertical"
+                            android:text="Exhaust"
+                            android:textColor="@color/black"
+                            android:textSize="17dp"
+                            android:textStyle="bold"
+                            android:typeface="monospace">
+
+                        </TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            app:cardCornerRadius="5dp"
+                            app:cardElevation="10dp">
+
+                            <ImageView
+                                android:layout_width="45dp"
+                                android:layout_height="45dp"
+                                android:src="@drawable/barrier"></ImageView>
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:gravity="center_vertical"
+                            android:text="Barrier"
+                            android:textColor="@color/black"
+                            android:textSize="17dp"
+                            android:textStyle="bold"
+                            android:typeface="monospace">
+
+                        </TextView>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            app:cardCornerRadius="5dp"
+                            app:cardElevation="10dp">
+
+                            <ImageView
+                                android:layout_width="45dp"
+                                android:layout_height="45dp"
+                                android:src="@drawable/ghost"></ImageView>
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:gravity="center_vertical"
+                            android:text="Ghost"
+                            android:textColor="@color/black"
+                            android:textSize="17dp"
+                            android:textStyle="bold"
+                            android:typeface="monospace">
+
+                        </TextView>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            app:cardCornerRadius="5dp"
+                            app:cardElevation="10dp">
+
+                            <ImageView
+                                android:layout_width="45dp"
+                                android:layout_height="45dp"
+                                android:src="@drawable/cleanse"></ImageView>
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:gravity="center_vertical"
+                            android:text="Cleanse"
+                            android:textColor="@color/black"
+                            android:textSize="17dp"
+                            android:textStyle="bold"
+                            android:typeface="monospace">
+
+                        </TextView>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="15dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/explanation"
+                        android:textColor="@color/black"
+                        android:textSize="17dp"
+                        android:textStyle="bold"
+                        android:typeface="monospace">
+
+                    </TextView>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="15dp"
+                        android:gravity="center"
+                        android:text=" &quot;Mid Flash&quot; or &quot;Flash Mid&quot; "
+                        android:textColor="@color/black"
+                        android:textSize="17dp"
+                        android:textStyle="bold"
+                        android:typeface="monospace">
+
+                    </TextView>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="5dp"
+                            android:text="Extra Commands"
+                            android:textColor="@color/black"
+                            android:textSize="17dp"
+                            android:textStyle="bold"
+                            android:typeface="monospace">
+
+                        </TextView>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="6dp"
+                            android:layout_marginTop="6dp"
+                            android:text="Extra Commands"
+                            android:textColor="@color/greenTime"
+                            android:textSize="17dp"
+                            android:textStyle="bold"
+                            android:typeface="monospace">
+
+                        </TextView>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp">
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            app:cardCornerRadius="5dp"
+                            app:cardElevation="10dp">
+
+                            <ImageView
+                                android:layout_width="45dp"
+                                android:layout_height="45dp"
+                                android:src="@drawable/boots"></ImageView>
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:gravity="center_vertical"
+                            android:text="Ionian Boots of Lucidity"
+                            android:textColor="@color/black"
+                            android:textSize="17dp"
+                            android:textStyle="bold"
+                            android:typeface="monospace">
+
+                        </TextView>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="15dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/explanation_boots"
+                        android:textColor="@color/black"
+                        android:textSize="17dp"
+                        android:textStyle="bold"
+                        android:typeface="monospace">
+
+                    </TextView>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="15dp"
+                        android:gravity="center"
+                        android:text=" &quot;Boots Mid&quot; or &quot;Mid Boots&quot; or &quot;Boot Mid&quot; or &quot;Boot Mid&quot; "
+                        android:textColor="@color/black"
+                        android:textSize="17dp"
+                        android:textStyle="bold"
+                        android:typeface="monospace">
+
+                    </TextView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp">
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            app:cardCornerRadius="5dp"
+                            app:cardElevation="10dp">
+
+                            <ImageView
+                                android:layout_width="45dp"
+                                android:layout_height="45dp"
+                                android:src="@drawable/icone_verde"></ImageView>
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:gravity="center_vertical"
+                            android:text="Normal Timer"
+                            android:textColor="@color/black"
+                            android:textSize="17dp"
+                            android:textStyle="bold"
+                            android:typeface="monospace">
+
+                        </TextView>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="15dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/explanation_normal_timer"
+                        android:textColor="@color/black"
+                        android:textSize="17dp"
+                        android:textStyle="bold"
+                        android:typeface="monospace">
+
+                    </TextView>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="15dp"
+                        android:gravity="center"
+                        android:text=" &quot;30s&quot; or &quot;60S&quot; "
+                        android:textColor="@color/black"
+                        android:textSize="17dp"
+                        android:textStyle="bold"
+                        android:typeface="monospace">
+
+                    </TextView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp">
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            app:cardCornerRadius="5dp"
+                            app:cardElevation="10dp">
+
+                            <ImageView
+                                android:layout_width="45dp"
+                                android:layout_height="45dp"
+                                android:src="@drawable/kindred"></ImageView>
+                        </androidx.cardview.widget.CardView>
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            app:cardCornerRadius="5dp"
+                            app:cardElevation="10dp">
+
+                            <ImageView
+                                android:layout_width="45dp"
+                                android:layout_height="45dp"
+                                android:src="@drawable/kindred_passive"></ImageView>
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:gravity="center_vertical"
+                            android:text="Kindred Passive"
+                            android:textColor="@color/black"
+                            android:textSize="17dp"
+                            android:textStyle="bold"
+                            android:typeface="monospace">
+
+                        </TextView>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="15dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/explanation_kindred"
+                        android:textColor="@color/black"
+                        android:textSize="17dp"
+                        android:textStyle="bold"
+                        android:typeface="monospace">
+
+                    </TextView>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="15dp"
+                        android:gravity="center"
+                        android:text=" &quot;K30&quot; or &quot;K45&quot; "
+                        android:textColor="@color/black"
+                        android:textSize="17dp"
+                        android:textStyle="bold"
+                        android:typeface="monospace">
+
+                    </TextView>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp">
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            app:cardCornerRadius="5dp"
+                            app:cardElevation="10dp">
+
+                            <ImageView
+                                android:layout_width="45dp"
+                                android:layout_height="45dp"
+                                android:src="@drawable/anivia"></ImageView>
+                        </androidx.cardview.widget.CardView>
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            app:cardCornerRadius="5dp"
+                            app:cardElevation="10dp">
+
+                            <ImageView
+                                android:layout_width="45dp"
+                                android:layout_height="45dp"
+                                android:src="@drawable/anivia_passive"></ImageView>
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:gravity="center_vertical"
+                            android:text="Anivia Passive"
+                            android:textColor="@color/black"
+                            android:textSize="17dp"
+                            android:textStyle="bold"
+                            android:typeface="monospace">
+
+                        </TextView>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="15dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/explanation_anivia"
+                        android:textColor="@color/black"
+                        android:textSize="17dp"
+                        android:textStyle="bold"
+                        android:typeface="monospace">
+
+                    </TextView>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="15dp"
+                        android:gravity="center"
+                        android:text=" &quot;Anivia Passive&quot; or &quot;Anivia Egg&quot; "
+                        android:textColor="@color/black"
+                        android:textSize="17dp"
+                        android:textStyle="bold"
+                        android:typeface="monospace">
+
+                    </TextView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

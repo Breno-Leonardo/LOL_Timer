@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
         findViewById(R.id.btnCommands).setOnTouchListener((view, motionEvent) -> {
             viewModel.showImages.setValue(false);
-            Intent intent = new Intent(MainActivity.this, CreateCustomCommands.class);
+            Intent intent = new Intent(MainActivity.this, CommandsActivity.class);
             startActivity(intent);
             return false;
         });

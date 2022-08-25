@@ -18,7 +18,11 @@ public class CommandsActivity extends AppCompatActivity {
 //        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_commands);
 
-
+        findViewById(R.id.btnCreateCommandInCommands).setOnTouchListener((view, motionEvent) -> {
+            Intent intent = new Intent(CommandsActivity.this, CreateCustomCommands.class);
+            startActivity(intent);
+            return false;
+        });
     }
     @Override
     public void onBackPressed() {

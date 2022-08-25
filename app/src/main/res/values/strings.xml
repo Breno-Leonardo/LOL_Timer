@@ -11,14 +11,20 @@
     <string name="tipStart">Speak your command, </string>
     <string name="like_for_example">like for example:</string>
     <string name="tipEnd">Hint: Speak slowly between each word or change recognition language in settings.</string>
-    <string name="tipCustomizeCommands">You can create custom commands in settings.</string>
+    <string name="tipCustomizeCommands">You can create custom commands in commands session.</string>
     <string name="summonerName">Summoner Name:</string>
     <string name="error">Incorrect Summoner Or Region</string>
     <string name="putSummonerName">The Kindred</string>
     <string name="custom_commands">Create Custom Commands</string>
     <string name="custom_commands_type">Type Your Command</string>
     <string name="command_created">Command Created</string>
-
+    <string name="list_commands">Command List</string>
+    <string name="explanation">To activate say lane and spell or spell and lane, for example: </string>
+    <string name="normal_timer">Normal Timer </string>
+    <string name="explanation_normal_timer">To activate say a number that represents the seconds, along with the letter S, for example: </string>
+    <string name="explanation_boots">Activation is done by clicking or using the word "Boot" or "Boots", along with lane, for example: </string>
+    <string name="explanation_kindred">To activate say the letter k along with a number that represents the seconds, for example: </string>
+    <string name="explanation_anivia">To activate say: </string>
     <string name="create">CREATE</string>
     <string name="custom_commands_existings">Existing Custom Commands</string>
 

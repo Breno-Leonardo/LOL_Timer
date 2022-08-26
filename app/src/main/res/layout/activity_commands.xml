@@ -2,7 +2,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/scrollViewCreateCustomCommands"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -36,19 +35,38 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <TextView
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center"
-                    android:text="@string/custom_commands"
-                    android:textColor="@color/black"
+                    android:layout_marginTop="7dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:text="@string/custom_commands"
+                        android:textColor="@color/black"
 
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:typeface="monospace">
+                        android:textSize="25dp"
+                        android:textStyle="bold"
+                        android:typeface="monospace">
 
-                </TextView>
+                    </TextView>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:layout_marginLeft="1dp"
+                        android:text="@string/custom_commands"
+                        android:textColor="@color/greenTime"
+
+                        android:textSize="25dp"
+                        android:textStyle="bold"
+                        android:typeface="monospace">
+
+                    </TextView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <Button
                     android:id="@+id/btnCreateCommandInCommands"
@@ -90,36 +108,39 @@
                 android:orientation="vertical"
                 android:layout_marginBottom="7dp">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="7dp">
-                    <TextView
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:gravity="center"
-                        android:text="@string/list_commands"
-                        android:textColor="@color/black"
-                        android:textSize="20dp"
-                        android:textStyle="bold"
-                        android:typeface="monospace">
+                        android:layout_marginTop="7dp">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center"
+                            android:text="@string/list_commands"
+                            android:textColor="@color/black"
+                            android:textSize="25dp"
+                            android:textStyle="bold"
+                            android:typeface="monospace">
 
-                    </TextView>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginLeft="1dp"
-                        android:gravity="center"
-                        android:text="@string/list_commands"
-                        android:textColor="@color/greenTime"
-                        android:textSize="20dp"
-                        android:textStyle="bold"
-                        android:typeface="monospace">
+                        </TextView>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginLeft="1dp"
+                            android:gravity="center"
+                            android:text="@string/list_commands"
+                            android:textColor="@color/greenTime"
+                            android:textSize="25dp"
+                            android:textStyle="bold"
+                            android:typeface="monospace">
 
-                    </TextView>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        </TextView>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
                 <LinearLayout
@@ -132,7 +153,8 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp">
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -281,7 +303,8 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp">
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -589,7 +612,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp">
+                        android:layout_marginTop="20dp">
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -722,7 +745,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginLeft="15dp"
                         android:gravity="center"
-                        android:text=" &quot;30s&quot; or &quot;60S&quot; "
+                        android:text=" &quot;30s&quot; or &quot;60s&quot; "
                         android:textColor="@color/black"
                         android:textSize="17dp"
                         android:textStyle="bold"
@@ -738,7 +761,7 @@
                             android:layout_width="45dp"
                             android:layout_height="45dp"
                             app:cardCornerRadius="5dp"
-                            app:cardElevation="10dp">
+                            >
 
                             <ImageView
                                 android:layout_width="45dp"
@@ -748,8 +771,9 @@
                         <androidx.cardview.widget.CardView
                             android:layout_width="45dp"
                             android:layout_height="45dp"
+                            android:layout_marginLeft="5dp"
                             app:cardCornerRadius="5dp"
-                            app:cardElevation="10dp">
+                            >
 
                             <ImageView
                                 android:layout_width="45dp"
@@ -817,8 +841,9 @@
                         <androidx.cardview.widget.CardView
                             android:layout_width="45dp"
                             android:layout_height="45dp"
+                            android:layout_marginLeft="5dp"
                             app:cardCornerRadius="5dp"
-                            app:cardElevation="10dp">
+                            >
 
                             <ImageView
                                 android:layout_width="45dp"

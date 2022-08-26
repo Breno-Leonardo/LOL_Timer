@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">LOL Timer</string>
     <string name="title_app">LOL TIMER</string>
-    <string name="settings">Settings</string>
+    <string name="settings">SETTINGS</string>
+
     <string name="commands">Commands</string>
     <string name="command">Command</string>
     <string name="inicial_commands_text">Command: Speak Your Command</string>
@@ -15,10 +16,10 @@
     <string name="summonerName">Summoner Name:</string>
     <string name="error">Incorrect Summoner Or Region</string>
     <string name="putSummonerName">The Kindred</string>
-    <string name="custom_commands">Create Custom Commands</string>
+    <string name="custom_commands">CREATE CUSTOM COMMANDS</string>
     <string name="custom_commands_type">Type Your Command</string>
     <string name="command_created">Command Created</string>
-    <string name="list_commands">Command List</string>
+    <string name="list_commands">COMMAND LIST</string>
     <string name="explanation">To activate say lane and spell or spell and lane, for example: </string>
     <string name="normal_timer">Normal Timer </string>
     <string name="explanation_normal_timer">To activate say a number that represents the seconds, along with the letter S, for example: </string>
@@ -27,6 +28,9 @@
     <string name="explanation_anivia">To activate say: </string>
     <string name="create">CREATE</string>
     <string name="custom_commands_existings">Existing Custom Commands</string>
+    <string name="vibrate_on_create">Vibrate when creating a command</string>
+    <string name="vibrate_on_end">Vibrate when ending a command</string>
+    <string name="command_exist">The command already exists</string>
 
 
     <!--    <string name="putSummonerName">Put Your Summoner Name</string>-->

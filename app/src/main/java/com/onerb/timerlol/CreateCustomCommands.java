@@ -42,7 +42,7 @@ public class CreateCustomCommands extends AppCompatActivity {
     private Spinner dropdownSpell;
     private int lane, spell;
     private Button btnCreate;
-    SharedPreferences sharedPref;
+    private SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +54,7 @@ public class CreateCustomCommands extends AppCompatActivity {
         setContentView(R.layout.activity_create_custom_commands);
         rotateIcon();
 
-        sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        sharedPref = this.getSharedPreferences("prefs",Context.MODE_PRIVATE);
         imageLane = findViewById(R.id.createCustomLane);
         imageSpell = findViewById(R.id.createCustomSpell);
 
@@ -105,10 +105,8 @@ public class CreateCustomCommands extends AppCompatActivity {
         dropdownSpell.setAdapter(adapter2);
         btnCreate = findViewById(R.id.btnCreateCommand);
         EditText editTextCommand = findViewById(R.id.editTextCreateCommand);
-        btnCreate.setOnTouchListener((view, motionEvent) -> {
+        btnCreate.setOnClickListener(view -> {
             putCommands(lane, spell, editTextCommand.getText().toString());
-            System.out.println("CreateCustomCommands.onCreate shared all " + sharedPref.getAll());
-            return true;
         });
 
 
@@ -172,21 +170,13 @@ public class CreateCustomCommands extends AppCompatActivity {
 
     }
 
-    public boolean verifyCommands(String command, String commands) {
-        boolean in = false;
-        String[] laneCommands = commands.split(" ");
-        for (String c :
-                laneCommands) {
-            if (c.equals(command))
-                in = true;
-        }
-        return in;
-    }
+
 
     public void putCommands(int lane, int spell, String command) {
-        String commands, originalCommands;
+        String commands, originalCommands, existingCommands;
         String commandsCode, originalCommandsCode;
-
+        command=command.toLowerCase();
+        command=removerAcentos(command);
         String spellName = "", laneName = "";
         if (spell == TimerActivity.FLASH) {
             spellName = "Flash";
@@ -235,11 +225,24 @@ public class CreateCustomCommands extends AppCompatActivity {
         originalCommandsCode = laneName + spellName + "OriginalCommands";
         commands = sharedPref.getString(commandsCode, null);
         originalCommands = sharedPref.getString(originalCommandsCode, null);
+        existingCommands = sharedPref.getString("existingCommands", "");
+
+
+
         String separator = "&7&";
         SharedPreferences.Editor editor = sharedPref.edit();
 
         String originalCommand = command;
         command = command.replace(" ", "");
+        for (String s:
+                existingCommands.split(" ")) {
+            if(s.equals(command)) {
+                System.out.println("CreateCustomCommands.putCommands shared ja existe");
+                Toast toast= Toast.makeText(getApplicationContext(),getString(R.string.command_exist), Toast.LENGTH_SHORT);
+                toast.show();
+                return;
+            }
+        }
         Boolean contains = false;
         if (commands != null) {
             for (String s :
@@ -254,6 +257,7 @@ public class CreateCustomCommands extends AppCompatActivity {
             if (originalCommands == null)
                 originalCommands = "";
             editor.putString(commandsCode, commands + " " + command);// add command
+            editor.putString("existingCommands", existingCommands+ " "+ command);
             if (originalCommands.equals(""))
                 editor.putString(originalCommandsCode, originalCommand);
             else

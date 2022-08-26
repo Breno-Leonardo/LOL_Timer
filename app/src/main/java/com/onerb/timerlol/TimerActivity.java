@@ -3,6 +3,7 @@ package com.onerb.timerlol;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -23,6 +24,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -173,6 +175,7 @@ public class TimerActivity extends AppCompatActivity {
     private CardView currentTouch;//to know which timer is playing
     private HashMap<CardView, CountDownTimer> timers = new HashMap<>();//to cancel the timer by dragging to the right
     private SummonerInfos.Participants[] participantsInfos = null;
+    private SharedPreferences sharedPref;
     private int apiRespCode = -1;
 
     @Override
@@ -209,7 +212,9 @@ public class TimerActivity extends AppCompatActivity {
 
 
 //        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_timer);
+        sharedPref = this.getSharedPreferences("prefs",Context.MODE_PRIVATE);
         container = findViewById(R.id.timersContainer);
         containerInfos = findViewById(R.id.containerInfos);
         textCommand = findViewById(R.id.textTimer);
@@ -666,12 +671,16 @@ public class TimerActivity extends AppCompatActivity {
     }
 
     public boolean verifyCommands(String command, String commands) {
+
         boolean in = false;
-        String[] laneCommands = commands.split(" ");
-        for (String c :
-                laneCommands) {
-            if (c.equals(command))
-                in = true;
+        if (commands!=null) {
+
+            String[] laneCommands = commands.split(" ");
+            for (String c :
+                    laneCommands) {
+                if (c.equals(command))
+                    in = true;
+            }
         }
         return in;
     }
@@ -708,351 +717,354 @@ public class TimerActivity extends AppCompatActivity {
          * this is for it not to activate with "maria fernanda" for example
          * and that's why I will not detect lane and spell separately
          * */
-        //Boots
+        int laneSpell[]=verifyCustomCommands(command);
+        lane=laneSpell[0];
+        spell=laneSpell[1];
+        if(spell==15){
+            if (lane==2) {
 
-        if (verifyCommands(command, commandsTopBoots)) {
+                topBoots = !topBoots;
+                return;
+            } else if (lane==3) {
 
-            topBoots = !topBoots;
-            return;
-        } else if (verifyCommands(command, commandsJungleBoots)) {
+                jungleBoots = !jungleBoots;
+                return;
 
-            jungleBoots = !jungleBoots;
-            return;
+            } else if (lane==4) {
 
-        } else if (verifyCommands(command, commandsMidBoots)) {
+                midBoots = !midBoots;
+                return;
 
-            midBoots = !midBoots;
-            return;
+            } else if (lane==5) {
 
-        } else if (verifyCommands(command, commandsAdcBoots)) {
+                adcBoots = !adcBoots;
+                return;
 
-            adcBoots = !adcBoots;
-            return;
+            } else if (lane==6) {
 
-        } else if (verifyCommands(command, commandsSupportBoots)) {
+                supportBoots = !supportBoots;
+                return;
 
-            supportBoots = !supportBoots;
-            return;
-
+            }
         }
-        //Flash
-        else if (verifyCommands(command, commandsTopFlash) || ((inicialLetter1 == 't' && inicialLetter2 == 'f') && (word1.equals("top") || word2.equals("flash")))) {
-            lane = TOP;
-            spell = FLASH;
-        } else if (verifyCommands(command, commandsJungleFlash) || ((inicialLetter1 == 'j' && inicialLetter2 == 'f') && (word1.equals("jungle") || word2.equals("flash")))) {
-            lane = JUNGLE;
-            spell = FLASH;
-        } else if (verifyCommands(command, commandsMidFlash) || ((inicialLetter1 == 'm' && inicialLetter2 == 'f') && (word1.equals("mid") || word2.equals("flash")))) {
-            lane = MID;
-            spell = FLASH;
-        } else if (verifyCommands(command, commandsAdcFlash) || (((inicialLetter1 == 'a' || inicialLetter1 == 'b') && inicialLetter2 == 'f') && ((word1.equals("adc") || word1.equals("bot")) || word2.equals("flash")))) {
-            lane = ADC;
-            spell = FLASH;
-        } else if (verifyCommands(command, commandsSupportFlash) || ((inicialLetter1 == 's' && inicialLetter2 == 'f') && (word1 == "support" || word2.equals("flash")))) {
-            lane = SUPPORT;
-            spell = FLASH;
-        }
+        if(lane==0|| spell==0) {
+            //Boots
 
-        //Heal
-        else if (verifyCommands(command, commandsTopHeal) || ((inicialLetter1 == 't' && inicialLetter2 == 'h') && (word1.equals("top") || word2.equals("heal")))) {
-            lane = TOP;
-            spell = HEAL;
-        } else if (verifyCommands(command, commandsJungleHeal) || ((inicialLetter1 == 'j' && inicialLetter2 == 'h') && (word1.equals("jungle") || word2.equals("heal")))) {
-            lane = JUNGLE;
-            spell = HEAL;
-        } else if (verifyCommands(command, commandsMidHeal) || ((inicialLetter1 == 'm' && inicialLetter2 == 'h') && (word1.equals("mid") || word2.equals("heal")))) {
-            lane = MID;
-            spell = HEAL;
-        } else if (verifyCommands(command, commandsAdcHeal) || (((inicialLetter1 == 'a' || inicialLetter1 == 'b') && inicialLetter2 == 'h') && ((word1.equals("adc") || word1.equals("bot")) || word2.equals("heal")))) {
-            lane = ADC;
-            spell = HEAL;
-        } else if (verifyCommands(command, commandsSupportHeal) || ((inicialLetter1 == 's' && inicialLetter2 == 'h') && (word1 == "support" || word2.equals("heal")))) {
-            lane = SUPPORT;
-            spell = HEAL;
-        }
+            if (verifyCommands(command, commandsTopBoots)) {
 
-        //Ignite
-        else if (verifyCommands(command, commandsTopIgnite) || ((inicialLetter1 == 't' && inicialLetter2 == 'i') && (word1.equals("top") || word2.equals("ignite")))) {
-            lane = TOP;
-            spell = IGNITE;
-        } else if (verifyCommands(command, commandsJungleIgnite) || ((inicialLetter1 == 'j' && inicialLetter2 == 'i') && (word1.equals("jungle") || word2.equals("ignite")))) {
-            lane = JUNGLE;
-            spell = IGNITE;
-        } else if (verifyCommands(command, commandsMidIgnite) || ((inicialLetter1 == 'm' && inicialLetter2 == 'i') && (word1.equals("mid") || word2.equals("ignite")))) {
-            lane = MID;
-            spell = IGNITE;
-        } else if (verifyCommands(command, commandsAdcIgnite) || (((inicialLetter1 == 'a' || inicialLetter1 == 'b') && inicialLetter2 == 'i') && ((word1.equals("adc") || word1.equals("bot")) || word2.equals("ignite")))) {
-            lane = ADC;
-            spell = IGNITE;
-        } else if (verifyCommands(command, commandsSupportIgnite) || ((inicialLetter1 == 's' && inicialLetter2 == 'i') && (word1 == "support" || word2.equals("ignite")))) {
-            lane = SUPPORT;
-            spell = IGNITE;
-        }
+                topBoots = !topBoots;
+                return;
+            } else if (verifyCommands(command, commandsJungleBoots)) {
 
-        //Ghost
-        else if (verifyCommands(command, commandsTopGhost) || ((inicialLetter1 == 't' && inicialLetter2 == 'g') && (word1.equals("top") || word2.equals("ghost")))) {
-            lane = TOP;
-            spell = GHOST;
-        } else if (verifyCommands(command, commandsJungleGhost) || ((inicialLetter1 == 'j' && inicialLetter2 == 'g') && (word1.equals("jungle") || word2.equals("ghost")))) {
-            lane = JUNGLE;
-            spell = GHOST;
-        } else if (verifyCommands(command, commandsMidGhost) || ((inicialLetter1 == 'm' && inicialLetter2 == 'g') && (word1.equals("mid") || word2.equals("ghost")))) {
-            lane = MID;
-            spell = GHOST;
-        } else if (verifyCommands(command, commandsAdcGhost) || (((inicialLetter1 == 'a' || inicialLetter1 == 'b') && inicialLetter2 == 'g') && ((word1.equals("adc") || word1.equals("bot")) || word2.equals("ghost")))) {
-            lane = ADC;
-            spell = GHOST;
-        } else if (verifyCommands(command, commandsSupportGhost) || ((inicialLetter1 == 's' && inicialLetter2 == 'g') && (word1 == "support" || word2.equals("ghost")))) {
-            lane = SUPPORT;
-            spell = GHOST;
-        }
+                jungleBoots = !jungleBoots;
+                return;
 
-        //Teleport
-        else if (verifyCommands(command, commandsTopTeleport) || ((inicialLetter1 == 't' && inicialLetter2 == 't') && (word1.equals("top") || word2.equals("teleport")))) {
-            lane = TOP;
-            spell = TELEPORT;
-        } else if (verifyCommands(command, commandsJungleTeleport) || ((inicialLetter1 == 'j' && inicialLetter2 == 't') && (word1.equals("jungle") || word2.equals("teleport")))) {
-            lane = JUNGLE;
-            spell = TELEPORT;
-        } else if (verifyCommands(command, commandsMidTeleport) || ((inicialLetter1 == 'm' && inicialLetter2 == 't') && (word1.equals("mid") || word2.equals("teleport")))) {
-            lane = MID;
-            spell = TELEPORT;
-        } else if (verifyCommands(command, commandsAdcTeleport) || (((inicialLetter1 == 'a' || inicialLetter1 == 'b') && inicialLetter2 == 't') && ((word1.equals("adc") || word1.equals("bot")) || word2.equals("teleport")))) {
-            lane = ADC;
-            spell = TELEPORT;
-        } else if (verifyCommands(command, commandsSupportTeleport) || ((inicialLetter1 == 's' && inicialLetter2 == 't') && (word1 == "support" || word2.equals("teleport")))) {
-            lane = SUPPORT;
-            spell = TELEPORT;
-        }
+            } else if (verifyCommands(command, commandsMidBoots)) {
 
-        //Barrier
-        else if (verifyCommands(command, commandsTopBarrier) || ((inicialLetter1 == 't' && inicialLetter2 == 'b') && (word1.equals("top") || word2.equals("barrier")))) {
-            lane = TOP;
-            spell = BARRIER;
-        } else if (verifyCommands(command, commandsJungleBarrier) || ((inicialLetter1 == 'j' && inicialLetter2 == 'b') && (word1.equals("jungle") || word2.equals("barrier")))) {
-            lane = JUNGLE;
-            spell = BARRIER;
-        } else if (verifyCommands(command, commandsMidBarrier) || ((inicialLetter1 == 'm' && inicialLetter2 == 'b') && (word1.equals("mid") || word2.equals("barrier")))) {
-            lane = MID;
-            spell = BARRIER;
-        } else if (verifyCommands(command, commandsAdcBarrier) || (((inicialLetter1 == 'a' || inicialLetter1 == 'b') && inicialLetter2 == 'b') && ((word1.equals("adc") || word1.equals("bot")) || word2.equals("barrier")))) {
-            lane = ADC;
-            spell = BARRIER;
-        } else if (verifyCommands(command, commandsSupportBarrier) || ((inicialLetter1 == 's' && inicialLetter2 == 'b') && (word1 == "support" || word2.equals("barrier")))) {
-            lane = SUPPORT;
-            spell = BARRIER;
-        }
+                midBoots = !midBoots;
+                return;
 
-        //Exhaust
-        else if (verifyCommands(command, commandsTopExhaust) || ((inicialLetter1 == 't' && inicialLetter2 == 'e') && (word1.equals("top") || word2.equals("exhaust")))) {
-            lane = TOP;
-            spell = EXHAUST;
-        } else if (verifyCommands(command, commandsJungleExhaust) || ((inicialLetter1 == 'j' && inicialLetter2 == 'e') && (word1.equals("jungle") || word2.equals("exhaust")))) {
-            lane = JUNGLE;
-            spell = EXHAUST;
-        } else if (verifyCommands(command, commandsMidExhaust) || ((inicialLetter1 == 'm' && inicialLetter2 == 'e') && (word1.equals("mid") || word2.equals("exhaust")))) {
-            lane = MID;
-            spell = EXHAUST;
-        } else if (verifyCommands(command, commandsAdcExhaust) || (((inicialLetter1 == 'a' || inicialLetter1 == 'e') && inicialLetter2 == 'e') && ((word1.equals("adc") || word1.equals("bot")) || word2.equals("exhaust")))) {
-            lane = ADC;
-            spell = EXHAUST;
-        } else if (verifyCommands(command, commandsSupportExhaust) || ((inicialLetter1 == 's' && inicialLetter2 == 'e') && (word1 == "support" || word2.equals("exhaust")))) {
-            lane = SUPPORT;
-            spell = EXHAUST;
-        }
+            } else if (verifyCommands(command, commandsAdcBoots)) {
 
-        //Cleanse
-        else if (verifyCommands(command, commandsTopCleanse) || ((inicialLetter1 == 't' && inicialLetter2 == 'c') && (word1.equals("top") || word2.equals("cleanse")))) {
-            lane = TOP;
-            spell = CLEANSE;
-        } else if (verifyCommands(command, commandsJungleCleanse) || ((inicialLetter1 == 'j' && inicialLetter2 == 'c') && (word1.equals("jungle") || word2.equals("cleanse")))) {
-            lane = JUNGLE;
-            spell = CLEANSE;
-        } else if (verifyCommands(command, commandsMidCleanse) || ((inicialLetter1 == 'm' && inicialLetter2 == 'c') && (word1.equals("mid") || word2.equals("cleanse")))) {
-            lane = MID;
-            spell = CLEANSE;
-        } else if (verifyCommands(command, commandsAdcCleanse) || (((inicialLetter1 == 'a' || inicialLetter1 == 'b') && inicialLetter2 == 'c') && ((word1.equals("adc") || word1.equals("bot")) || word2.equals("cleanse")))) {
-            lane = ADC;
-            spell = CLEANSE;
-        } else if (verifyCommands(command, commandsSupportCleanse) || ((inicialLetter1 == 's' && inicialLetter2 == 'c') && (word1 == "support" || word2.equals("cleanse")))) {
-            lane = SUPPORT;
-            spell = CLEANSE;
-        }
+                adcBoots = !adcBoots;
+                return;
 
-        //Boots
+            } else if (verifyCommands(command, commandsSupportBoots)) {
 
+                supportBoots = !supportBoots;
+                return;
 
-        else if (verifyCommands(command, commandsTopBoots)) {
+            }
+            //Flash
+            else if (verifyCommands(command, commandsTopFlash) || ((inicialLetter1 == 't' && inicialLetter2 == 'f') && (word1.equals("top") || word2.equals("flash")))) {
+                lane = TOP;
+                spell = FLASH;
+            } else if (verifyCommands(command, commandsJungleFlash) || ((inicialLetter1 == 'j' && inicialLetter2 == 'f') && (word1.equals("jungle") || word2.equals("flash")))) {
+                lane = JUNGLE;
+                spell = FLASH;
+            } else if (verifyCommands(command, commandsMidFlash) || ((inicialLetter1 == 'm' && inicialLetter2 == 'f') && (word1.equals("mid") || word2.equals("flash")))) {
+                lane = MID;
+                spell = FLASH;
+            } else if (verifyCommands(command, commandsAdcFlash) || (((inicialLetter1 == 'a' || inicialLetter1 == 'b') && inicialLetter2 == 'f') && ((word1.equals("adc") || word1.equals("bot")) || word2.equals("flash")))) {
+                lane = ADC;
+                spell = FLASH;
+            } else if (verifyCommands(command, commandsSupportFlash) || ((inicialLetter1 == 's' && inicialLetter2 == 'f') && (word1 == "support" || word2.equals("flash")))) {
+                lane = SUPPORT;
+                spell = FLASH;
+            }
 
-            topBoots = !topBoots;
-            return;
-        } else if (verifyCommands(command, commandsJungleBoots)) {
+            //Heal
+            else if (verifyCommands(command, commandsTopHeal) || ((inicialLetter1 == 't' && inicialLetter2 == 'h') && (word1.equals("top") || word2.equals("heal")))) {
+                lane = TOP;
+                spell = HEAL;
+            } else if (verifyCommands(command, commandsJungleHeal) || ((inicialLetter1 == 'j' && inicialLetter2 == 'h') && (word1.equals("jungle") || word2.equals("heal")))) {
+                lane = JUNGLE;
+                spell = HEAL;
+            } else if (verifyCommands(command, commandsMidHeal) || ((inicialLetter1 == 'm' && inicialLetter2 == 'h') && (word1.equals("mid") || word2.equals("heal")))) {
+                lane = MID;
+                spell = HEAL;
+            } else if (verifyCommands(command, commandsAdcHeal) || (((inicialLetter1 == 'a' || inicialLetter1 == 'b') && inicialLetter2 == 'h') && ((word1.equals("adc") || word1.equals("bot")) || word2.equals("heal")))) {
+                lane = ADC;
+                spell = HEAL;
+            } else if (verifyCommands(command, commandsSupportHeal) || ((inicialLetter1 == 's' && inicialLetter2 == 'h') && (word1 == "support" || word2.equals("heal")))) {
+                lane = SUPPORT;
+                spell = HEAL;
+            }
 
-            jungleBoots = !jungleBoots;
-            return;
+            //Ignite
+            else if (verifyCommands(command, commandsTopIgnite) || ((inicialLetter1 == 't' && inicialLetter2 == 'i') && (word1.equals("top") || word2.equals("ignite")))) {
+                lane = TOP;
+                spell = IGNITE;
+            } else if (verifyCommands(command, commandsJungleIgnite) || ((inicialLetter1 == 'j' && inicialLetter2 == 'i') && (word1.equals("jungle") || word2.equals("ignite")))) {
+                lane = JUNGLE;
+                spell = IGNITE;
+            } else if (verifyCommands(command, commandsMidIgnite) || ((inicialLetter1 == 'm' && inicialLetter2 == 'i') && (word1.equals("mid") || word2.equals("ignite")))) {
+                lane = MID;
+                spell = IGNITE;
+            } else if (verifyCommands(command, commandsAdcIgnite) || (((inicialLetter1 == 'a' || inicialLetter1 == 'b') && inicialLetter2 == 'i') && ((word1.equals("adc") || word1.equals("bot")) || word2.equals("ignite")))) {
+                lane = ADC;
+                spell = IGNITE;
+            } else if (verifyCommands(command, commandsSupportIgnite) || ((inicialLetter1 == 's' && inicialLetter2 == 'i') && (word1 == "support" || word2.equals("ignite")))) {
+                lane = SUPPORT;
+                spell = IGNITE;
+            }
 
-        } else if (verifyCommands(command, commandsMidBoots)) {
+            //Ghost
+            else if (verifyCommands(command, commandsTopGhost) || ((inicialLetter1 == 't' && inicialLetter2 == 'g') && (word1.equals("top") || word2.equals("ghost")))) {
+                lane = TOP;
+                spell = GHOST;
+            } else if (verifyCommands(command, commandsJungleGhost) || ((inicialLetter1 == 'j' && inicialLetter2 == 'g') && (word1.equals("jungle") || word2.equals("ghost")))) {
+                lane = JUNGLE;
+                spell = GHOST;
+            } else if (verifyCommands(command, commandsMidGhost) || ((inicialLetter1 == 'm' && inicialLetter2 == 'g') && (word1.equals("mid") || word2.equals("ghost")))) {
+                lane = MID;
+                spell = GHOST;
+            } else if (verifyCommands(command, commandsAdcGhost) || (((inicialLetter1 == 'a' || inicialLetter1 == 'b') && inicialLetter2 == 'g') && ((word1.equals("adc") || word1.equals("bot")) || word2.equals("ghost")))) {
+                lane = ADC;
+                spell = GHOST;
+            } else if (verifyCommands(command, commandsSupportGhost) || ((inicialLetter1 == 's' && inicialLetter2 == 'g') && (word1 == "support" || word2.equals("ghost")))) {
+                lane = SUPPORT;
+                spell = GHOST;
+            }
 
-            midBoots = !midBoots;
-            return;
+            //Teleport
+            else if (verifyCommands(command, commandsTopTeleport) || ((inicialLetter1 == 't' && inicialLetter2 == 't') && (word1.equals("top") || word2.equals("teleport")))) {
+                lane = TOP;
+                spell = TELEPORT;
+            } else if (verifyCommands(command, commandsJungleTeleport) || ((inicialLetter1 == 'j' && inicialLetter2 == 't') && (word1.equals("jungle") || word2.equals("teleport")))) {
+                lane = JUNGLE;
+                spell = TELEPORT;
+            } else if (verifyCommands(command, commandsMidTeleport) || ((inicialLetter1 == 'm' && inicialLetter2 == 't') && (word1.equals("mid") || word2.equals("teleport")))) {
+                lane = MID;
+                spell = TELEPORT;
+            } else if (verifyCommands(command, commandsAdcTeleport) || (((inicialLetter1 == 'a' || inicialLetter1 == 'b') && inicialLetter2 == 't') && ((word1.equals("adc") || word1.equals("bot")) || word2.equals("teleport")))) {
+                lane = ADC;
+                spell = TELEPORT;
+            } else if (verifyCommands(command, commandsSupportTeleport) || ((inicialLetter1 == 's' && inicialLetter2 == 't') && (word1 == "support" || word2.equals("teleport")))) {
+                lane = SUPPORT;
+                spell = TELEPORT;
+            }
 
-        } else if (verifyCommands(command, commandsAdcBoots)) {
+            //Barrier
+            else if (verifyCommands(command, commandsTopBarrier) || ((inicialLetter1 == 't' && inicialLetter2 == 'b') && (word1.equals("top") || word2.equals("barrier")))) {
+                lane = TOP;
+                spell = BARRIER;
+            } else if (verifyCommands(command, commandsJungleBarrier) || ((inicialLetter1 == 'j' && inicialLetter2 == 'b') && (word1.equals("jungle") || word2.equals("barrier")))) {
+                lane = JUNGLE;
+                spell = BARRIER;
+            } else if (verifyCommands(command, commandsMidBarrier) || ((inicialLetter1 == 'm' && inicialLetter2 == 'b') && (word1.equals("mid") || word2.equals("barrier")))) {
+                lane = MID;
+                spell = BARRIER;
+            } else if (verifyCommands(command, commandsAdcBarrier) || (((inicialLetter1 == 'a' || inicialLetter1 == 'b') && inicialLetter2 == 'b') && ((word1.equals("adc") || word1.equals("bot")) || word2.equals("barrier")))) {
+                lane = ADC;
+                spell = BARRIER;
+            } else if (verifyCommands(command, commandsSupportBarrier) || ((inicialLetter1 == 's' && inicialLetter2 == 'b') && (word1 == "support" || word2.equals("barrier")))) {
+                lane = SUPPORT;
+                spell = BARRIER;
+            }
 
-            adcBoots = !adcBoots;
-            return;
+            //Exhaust
+            else if (verifyCommands(command, commandsTopExhaust) || ((inicialLetter1 == 't' && inicialLetter2 == 'e') && (word1.equals("top") || word2.equals("exhaust")))) {
+                lane = TOP;
+                spell = EXHAUST;
+            } else if (verifyCommands(command, commandsJungleExhaust) || ((inicialLetter1 == 'j' && inicialLetter2 == 'e') && (word1.equals("jungle") || word2.equals("exhaust")))) {
+                lane = JUNGLE;
+                spell = EXHAUST;
+            } else if (verifyCommands(command, commandsMidExhaust) || ((inicialLetter1 == 'm' && inicialLetter2 == 'e') && (word1.equals("mid") || word2.equals("exhaust")))) {
+                lane = MID;
+                spell = EXHAUST;
+            } else if (verifyCommands(command, commandsAdcExhaust) || (((inicialLetter1 == 'a' || inicialLetter1 == 'e') && inicialLetter2 == 'e') && ((word1.equals("adc") || word1.equals("bot")) || word2.equals("exhaust")))) {
+                lane = ADC;
+                spell = EXHAUST;
+            } else if (verifyCommands(command, commandsSupportExhaust) || ((inicialLetter1 == 's' && inicialLetter2 == 'e') && (word1 == "support" || word2.equals("exhaust")))) {
+                lane = SUPPORT;
+                spell = EXHAUST;
+            }
 
-        } else if (verifyCommands(command, commandsSupportBoots)) {
+            //Cleanse
+            else if (verifyCommands(command, commandsTopCleanse) || ((inicialLetter1 == 't' && inicialLetter2 == 'c') && (word1.equals("top") || word2.equals("cleanse")))) {
+                lane = TOP;
+                spell = CLEANSE;
+            } else if (verifyCommands(command, commandsJungleCleanse) || ((inicialLetter1 == 'j' && inicialLetter2 == 'c') && (word1.equals("jungle") || word2.equals("cleanse")))) {
+                lane = JUNGLE;
+                spell = CLEANSE;
+            } else if (verifyCommands(command, commandsMidCleanse) || ((inicialLetter1 == 'm' && inicialLetter2 == 'c') && (word1.equals("mid") || word2.equals("cleanse")))) {
+                lane = MID;
+                spell = CLEANSE;
+            } else if (verifyCommands(command, commandsAdcCleanse) || (((inicialLetter1 == 'a' || inicialLetter1 == 'b') && inicialLetter2 == 'c') && ((word1.equals("adc") || word1.equals("bot")) || word2.equals("cleanse")))) {
+                lane = ADC;
+                spell = CLEANSE;
+            } else if (verifyCommands(command, commandsSupportCleanse) || ((inicialLetter1 == 's' && inicialLetter2 == 'c') && (word1 == "support" || word2.equals("cleanse")))) {
+                lane = SUPPORT;
+                spell = CLEANSE;
+            }
 
-            supportBoots = !supportBoots;
-            return;
-
-        }
-        // REVERSE ORDER
-        //Flash
-        if (verifyCommands(command, commandsTopFlash) || ((inicialLetter2 == 't' && inicialLetter1 == 'f') && (word2.equals("top") || word1.equals("flash")))) {
-            lane = TOP;
-            spell = FLASH;
-        } else if (verifyCommands(command, commandsJungleFlash) || ((inicialLetter2 == 'j' && inicialLetter1 == 'f') && (word2.equals("jungle") || word1.equals("flash")))) {
-            lane = JUNGLE;
-            spell = FLASH;
-        } else if (verifyCommands(command, commandsMidFlash) || ((inicialLetter2 == 'm' && inicialLetter1 == 'f') && (word2.equals("mid") || word1.equals("flash")))) {
-            lane = MID;
-            spell = FLASH;
-        } else if (verifyCommands(command, commandsAdcFlash) || (((inicialLetter2 == 'a' || inicialLetter2 == 'b') && inicialLetter1 == 'f') && ((word2.equals("adc") || word2.equals("bot")) || word1.equals("flash")))) {
-            lane = ADC;
-            spell = FLASH;
-        } else if (verifyCommands(command, commandsSupportFlash) || ((inicialLetter2 == 's' && inicialLetter1 == 'f') && (word2 == "support" || word1.equals("flash")))) {
-            lane = SUPPORT;
-            spell = FLASH;
-        }
+            // REVERSE ORDER
+            //Flash
+            if (verifyCommands(command, commandsTopFlash) || ((inicialLetter2 == 't' && inicialLetter1 == 'f') && (word2.equals("top") || word1.equals("flash")))) {
+                lane = TOP;
+                spell = FLASH;
+            } else if (verifyCommands(command, commandsJungleFlash) || ((inicialLetter2 == 'j' && inicialLetter1 == 'f') && (word2.equals("jungle") || word1.equals("flash")))) {
+                lane = JUNGLE;
+                spell = FLASH;
+            } else if (verifyCommands(command, commandsMidFlash) || ((inicialLetter2 == 'm' && inicialLetter1 == 'f') && (word2.equals("mid") || word1.equals("flash")))) {
+                lane = MID;
+                spell = FLASH;
+            } else if (verifyCommands(command, commandsAdcFlash) || (((inicialLetter2 == 'a' || inicialLetter2 == 'b') && inicialLetter1 == 'f') && ((word2.equals("adc") || word2.equals("bot")) || word1.equals("flash")))) {
+                lane = ADC;
+                spell = FLASH;
+            } else if (verifyCommands(command, commandsSupportFlash) || ((inicialLetter2 == 's' && inicialLetter1 == 'f') && (word2 == "support" || word1.equals("flash")))) {
+                lane = SUPPORT;
+                spell = FLASH;
+            }
 
 //Heal
-        else if (verifyCommands(command, commandsTopHeal) || ((inicialLetter2 == 't' && inicialLetter1 == 'h') && (word2.equals("top") || word1.equals("heal")))) {
-            lane = TOP;
-            spell = HEAL;
-        } else if (verifyCommands(command, commandsJungleHeal) || ((inicialLetter2 == 'j' && inicialLetter1 == 'h') && (word2.equals("jungle") || word1.equals("heal")))) {
-            lane = JUNGLE;
-            spell = HEAL;
-        } else if (verifyCommands(command, commandsMidHeal) || ((inicialLetter2 == 'm' && inicialLetter1 == 'h') && (word2.equals("mid") || word1.equals("heal")))) {
-            lane = MID;
-            spell = HEAL;
-        } else if (verifyCommands(command, commandsAdcHeal) || (((inicialLetter2 == 'a' || inicialLetter2 == 'b') && inicialLetter1 == 'h') && ((word2.equals("adc") || word2.equals("bot")) || word1.equals("heal")))) {
-            lane = ADC;
-            spell = HEAL;
-        } else if (verifyCommands(command, commandsSupportHeal) || ((inicialLetter2 == 's' && inicialLetter1 == 'h') && (word2 == "support" || word1.equals("heal")))) {
-            lane = SUPPORT;
-            spell = HEAL;
-        }
+            else if (verifyCommands(command, commandsTopHeal) || ((inicialLetter2 == 't' && inicialLetter1 == 'h') && (word2.equals("top") || word1.equals("heal")))) {
+                lane = TOP;
+                spell = HEAL;
+            } else if (verifyCommands(command, commandsJungleHeal) || ((inicialLetter2 == 'j' && inicialLetter1 == 'h') && (word2.equals("jungle") || word1.equals("heal")))) {
+                lane = JUNGLE;
+                spell = HEAL;
+            } else if (verifyCommands(command, commandsMidHeal) || ((inicialLetter2 == 'm' && inicialLetter1 == 'h') && (word2.equals("mid") || word1.equals("heal")))) {
+                lane = MID;
+                spell = HEAL;
+            } else if (verifyCommands(command, commandsAdcHeal) || (((inicialLetter2 == 'a' || inicialLetter2 == 'b') && inicialLetter1 == 'h') && ((word2.equals("adc") || word2.equals("bot")) || word1.equals("heal")))) {
+                lane = ADC;
+                spell = HEAL;
+            } else if (verifyCommands(command, commandsSupportHeal) || ((inicialLetter2 == 's' && inicialLetter1 == 'h') && (word2 == "support" || word1.equals("heal")))) {
+                lane = SUPPORT;
+                spell = HEAL;
+            }
 
 //Ignite
-        else if (verifyCommands(command, commandsTopIgnite) || ((inicialLetter2 == 't' && inicialLetter1 == 'i') && (word2.equals("top") || word1.equals("ignite")))) {
-            lane = TOP;
-            spell = IGNITE;
-        } else if (verifyCommands(command, commandsJungleIgnite) || ((inicialLetter2 == 'j' && inicialLetter1 == 'i') && (word2.equals("jungle") || word1.equals("ignite")))) {
-            lane = JUNGLE;
-            spell = IGNITE;
-        } else if (verifyCommands(command, commandsMidIgnite) || ((inicialLetter2 == 'm' && inicialLetter1 == 'i') && (word2.equals("mid") || word1.equals("ignite")))) {
-            lane = MID;
-            spell = IGNITE;
-        } else if (verifyCommands(command, commandsAdcIgnite) || (((inicialLetter2 == 'a' || inicialLetter2 == 'b') && inicialLetter1 == 'i') && ((word2.equals("adc") || word2.equals("bot")) || word1.equals("ignite")))) {
-            lane = ADC;
-            spell = IGNITE;
-        } else if (verifyCommands(command, commandsSupportIgnite) || ((inicialLetter2 == 's' && inicialLetter1 == 'i') && (word2 == "support" || word1.equals("ignite")))) {
-            lane = SUPPORT;
-            spell = IGNITE;
-        }
+            else if (verifyCommands(command, commandsTopIgnite) || ((inicialLetter2 == 't' && inicialLetter1 == 'i') && (word2.equals("top") || word1.equals("ignite")))) {
+                lane = TOP;
+                spell = IGNITE;
+            } else if (verifyCommands(command, commandsJungleIgnite) || ((inicialLetter2 == 'j' && inicialLetter1 == 'i') && (word2.equals("jungle") || word1.equals("ignite")))) {
+                lane = JUNGLE;
+                spell = IGNITE;
+            } else if (verifyCommands(command, commandsMidIgnite) || ((inicialLetter2 == 'm' && inicialLetter1 == 'i') && (word2.equals("mid") || word1.equals("ignite")))) {
+                lane = MID;
+                spell = IGNITE;
+            } else if (verifyCommands(command, commandsAdcIgnite) || (((inicialLetter2 == 'a' || inicialLetter2 == 'b') && inicialLetter1 == 'i') && ((word2.equals("adc") || word2.equals("bot")) || word1.equals("ignite")))) {
+                lane = ADC;
+                spell = IGNITE;
+            } else if (verifyCommands(command, commandsSupportIgnite) || ((inicialLetter2 == 's' && inicialLetter1 == 'i') && (word2 == "support" || word1.equals("ignite")))) {
+                lane = SUPPORT;
+                spell = IGNITE;
+            }
 
 //Ghost
-        else if (verifyCommands(command, commandsTopGhost) || ((inicialLetter2 == 't' && inicialLetter1 == 'g') && (word2.equals("top") || word1.equals("ghost")))) {
-            lane = TOP;
-            spell = GHOST;
-        } else if (verifyCommands(command, commandsJungleGhost) || ((inicialLetter2 == 'j' && inicialLetter1 == 'g') && (word2.equals("jungle") || word1.equals("ghost")))) {
-            lane = JUNGLE;
-            spell = GHOST;
-        } else if (verifyCommands(command, commandsMidGhost) || ((inicialLetter2 == 'm' && inicialLetter1 == 'g') && (word2.equals("mid") || word1.equals("ghost")))) {
-            lane = MID;
-            spell = GHOST;
-        } else if (verifyCommands(command, commandsAdcGhost) || (((inicialLetter2 == 'a' || inicialLetter2 == 'b') && inicialLetter1 == 'g') && ((word2.equals("adc") || word2.equals("bot")) || word1.equals("ghost")))) {
-            lane = ADC;
-            spell = GHOST;
-        } else if (verifyCommands(command, commandsSupportGhost) || ((inicialLetter2 == 's' && inicialLetter1 == 'g') && (word2 == "support" || word1.equals("ghost")))) {
-            lane = SUPPORT;
-            spell = GHOST;
-        }
+            else if (verifyCommands(command, commandsTopGhost) || ((inicialLetter2 == 't' && inicialLetter1 == 'g') && (word2.equals("top") || word1.equals("ghost")))) {
+                lane = TOP;
+                spell = GHOST;
+            } else if (verifyCommands(command, commandsJungleGhost) || ((inicialLetter2 == 'j' && inicialLetter1 == 'g') && (word2.equals("jungle") || word1.equals("ghost")))) {
+                lane = JUNGLE;
+                spell = GHOST;
+            } else if (verifyCommands(command, commandsMidGhost) || ((inicialLetter2 == 'm' && inicialLetter1 == 'g') && (word2.equals("mid") || word1.equals("ghost")))) {
+                lane = MID;
+                spell = GHOST;
+            } else if (verifyCommands(command, commandsAdcGhost) || (((inicialLetter2 == 'a' || inicialLetter2 == 'b') && inicialLetter1 == 'g') && ((word2.equals("adc") || word2.equals("bot")) || word1.equals("ghost")))) {
+                lane = ADC;
+                spell = GHOST;
+            } else if (verifyCommands(command, commandsSupportGhost) || ((inicialLetter2 == 's' && inicialLetter1 == 'g') && (word2 == "support" || word1.equals("ghost")))) {
+                lane = SUPPORT;
+                spell = GHOST;
+            }
 
 //Teleport
-        else if (verifyCommands(command, commandsTopTeleport) || ((inicialLetter2 == 't' && inicialLetter1 == 't') && (word2.equals("top") || word1.equals("teleport")))) {
-            lane = TOP;
-            spell = TELEPORT;
-        } else if (verifyCommands(command, commandsJungleTeleport) || ((inicialLetter2 == 'j' && inicialLetter1 == 't') && (word2.equals("jungle") || word1.equals("teleport")))) {
-            lane = JUNGLE;
-            spell = TELEPORT;
-        } else if (verifyCommands(command, commandsMidTeleport) || ((inicialLetter2 == 'm' && inicialLetter1 == 't') && (word2.equals("mid") || word1.equals("teleport")))) {
-            lane = MID;
-            spell = TELEPORT;
-        } else if (verifyCommands(command, commandsAdcTeleport) || (((inicialLetter2 == 'a' || inicialLetter2 == 'b') && inicialLetter1 == 't') && ((word2.equals("adc") || word2.equals("bot")) || word1.equals("teleport")))) {
-            lane = ADC;
-            spell = TELEPORT;
-        } else if (verifyCommands(command, commandsSupportTeleport) || ((inicialLetter2 == 's' && inicialLetter1 == 't') && (word2 == "support" || word1.equals("teleport")))) {
-            lane = SUPPORT;
-            spell = TELEPORT;
-        }
+            else if (verifyCommands(command, commandsTopTeleport) || ((inicialLetter2 == 't' && inicialLetter1 == 't') && (word2.equals("top") || word1.equals("teleport")))) {
+                lane = TOP;
+                spell = TELEPORT;
+            } else if (verifyCommands(command, commandsJungleTeleport) || ((inicialLetter2 == 'j' && inicialLetter1 == 't') && (word2.equals("jungle") || word1.equals("teleport")))) {
+                lane = JUNGLE;
+                spell = TELEPORT;
+            } else if (verifyCommands(command, commandsMidTeleport) || ((inicialLetter2 == 'm' && inicialLetter1 == 't') && (word2.equals("mid") || word1.equals("teleport")))) {
+                lane = MID;
+                spell = TELEPORT;
+            } else if (verifyCommands(command, commandsAdcTeleport) || (((inicialLetter2 == 'a' || inicialLetter2 == 'b') && inicialLetter1 == 't') && ((word2.equals("adc") || word2.equals("bot")) || word1.equals("teleport")))) {
+                lane = ADC;
+                spell = TELEPORT;
+            } else if (verifyCommands(command, commandsSupportTeleport) || ((inicialLetter2 == 's' && inicialLetter1 == 't') && (word2 == "support" || word1.equals("teleport")))) {
+                lane = SUPPORT;
+                spell = TELEPORT;
+            }
 
 //Barrier
-        else if (verifyCommands(command, commandsTopBarrier) || ((inicialLetter2 == 't' && inicialLetter1 == 'b') && (word2.equals("top") || word1.equals("barrier")))) {
-            lane = TOP;
-            spell = BARRIER;
-        } else if (verifyCommands(command, commandsJungleBarrier) || ((inicialLetter2 == 'j' && inicialLetter1 == 'b') && (word2.equals("jungle") || word1.equals("barrier")))) {
-            lane = JUNGLE;
-            spell = BARRIER;
-        } else if (verifyCommands(command, commandsMidBarrier) || ((inicialLetter2 == 'm' && inicialLetter1 == 'b') && (word2.equals("mid") || word1.equals("barrier")))) {
-            lane = MID;
-            spell = BARRIER;
-        } else if (verifyCommands(command, commandsAdcBarrier) || (((inicialLetter2 == 'a' || inicialLetter2 == 'b') && inicialLetter1 == 'b') && ((word2.equals("adc") || word2.equals("bot")) || word1.equals("barrier")))) {
-            lane = ADC;
-            spell = BARRIER;
-        } else if (verifyCommands(command, commandsSupportBarrier) || ((inicialLetter2 == 's' && inicialLetter1 == 'b') && (word2 == "support" || word1.equals("barrier")))) {
-            lane = SUPPORT;
-            spell = BARRIER;
-        }
+            else if (verifyCommands(command, commandsTopBarrier) || ((inicialLetter2 == 't' && inicialLetter1 == 'b') && (word2.equals("top") || word1.equals("barrier")))) {
+                lane = TOP;
+                spell = BARRIER;
+            } else if (verifyCommands(command, commandsJungleBarrier) || ((inicialLetter2 == 'j' && inicialLetter1 == 'b') && (word2.equals("jungle") || word1.equals("barrier")))) {
+                lane = JUNGLE;
+                spell = BARRIER;
+            } else if (verifyCommands(command, commandsMidBarrier) || ((inicialLetter2 == 'm' && inicialLetter1 == 'b') && (word2.equals("mid") || word1.equals("barrier")))) {
+                lane = MID;
+                spell = BARRIER;
+            } else if (verifyCommands(command, commandsAdcBarrier) || (((inicialLetter2 == 'a' || inicialLetter2 == 'b') && inicialLetter1 == 'b') && ((word2.equals("adc") || word2.equals("bot")) || word1.equals("barrier")))) {
+                lane = ADC;
+                spell = BARRIER;
+            } else if (verifyCommands(command, commandsSupportBarrier) || ((inicialLetter2 == 's' && inicialLetter1 == 'b') && (word2 == "support" || word1.equals("barrier")))) {
+                lane = SUPPORT;
+                spell = BARRIER;
+            }
 
 //Exhaust
-        else if (verifyCommands(command, commandsTopExhaust) || ((inicialLetter2 == 't' && inicialLetter1 == 'e') && (word2.equals("top") || word1.equals("exhaust")))) {
-            lane = TOP;
-            spell = EXHAUST;
-        } else if (verifyCommands(command, commandsJungleExhaust) || ((inicialLetter2 == 'j' && inicialLetter1 == 'e') && (word2.equals("jungle") || word1.equals("exhaust")))) {
-            lane = JUNGLE;
-            spell = EXHAUST;
-        } else if (verifyCommands(command, commandsMidExhaust) || ((inicialLetter2 == 'm' && inicialLetter1 == 'e') && (word2.equals("mid") || word1.equals("exhaust")))) {
-            lane = MID;
-            spell = EXHAUST;
-        } else if (verifyCommands(command, commandsAdcExhaust) || (((inicialLetter2 == 'a' || inicialLetter2 == 'e') && inicialLetter1 == 'e') && ((word2.equals("adc") || word2.equals("bot")) || word1.equals("exhaust")))) {
-            lane = ADC;
-            spell = EXHAUST;
-        } else if (verifyCommands(command, commandsSupportExhaust) || ((inicialLetter2 == 's' && inicialLetter1 == 'e') && (word2 == "support" || word1.equals("exhaust")))) {
-            lane = SUPPORT;
-            spell = EXHAUST;
-        }
+            else if (verifyCommands(command, commandsTopExhaust) || ((inicialLetter2 == 't' && inicialLetter1 == 'e') && (word2.equals("top") || word1.equals("exhaust")))) {
+                lane = TOP;
+                spell = EXHAUST;
+            } else if (verifyCommands(command, commandsJungleExhaust) || ((inicialLetter2 == 'j' && inicialLetter1 == 'e') && (word2.equals("jungle") || word1.equals("exhaust")))) {
+                lane = JUNGLE;
+                spell = EXHAUST;
+            } else if (verifyCommands(command, commandsMidExhaust) || ((inicialLetter2 == 'm' && inicialLetter1 == 'e') && (word2.equals("mid") || word1.equals("exhaust")))) {
+                lane = MID;
+                spell = EXHAUST;
+            } else if (verifyCommands(command, commandsAdcExhaust) || (((inicialLetter2 == 'a' || inicialLetter2 == 'e') && inicialLetter1 == 'e') && ((word2.equals("adc") || word2.equals("bot")) || word1.equals("exhaust")))) {
+                lane = ADC;
+                spell = EXHAUST;
+            } else if (verifyCommands(command, commandsSupportExhaust) || ((inicialLetter2 == 's' && inicialLetter1 == 'e') && (word2 == "support" || word1.equals("exhaust")))) {
+                lane = SUPPORT;
+                spell = EXHAUST;
+            }
 
 //Cleanse
-        else if (verifyCommands(command, commandsTopCleanse) || ((inicialLetter2 == 't' && inicialLetter1 == 'c') && (word2.equals("top") || word1.equals("cleanse")))) {
-            lane = TOP;
-            spell = CLEANSE;
-        } else if (verifyCommands(command, commandsJungleCleanse) || ((inicialLetter2 == 'j' && inicialLetter1 == 'c') && (word2.equals("jungle") || word1.equals("cleanse")))) {
-            lane = JUNGLE;
-            spell = CLEANSE;
-        } else if (verifyCommands(command, commandsMidCleanse) || ((inicialLetter2 == 'm' && inicialLetter1 == 'c') && (word2.equals("mid") || word1.equals("cleanse")))) {
-            lane = MID;
-            spell = CLEANSE;
-        } else if (verifyCommands(command, commandsAdcCleanse) || (((inicialLetter2 == 'a' || inicialLetter2 == 'b') && inicialLetter1 == 'c') && ((word2.equals("adc") || word2.equals("bot")) || word1.equals("cleanse")))) {
-            lane = ADC;
-            spell = CLEANSE;
-        } else if (verifyCommands(command, commandsSupportCleanse) || ((inicialLetter2 == 's' && inicialLetter1 == 'c') && (word2 == "support" || word1.equals("cleanse")))) {
-            lane = SUPPORT;
-            spell = CLEANSE;
+            else if (verifyCommands(command, commandsTopCleanse) || ((inicialLetter2 == 't' && inicialLetter1 == 'c') && (word2.equals("top") || word1.equals("cleanse")))) {
+                lane = TOP;
+                spell = CLEANSE;
+            } else if (verifyCommands(command, commandsJungleCleanse) || ((inicialLetter2 == 'j' && inicialLetter1 == 'c') && (word2.equals("jungle") || word1.equals("cleanse")))) {
+                lane = JUNGLE;
+                spell = CLEANSE;
+            } else if (verifyCommands(command, commandsMidCleanse) || ((inicialLetter2 == 'm' && inicialLetter1 == 'c') && (word2.equals("mid") || word1.equals("cleanse")))) {
+                lane = MID;
+                spell = CLEANSE;
+            } else if (verifyCommands(command, commandsAdcCleanse) || (((inicialLetter2 == 'a' || inicialLetter2 == 'b') && inicialLetter1 == 'c') && ((word2.equals("adc") || word2.equals("bot")) || word1.equals("cleanse")))) {
+                lane = ADC;
+                spell = CLEANSE;
+            } else if (verifyCommands(command, commandsSupportCleanse) || ((inicialLetter2 == 's' && inicialLetter1 == 'c') && (word2 == "support" || word1.equals("cleanse")))) {
+                lane = SUPPORT;
+                spell = CLEANSE;
+            }
+
         }
-
-
 
 
         //Kindred Mark
@@ -1201,6 +1213,69 @@ public class TimerActivity extends AppCompatActivity {
         }
     }
 
+    public String getCommands(int lane, int spell) {
+        String commands;
+        String commandsCode;
+        String spellName = "", laneName = "";
+        if (spell == TimerActivity.FLASH) {
+            spellName = "Flash";
+        } else if (spell == TimerActivity.HEAL) {
+            spellName = "Heal";
+
+        } else if (spell == TimerActivity.IGNITE) {
+            spellName = "Ignite";
+
+        } else if (spell == TimerActivity.GHOST) {
+            spellName = "Ghost";
+
+        } else if (spell == TimerActivity.BARRIER) {
+            spellName = "Barrier";
+
+        } else if (spell == TimerActivity.CLEANSE) {
+            spellName = "Cleanse";
+
+        } else if (spell == TimerActivity.EXHAUST) {
+            spellName = "Exhaust";
+
+        } else if (spell == TimerActivity.TELEPORT) {
+            spellName = "Teleport";
+
+        } else if (spell == TimerActivity.BOOTS) {
+            spellName = "Boots";
+
+        }
+
+        if (lane == TimerActivity.TOP) {
+            laneName = "Top";
+        } else if (lane == TimerActivity.JUNGLE) {
+            laneName = "Jungle";
+
+        } else if (lane == TimerActivity.MID) {
+            laneName = "Mid";
+
+        } else if (lane == TimerActivity.ADC) {
+            laneName = "Adc";
+
+        } else if (lane == TimerActivity.SUPPORT) {
+            laneName = "Support";
+
+        }
+        commandsCode = laneName + spellName + "Commands";
+
+        commands = sharedPref.getString(commandsCode, null);
+        return commands;
+    }
+    public int[] verifyCustomCommands(String command){
+
+        for (int i = 2; i < 7; i++) {//lane
+            for (int j = 0; j <17 ; j++) {//spell
+                if(verifyCommands(command, getCommands(i,j)))
+                    return new int[]{i, j};
+            }
+        }
+
+        return new int[]{0, 0};
+    }
     public void mute() {
         try {
             AudioManager audioManager =

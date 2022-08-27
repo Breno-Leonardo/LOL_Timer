@@ -151,6 +151,61 @@
                     android:layout_marginBottom="10dp"
                     android:orientation="vertical">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginLeft="77dp"
+                        android:layout_marginRight="77dp"
+                        >
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="7dp"
+                            android:layout_marginTop="15dp">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:text="@string/language"
+                                android:gravity=""
+                                android:textColor="@color/black"
+                                android:textSize="19dp"
+                                android:textStyle="bold"
+                                android:typeface="monospace">
+
+                            </TextView>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="6dp"
+                                android:layout_marginTop="6dp"
+                                android:text="@string/language"
+                                android:textColor="@color/greenTime"
+                                android:textSize="19dp"
+                                android:textStyle="bold"
+                                android:typeface="monospace">
+
+                            </TextView>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                        <Spinner
+                            android:id="@+id/spinnerLanguageInCommands"
+                            android:layout_width="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginBottom="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="10dp"
+
+                            android:background="@android:drawable/btn_dropdown"
+                            android:backgroundTint="@color/greenTime"
+                            android:backgroundTintMode="multiply"
+                            android:popupBackground="@color/greenTime"
+                            android:spinnerMode="dropdown"
+                            android:textAlignment="center"
+                            android:theme="@style/spinnerTheme" />
+                    </LinearLayout>
+
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -192,6 +247,7 @@
                             android:src="@drawable/top"></ImageView>
 
                         <TextView
+                            android:id="@+id/txtTop"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="5dp"
@@ -216,6 +272,8 @@
                             android:src="@drawable/jungle"></ImageView>
 
                         <TextView
+                            android:id="@+id/txtJungle"
+
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="5dp"
@@ -240,6 +298,8 @@
                             android:src="@drawable/mid"></ImageView>
 
                         <TextView
+                            android:id="@+id/txtMid"
+
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="5dp"
@@ -264,6 +324,8 @@
                             android:src="@drawable/adc"></ImageView>
 
                         <TextView
+                            android:id="@+id/txtBot"
+
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="5dp"
@@ -288,6 +350,8 @@
                             android:src="@drawable/support"></ImageView>
 
                         <TextView
+                            android:id="@+id/txtSuport"
+
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="5dp"
@@ -350,6 +414,8 @@
                         </androidx.cardview.widget.CardView>
 
                         <TextView
+                            android:id="@+id/txtFlash"
+
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="5dp"
@@ -381,6 +447,8 @@
                         </androidx.cardview.widget.CardView>
 
                         <TextView
+                            android:id="@+id/txtIgnite"
+
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="5dp"
@@ -413,6 +481,8 @@
                         </androidx.cardview.widget.CardView>
 
                         <TextView
+                            android:id="@+id/txtTeleport"
+
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="5dp"
@@ -444,6 +514,8 @@
                         </androidx.cardview.widget.CardView>
 
                         <TextView
+                            android:id="@+id/txtHeal"
+
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="5dp"
@@ -476,6 +548,8 @@
                         </androidx.cardview.widget.CardView>
 
                         <TextView
+                            android:id="@+id/txtExhaust"
+
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="5dp"
@@ -508,6 +582,8 @@
                         </androidx.cardview.widget.CardView>
 
                         <TextView
+                            android:id="@+id/txtBarrier"
+
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="5dp"
@@ -539,6 +615,8 @@
                         </androidx.cardview.widget.CardView>
 
                         <TextView
+                            android:id="@+id/txtGhost"
+
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="5dp"
@@ -570,6 +648,8 @@
                         </androidx.cardview.widget.CardView>
 
                         <TextView
+                            android:id="@+id/txtCleanse"
+
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="5dp"
@@ -597,6 +677,7 @@
 
                     </TextView>
                     <TextView
+android:id="@+id/activateExample"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="5dp"
@@ -656,11 +737,12 @@
                         </androidx.cardview.widget.CardView>
 
                         <TextView
+                            android:id="@+id/txtBoots"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="5dp"
                             android:gravity="center_vertical"
-                            android:text="Ionian Boots of Lucidity"
+                            android:text="Boots"
                             android:textColor="@color/black"
                             android:textSize="17dp"
                             android:textStyle="bold"
@@ -683,12 +765,12 @@
 
                     </TextView>
                     <TextView
+                        android:id="@+id/activateExampleBoots"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="5dp"
                         android:layout_marginLeft="15dp"
                         android:gravity="center"
-                        android:text=" &quot;Boots Mid&quot; or &quot;Mid Boots&quot; or &quot;Boot Mid&quot; or &quot;Boot Mid&quot; "
                         android:textColor="@color/black"
                         android:textSize="17dp"
                         android:textStyle="bold"

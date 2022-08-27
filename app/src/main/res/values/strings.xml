@@ -12,7 +12,7 @@
     <string name="tipStart">Speak your command, </string>
     <string name="like_for_example">like for example:</string>
     <string name="tipEnd">Hint: Speak slowly between each word or change recognition language in settings.</string>
-    <string name="tipCustomizeCommands">You can create custom commands in commands session.</string>
+    <string name="tipCustomizeCommands">You can create custom commands in commands session and change language in settings session.</string>
     <string name="summonerName">Summoner Name:</string>
     <string name="error">Incorrect Summoner Or Region</string>
     <string name="putSummonerName">The Kindred</string>
@@ -31,6 +31,10 @@
     <string name="vibrate_on_create">Vibrate when creating a command</string>
     <string name="vibrate_on_end">Vibrate when ending a command</string>
     <string name="command_exist">The command already exists</string>
+    <string name="speak_end">Speak at the end of the command</string>
+    <string name="recognition_language">Recognition language</string>
+    <string name="language">Language</string>
+    <string name="or">or</string>
 
 
     <!--    <string name="putSummonerName">Put Your Summoner Name</string>-->

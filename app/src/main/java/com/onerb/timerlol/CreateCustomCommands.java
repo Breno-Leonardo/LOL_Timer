@@ -175,8 +175,9 @@ public class CreateCustomCommands extends AppCompatActivity {
     public void putCommands(int lane, int spell, String command) {
         String commands, originalCommands, existingCommands;
         String commandsCode, originalCommandsCode;
+        command=command.trim();
         command=command.toLowerCase();
-        command=removerAcentos(command);
+//        command=removerAcentos(command);
         String spellName = "", laneName = "";
         if (spell == TimerActivity.FLASH) {
             spellName = "Flash";
@@ -236,7 +237,7 @@ public class CreateCustomCommands extends AppCompatActivity {
         command = command.replace(" ", "");
         for (String s:
                 existingCommands.split(" ")) {
-            if(s.equals(command)) {
+            if(s.equalsIgnoreCase(command) && !s.equalsIgnoreCase("") && s.equalsIgnoreCase(" ")) {
                 System.out.println("CreateCustomCommands.putCommands shared ja existe");
                 Toast toast= Toast.makeText(getApplicationContext(),getString(R.string.command_exist), Toast.LENGTH_SHORT);
                 toast.show();
@@ -247,21 +248,21 @@ public class CreateCustomCommands extends AppCompatActivity {
         if (commands != null) {
             for (String s :
                     commands.split(" ")) {
-                if (s.equals(command))
+                if (s.equalsIgnoreCase(command))
                     contains = true;
             }
         }
-        if (!contains && !originalCommand.equals("") && !originalCommand.equals("\n") && !originalCommand.equals(" ") && !originalCommand.equals("  ")) {
+        if (!contains && !originalCommand.equalsIgnoreCase("") && !originalCommand.equalsIgnoreCase("\n") && !originalCommand.equalsIgnoreCase(" ") && !originalCommand.equalsIgnoreCase("  ")) {
             if (commands == null)
                 commands = "";
             if (originalCommands == null)
                 originalCommands = "";
             editor.putString(commandsCode, commands + " " + command);// add command
             editor.putString("existingCommands", existingCommands+ " "+ command);
-            if (originalCommands.equals(""))
+            if (originalCommands.equalsIgnoreCase(""))
                 editor.putString(originalCommandsCode, originalCommand);
             else
-                editor.putString(originalCommandsCode, originalCommands + " " + separator + " " + originalCommand);
+                editor.putString(originalCommandsCode, originalCommands + separator  + originalCommand);
 
         }
         editor.commit();
@@ -337,24 +338,31 @@ public class CreateCustomCommands extends AppCompatActivity {
 
                     String[] a1 = sharedPref.getString(originalCommandsCode, null).split("&7&");
                     String[] a2 = sharedPref.getString(commandsCode, null).split(" ");
+                    String[] a3 = sharedPref.getString("existingCommands", null).split(" ");
                     TextView txtCommand = containerCard.findViewById(R.id.textCommand);
-                    String newOriginalCommand = "", newCommand = "";
+                    String newOriginalCommand = "", newCommand = "", newExistingCommand="";
 
                     for (int j = 0; j < a1.length; j++) {
-                        if (!a1[j].equals(txtCommand.getText().toString()))
+                        if (!a1[j].equalsIgnoreCase(txtCommand.getText().toString()) && !a1[j].equalsIgnoreCase("") && !a1[j].equalsIgnoreCase(" ") )
                             newOriginalCommand = newOriginalCommand + a1[j] + "&7&";
                     }
 
 
                     for (int j = 0; j < a2.length; j++) {
-                        if (!a2[j].equals(txtCommand.getText().toString().replace(" ", "")))
+                        if (!a2[j].equalsIgnoreCase(txtCommand.getText().toString().replace(" ", ""))&& !a2[j].equalsIgnoreCase("") && !a2[j].equalsIgnoreCase(" "))
                             newCommand = newCommand + a2[j] + " ";
+                    }
+
+                    for (int j = 0; j < a3.length; j++) {
+                        if (!a3[j].equalsIgnoreCase(txtCommand.getText().toString().replace(" ", "")) && !a3[j].equalsIgnoreCase("") && !a3[j].equalsIgnoreCase(" "))
+                            newExistingCommand = newExistingCommand + a3[j] + " ";
                     }
 
                     containerCustomCommandsExisting.removeView(containerCard);
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putString(commandsCode, newCommand);// add command
                     editor.putString(originalCommandsCode, newOriginalCommand);
+                    editor.putString("existingCommands", newExistingCommand);
                     editor.commit();
 
 

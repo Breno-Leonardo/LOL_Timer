@@ -102,6 +102,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView">
 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -148,8 +149,75 @@
                     android:layout_marginBottom="10dp"
                     android:orientation="vertical">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="15dp">
 
 
+
+                        <TextView
+                            android:layout_width="220dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:text="@string/recognition_language"
+                            android:textColor="@color/black"
+                            android:textSize="17dp"
+                            android:textStyle="bold"
+                            android:typeface="monospace">
+
+                        </TextView>
+                        <Spinner
+                            android:id="@+id/spinnerLanguage"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="10dp"
+
+                            android:background="@android:drawable/btn_dropdown"
+                            android:backgroundTint="@color/greenTime"
+                            android:backgroundTintMode="multiply"
+                            android:popupBackground="@color/greenTime"
+                            android:spinnerMode="dropdown"
+                            android:textAlignment="center"
+                            android:theme="@style/spinnerTheme" />
+
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="15dp">
+
+
+
+                        <TextView
+                            android:layout_width="330dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:text="@string/vibrate_on_end"
+                            android:textColor="@color/black"
+                            android:textSize="17dp"
+                            android:textStyle="bold"
+                            android:typeface="monospace">
+
+                        </TextView>
+                        <Switch
+                            android:id="@+id/switchVibrateOnFinish"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:scaleX="1.2"
+                            android:scaleY="1.2"
+                            >
+
+                        </Switch>
+
+
+
+                    </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -183,6 +251,8 @@
 
                     </LinearLayout>
 
+
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -195,7 +265,7 @@
                             android:layout_width="330dp"
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
-                            android:text="@string/vibrate_on_end"
+                            android:text="@string/speak_end"
                             android:textColor="@color/black"
                             android:textSize="17dp"
                             android:textStyle="bold"
@@ -203,7 +273,7 @@
 
                         </TextView>
                         <Switch
-                            android:id="@+id/switchVibrateOnFinish"
+                            android:id="@+id/switchSpeakOnEnd"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:scaleX="1.2"

@@ -227,7 +227,7 @@ public class CreateCustomCommands extends AppCompatActivity {
         commands = sharedPref.getString(commandsCode, null);
         originalCommands = sharedPref.getString(originalCommandsCode, null);
         existingCommands = sharedPref.getString("existingCommands", "");
-
+        System.out.println("CreateCustomCommands.putCommands shared all:"+sharedPref.getAll());
 
 
         String separator = "&7&";
@@ -237,8 +237,7 @@ public class CreateCustomCommands extends AppCompatActivity {
         command = command.replace(" ", "");
         for (String s:
                 existingCommands.split(" ")) {
-            if(s.equalsIgnoreCase(command) && !s.equalsIgnoreCase("") && s.equalsIgnoreCase(" ")) {
-                System.out.println("CreateCustomCommands.putCommands shared ja existe");
+            if(s.equalsIgnoreCase(command) && !s.equalsIgnoreCase("") && !s.equalsIgnoreCase(" ")) {
                 Toast toast= Toast.makeText(getApplicationContext(),getString(R.string.command_exist), Toast.LENGTH_SHORT);
                 toast.show();
                 return;

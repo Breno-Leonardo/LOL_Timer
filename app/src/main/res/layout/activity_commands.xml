@@ -22,8 +22,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="7dp"
 
-            app:cardCornerRadius="20dp"
             android:backgroundTint="@color/white"
+            app:cardCornerRadius="20dp"
 
             app:cardElevation="10dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -39,6 +39,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="7dp">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -52,12 +53,13 @@
                         android:typeface="monospace">
 
                     </TextView>
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="1dp"
                         android:layout_marginTop="5dp"
                         android:gravity="center"
-                        android:layout_marginLeft="1dp"
                         android:text="@string/custom_commands"
                         android:textColor="@color/greenTime"
 
@@ -74,8 +76,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
                     android:layout_marginTop="5dp"
-                    android:layout_marginBottom="10dp"
                     android:layout_marginRight="40dp"
+                    android:layout_marginBottom="10dp"
                     android:backgroundTint="@color/greenTime"
                     android:text="@string/create"
 
@@ -94,9 +96,9 @@
             android:layout_marginLeft="7dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="7dp"
+            android:backgroundTint="@color/white"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp"
-            android:backgroundTint="@color/white"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -105,42 +107,42 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginBottom="7dp">
+                android:layout_marginBottom="7dp"
+                android:orientation="vertical">
 
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp">
+
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="7dp">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:gravity="center"
-                            android:text="@string/list_commands"
-                            android:textColor="@color/black"
-                            android:textSize="25dp"
-                            android:textStyle="bold"
-                            android:typeface="monospace">
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:text="@string/list_commands"
+                        android:textColor="@color/black"
+                        android:textSize="25dp"
+                        android:textStyle="bold"
+                        android:typeface="monospace">
 
-                        </TextView>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginLeft="1dp"
-                            android:gravity="center"
-                            android:text="@string/list_commands"
-                            android:textColor="@color/greenTime"
-                            android:textSize="25dp"
-                            android:textStyle="bold"
-                            android:typeface="monospace">
+                    </TextView>
 
-                        </TextView>
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:text="@string/list_commands"
+                        android:textColor="@color/greenTime"
+                        android:textSize="25dp"
+                        android:textStyle="bold"
+                        android:typeface="monospace">
 
-
+                    </TextView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
                 <LinearLayout
@@ -155,27 +157,29 @@
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:layout_marginLeft="77dp"
-                        android:layout_marginRight="77dp"
-                        >
+                        android:layout_marginRight="77dp">
+
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginRight="7dp"
-                            android:layout_marginTop="15dp">
+                            android:layout_marginTop="15dp"
+                            android:layout_marginRight="7dp">
+
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginTop="5dp"
-                                android:text="@string/language"
                                 android:gravity=""
+                                android:text="@string/language"
                                 android:textColor="@color/black"
                                 android:textSize="19dp"
                                 android:textStyle="bold"
                                 android:typeface="monospace">
 
                             </TextView>
+
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -189,13 +193,14 @@
 
                             </TextView>
                         </androidx.constraintlayout.widget.ConstraintLayout>
+
                         <Spinner
                             android:id="@+id/spinnerLanguageInCommands"
                             android:layout_width="match_parent"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginBottom="1dp"
                             android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
                             android:layout_marginTop="10dp"
+                            android:layout_marginBottom="1dp"
 
                             android:background="@android:drawable/btn_dropdown"
                             android:backgroundTint="@color/greenTime"
@@ -210,6 +215,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp">
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -222,6 +228,7 @@
                             android:typeface="monospace">
 
                         </TextView>
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -369,6 +376,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp">
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -381,6 +389,7 @@
                             android:typeface="monospace">
 
                         </TextView>
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -428,6 +437,7 @@
 
                         </TextView>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -495,6 +505,7 @@
 
                         </TextView>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -596,6 +607,7 @@
 
                         </TextView>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -629,6 +641,7 @@
 
                         </TextView>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -666,8 +679,8 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="5dp"
                         android:layout_marginLeft="15dp"
+                        android:layout_marginTop="5dp"
                         android:gravity="center_vertical"
                         android:text="@string/explanation"
                         android:textColor="@color/black"
@@ -676,12 +689,13 @@
                         android:typeface="monospace">
 
                     </TextView>
+
                     <TextView
-android:id="@+id/activateExample"
+                        android:id="@+id/activateExample"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="5dp"
                         android:layout_marginLeft="15dp"
+                        android:layout_marginTop="5dp"
                         android:gravity="center"
                         android:text=" &quot;Mid Flash&quot; or &quot;Flash Mid&quot; "
                         android:textColor="@color/black"
@@ -690,10 +704,27 @@ android:id="@+id/activateExample"
                         android:typeface="monospace">
 
                     </TextView>
+                    <TextView
+                        android:id="@+id/mix"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/mix_commands"
+                        android:textColor="@color/black"
+                        android:textSize="17dp"
+                        android:textStyle="bold"
+                        android:typeface="monospace">
+
+                    </TextView>
+
+
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp">
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -706,6 +737,7 @@ android:id="@+id/activateExample"
                             android:typeface="monospace">
 
                         </TextView>
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -719,11 +751,13 @@ android:id="@+id/activateExample"
 
                         </TextView>
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:layout_marginTop="10dp">
+
                         <androidx.cardview.widget.CardView
                             android:layout_width="45dp"
                             android:layout_height="45dp"
@@ -754,8 +788,8 @@ android:id="@+id/activateExample"
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="5dp"
                         android:layout_marginLeft="15dp"
+                        android:layout_marginTop="5dp"
                         android:gravity="center_vertical"
                         android:text="@string/explanation_boots"
                         android:textColor="@color/black"
@@ -764,12 +798,13 @@ android:id="@+id/activateExample"
                         android:typeface="monospace">
 
                     </TextView>
+
                     <TextView
                         android:id="@+id/activateExampleBoots"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="5dp"
                         android:layout_marginLeft="15dp"
+                        android:layout_marginTop="5dp"
                         android:gravity="center"
                         android:textColor="@color/black"
                         android:textSize="17dp"
@@ -777,11 +812,73 @@ android:id="@+id/activateExample"
                         android:typeface="monospace">
 
                     </TextView>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:layout_marginTop="10dp">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            app:cardCornerRadius="5dp"
+                            app:cardElevation="10dp">
+
+                            <ImageView
+                                android:layout_width="45dp"
+                                android:layout_height="45dp"
+                                android:src="@drawable/zhonyas"></ImageView>
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:gravity="center_vertical"
+                            android:text="Zhonyas"
+                            android:textColor="@color/black"
+                            android:textSize="17dp"
+                            android:textStyle="bold"
+                            android:typeface="monospace">
+
+                        </TextView>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/activate_zhonyas"
+                        android:textColor="@color/black"
+                        android:textSize="17dp"
+                        android:textStyle="bold"
+                        android:typeface="monospace">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/activateExampleZhonyas"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:textSize="17dp"
+                        android:textStyle="bold"
+                        android:typeface="monospace">
+
+                    </TextView>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp">
+
                         <androidx.cardview.widget.CardView
                             android:layout_width="45dp"
                             android:layout_height="45dp"
@@ -811,8 +908,8 @@ android:id="@+id/activateExample"
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="5dp"
                         android:layout_marginLeft="15dp"
+                        android:layout_marginTop="5dp"
                         android:gravity="center_vertical"
                         android:text="@string/explanation_normal_timer"
                         android:textColor="@color/black"
@@ -821,11 +918,12 @@ android:id="@+id/activateExample"
                         android:typeface="monospace">
 
                     </TextView>
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="5dp"
                         android:layout_marginLeft="15dp"
+                        android:layout_marginTop="5dp"
                         android:gravity="center"
                         android:text=" &quot;30s&quot; or &quot;60s&quot; "
                         android:textColor="@color/black"
@@ -834,28 +932,29 @@ android:id="@+id/activateExample"
                         android:typeface="monospace">
 
                     </TextView>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:layout_marginTop="10dp">
+
                         <androidx.cardview.widget.CardView
                             android:layout_width="45dp"
                             android:layout_height="45dp"
-                            app:cardCornerRadius="5dp"
-                            >
+                            app:cardCornerRadius="5dp">
 
                             <ImageView
                                 android:layout_width="45dp"
                                 android:layout_height="45dp"
                                 android:src="@drawable/kindred"></ImageView>
                         </androidx.cardview.widget.CardView>
+
                         <androidx.cardview.widget.CardView
                             android:layout_width="45dp"
                             android:layout_height="45dp"
                             android:layout_marginLeft="5dp"
-                            app:cardCornerRadius="5dp"
-                            >
+                            app:cardCornerRadius="5dp">
 
                             <ImageView
                                 android:layout_width="45dp"
@@ -880,8 +979,8 @@ android:id="@+id/activateExample"
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="5dp"
                         android:layout_marginLeft="15dp"
+                        android:layout_marginTop="5dp"
                         android:gravity="center_vertical"
                         android:text="@string/explanation_kindred"
                         android:textColor="@color/black"
@@ -890,11 +989,12 @@ android:id="@+id/activateExample"
                         android:typeface="monospace">
 
                     </TextView>
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="5dp"
                         android:layout_marginLeft="15dp"
+                        android:layout_marginTop="5dp"
                         android:gravity="center"
                         android:text=" &quot;K30&quot; or &quot;K45&quot; "
                         android:textColor="@color/black"
@@ -909,6 +1009,7 @@ android:id="@+id/activateExample"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:layout_marginTop="10dp">
+
                         <androidx.cardview.widget.CardView
                             android:layout_width="45dp"
                             android:layout_height="45dp"
@@ -920,12 +1021,12 @@ android:id="@+id/activateExample"
                                 android:layout_height="45dp"
                                 android:src="@drawable/anivia"></ImageView>
                         </androidx.cardview.widget.CardView>
+
                         <androidx.cardview.widget.CardView
                             android:layout_width="45dp"
                             android:layout_height="45dp"
                             android:layout_marginLeft="5dp"
-                            app:cardCornerRadius="5dp"
-                            >
+                            app:cardCornerRadius="5dp">
 
                             <ImageView
                                 android:layout_width="45dp"
@@ -950,8 +1051,8 @@ android:id="@+id/activateExample"
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="5dp"
                         android:layout_marginLeft="15dp"
+                        android:layout_marginTop="5dp"
                         android:gravity="center_vertical"
                         android:text="@string/explanation_anivia"
                         android:textColor="@color/black"
@@ -960,11 +1061,12 @@ android:id="@+id/activateExample"
                         android:typeface="monospace">
 
                     </TextView>
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="5dp"
                         android:layout_marginLeft="15dp"
+                        android:layout_marginTop="5dp"
                         android:gravity="center"
                         android:text=" &quot;Anivia Passive&quot; or &quot;Anivia Egg&quot; "
                         android:textColor="@color/black"

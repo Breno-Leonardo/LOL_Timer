@@ -74,11 +74,14 @@ public class TimerActivity extends AppCompatActivity {
     private static final int EXHAUST_TIME = 210;
     private static final int TELEPORT_TIME = 360;
     private static final int CLEANSE_TIME = 210;
+    private static final int ZHONYAS_TIME = 120;
 
     private static final int KINDRED = 1;
     private static final int ANIVIA = 17;
     private static final int ANIVIA_TIME = 240;
     private static final int NORMAL_TIMER = 16;
+    private static final int ZHONYAS = 18;
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //put the commands glued
@@ -153,24 +156,24 @@ public class TimerActivity extends AppCompatActivity {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //EXTRA LANGUAGES
     // ingles en 0, portugues pt 1, alemao de 2, espanhol es 3, frances fr 4, italiano it 5, polones pl 6, grego el 7, romeno ro 8, hungaro hu 9, tcheco cs 10
-    // ,japones ja 11,russo ru 12, turco tr 13, koreano ko 14, chines zh 15
+    // ,japones ja 11,russo ru 12, turco tr 13, koreano ko 14, chines zh 15, comandos extras para melhorar deteccao
     public static final String laneTopExtra = "top topo OBERE SUPERIOR HAUT SUPERIORE GÓRNA Πάνω SUS FELSŐ HORNÍ トップ ВЕРХНЯЯ ÜST 상단 上路";
-    public static final String laneJungleExtra = "jungle caçador DSCHUNGEL JUNGLA JUNGLE GIUNGLA DŻUNGLA Ζούγκλα JUNGLĂ DZSUNGEL DŽUNGLE ジャングル ЛЕС ORMANCI 정글 打野";
-    public static final String laneMidExtra = "mid meio MITTLERE CENTRAL MILIEU CENTRALE ŚRODKOWA Μεσαία MIJLOC KÖZÉPSŐ STŘEDOVÁ ミッド СРЕДНЯЯ ORTA 중단 中路";
-    public static final String laneAdcExtra = "bot atirador UNTERE INFERIOR BAS INFERIORE DOLNA Κάτω JOS ALSÓ SPODNÍ ボット НИЖНЯЯ ALT 하단 远程物理输出";
-    public static final String laneSupportExtra = "support suporte SUPPORTER APOYO SUPPORT SUPPORTO WSPARCIE Υποστηρικτής SUPORT TÁMOGATÓ PODPORA サポート ПОДДЕРЖКА DESTEK 서포터 辅助";
+    public static final String laneJungleExtra = "jungle caçador DSCHUNGEL JUNGLA JUNGLE GIUNGLA DŻUNGLA Ζούγκλα JUNGLĂ DZSUNGEL DŽUNGLE ジャングル ЛЕС ORMANCI 정글 打野 django";
+    public static final String laneMidExtra = "mid meio MITTLERE CENTRAL MILIEU CENTRALE ŚRODKOWA Μεσαία MIJLOC KÖZÉPSŐ STŘEDOVÁ ミッド СРЕДНЯЯ ORTA 중단 中路 midi";
+    public static final String laneAdcExtra = "bot atirador UNTERE INFERIOR BAS INFERIORE DOLNA Κάτω JOS ALSÓ SPODNÍ ボット НИЖНЯЯ ALT 하단 远程物理输出 adc";
+    public static final String laneSupportExtra = "support suporte SUPPORTER APOYO SUPPORT SUPPORTO WSPARCIE Υποστηρικτής SUPORT TÁMOGATÓ PODPORA サポート ПОДДЕРЖКА DESTEK 서포터 辅助 sup";
 
     public static final String flashExtra = "FLASH FLASH Blitz Destello Sautéclair Flash Błysk Φλας Flash Átvillanás Skok フラッシュ Скачок Sıçra 점멸 閃現";
     public static final String igniteExtra = "IGNITE INCENDIAR Entzünden Prender Embrasement Ustione Podpalenie Ανάφλεξη Igniție Égetés Vznítit イグナイト Воспламенение Tutuştur 점화 點燃";
-    public static final String exhaustExtra = "EXHAUST EXAUSTÃO Erschöpfen Extenuación Fatigue Sfinimento Wyczerpanie Εξάντληση Epuizare Kifárasztás Vyčerpat イグゾースト Изнурение Bitkinlik 탈진 虛弱";
+    public static final String exhaustExtra = "EXHAUST EXAUSTÃO Erschöpfen Extenuación Fatigue Sfinimento Wyczerpanie Εξάντληση Epuizare Kifárasztás Vyčerpat イグゾースト Изнурение Bitkinlik 탈진 虛弱 exausto";
     public static final String healExtra = "HEAL CURAR Heilen Curar Soins Guarigione Uzdrowienie Θεραπεία Vindecare Gyógyítás Vyléčit ヒール Исцеление Şifa 회복 治癒";
     public static final String teleportExtra = "TELEPORT TELEPORTE Teleportation Teleportar Téléportation Teletrasporto Teleportacja Τηλεμεταφορά Teleportare Teleport Teleport テレポート Телепорт Işınlan 순간이동 傳送 TP";
     public static final String barrierExtra = "BARRIER BARREIRA Barriere Barrera Barrière Barriera Bariera Φράγμα Barieră Pajzs Bariéra バリア Барьер Bariyer 방어막 光盾";
     public static final String ghostExtra = "GHOST FANTASMA Geist Fantasmal Fantôme Spettralità Duch Φάντασμα Fantomă Szellem Duch ゴースト Призрак Hayalet 유체화 鬼步";
-    public static final String cleanseExtra = "CLEANSE PURIFICAR Läuterung Limpiar Purge Purificazione Oczyszczenie Εξαγνισμός Purificare Megtisztulás Očista クレンズ Очищение Arındır 정화 淨化";
+    public static final String cleanseExtra = "CLEANSE PURIFICAR Läuterung Limpiar Purge Purificazione Oczyszczenie Εξαγνισμός Purificare Megtisztulás Očista クレンズ Очищение Arındır 정화 淨化 klinse";
     public static final String bootExtra = "BOOT BOTA Stiefel Bota Botte Avvio Uruchomić Μπότα Boot Csomagtartó Bota ブート Ботинок Bot 신병 引导 引導";
-    public static final String bootsExtra = "BOOTS BOTAS Stiefel Botas Bottes Stivali Buty Μπότες Cizme Csizma Boty ブーツ Сапоги botayakkabı 부츠 靴子";
-
+    public static final String bootsExtra = "BOOTS BOTAS Stiefel Botas Bottes Stivali Buty Μπότες Cizme Csizma Boty ブーツ Сапоги botayakkabı 부츠 靴子 bots";
+    public static final String zhonyasExtra = "ZH Zzz Zho Zhon Zy Z Z Z Z Z Z Z Z Z Z Z ZZ";
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private boolean topBoots = false;
@@ -469,6 +472,11 @@ public class TimerActivity extends AppCompatActivity {
         }
         if (haste[0] > 0)
             hasteRune[0] = 18;
+        if(hasteRune[0]>0)
+            containerTimer.findViewById(R.id.btnRune).setVisibility(View.VISIBLE);
+        else
+           containerTimer.findViewById(R.id.btnRune).setVisibility(View.GONE);
+
 
         if (spell == FLASH) {
             time[0] = FLASH_TIME;
@@ -486,6 +494,9 @@ public class TimerActivity extends AppCompatActivity {
             time[0] = CLEANSE_TIME;
         } else if (spell == IGNITE) {
             time[0] = IGNITE_TIME;
+        }
+        else if (spell == ZHONYAS) {
+            time[0] = ZHONYAS_TIME;
         }
         if (lane == KINDRED || lane == NORMAL_TIMER) {
             time[0] = -spell;
@@ -898,19 +909,19 @@ public class TimerActivity extends AppCompatActivity {
             }
 
             //Barrier
-            else if (verifyCommands(command, commandsTopBarrier) || ((inicialLetter1 == 't' && inicialLetter2 == 'b') && (word1.equalsIgnoreCase("top") || word2.equalsIgnoreCase("barrier")))) {
+            else if (verifyCommands(command, commandsTopBarrier)  ) {
                 lane = TOP;
                 spell = BARRIER;
-            } else if (verifyCommands(command, commandsJungleBarrier) || ((inicialLetter1 == 'j' && inicialLetter2 == 'b') && (word1.equalsIgnoreCase("jungle") || word2.equalsIgnoreCase("barrier")))) {
+            } else if (verifyCommands(command, commandsJungleBarrier) ) {
                 lane = JUNGLE;
                 spell = BARRIER;
-            } else if (verifyCommands(command, commandsMidBarrier) || ((inicialLetter1 == 'm' && inicialLetter2 == 'b') && (word1.equalsIgnoreCase("mid") || word2.equalsIgnoreCase("barrier")))) {
+            } else if (verifyCommands(command, commandsMidBarrier) ) {
                 lane = MID;
                 spell = BARRIER;
-            } else if (verifyCommands(command, commandsAdcBarrier) || (((inicialLetter1 == 'a' || inicialLetter1 == 'b') && inicialLetter2 == 'b') && ((word1.equalsIgnoreCase("adc") || word1.equalsIgnoreCase("bot")) || word2.equalsIgnoreCase("barrier")))) {
+            } else if (verifyCommands(command, commandsAdcBarrier) ) {
                 lane = ADC;
                 spell = BARRIER;
-            } else if (verifyCommands(command, commandsSupportBarrier) || ((inicialLetter1 == 's' && inicialLetter2 == 'b') && (word1 == "support" || word2.equalsIgnoreCase("barrier")))) {
+            } else if (verifyCommands(command, commandsSupportBarrier) ) {
                 lane = SUPPORT;
                 spell = BARRIER;
             }
@@ -1160,6 +1171,8 @@ public class TimerActivity extends AppCompatActivity {
             spell = BARRIER;
         else if (verifyCommands(word1, cleanseExtra) || verifyCommands(word2, cleanseExtra))
             spell = CLEANSE;
+        else if (verifyCommands(word1, zhonyasExtra) || verifyCommands(word2, zhonyasExtra))
+            spell = ZHONYAS;
         else if (verifyCommands(word1, bootExtra) || verifyCommands(word2, bootExtra)) {
             if (lane == 2) {
 
@@ -1296,7 +1309,12 @@ public class TimerActivity extends AppCompatActivity {
             } else if (spell == IGNITE) {
                 spellIcon.setImageDrawable(getDrawable(R.drawable.ignite));
                 speakSpell = "Ignite";
-            } else if (lane == KINDRED) {
+            }
+            else if (spell == ZHONYAS) {
+                spellIcon.setImageDrawable(getDrawable(R.drawable.zhonyas));
+                speakSpell = "Zhonyas";
+            }
+            else if (lane == KINDRED) {
                 laneIcon.setImageDrawable(getDrawable(R.drawable.kindred));
                 speakLane = "Kindred";
                 spellIcon.setImageDrawable(getDrawable(R.drawable.kindred_passive));

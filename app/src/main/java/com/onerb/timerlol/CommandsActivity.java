@@ -64,6 +64,9 @@ private Spinner dropdownLanguage;
                 TextView example= findViewById(R.id.activateExample);
                 example.setText("\""+txts[2].getText()+" "+txts[5].getText()+"\" "+getString(R.string.or)+" \"" +txts[5].getText()+" "+txts[2].getText()+"\" ");
 
+                TextView exampleZhonyas= findViewById(R.id.activateExampleZhonyas);
+                exampleZhonyas.setText("\""+txts[2].getText()+" "+"ZY"+"\" "+getString(R.string.or)+" \"" +"ZY"+" "+txts[2].getText()+"\" ");
+
                 TextView exampleBoots= findViewById(R.id.activateExampleBoots);
                 exampleBoots.setText("\""+txts[2].getText()+" "+txts[13].getText()+"\" "+getString(R.string.or)+" \"" +txts[13].getText()+" "+txts[2].getText()+"\" "
                         +getString(R.string.or)+" \""+txts[2].getText()+" "+TimerActivity.bootsExtra.split(" ")[position]+"\" "+getString(R.string.or)+" \""

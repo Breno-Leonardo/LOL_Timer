@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings">CONFIGURAÇÕES</string>
+    <string name="commands">Comandos</string>
+    <string name="command">Comando</string>
+    <string name="inicial_commands_text">Comando: Fale seu comando</string>
+    <string name="permissionDenied">Permissão negada</string>
+    <string name="givePermission">Conceder permissão</string>
+    <string name="start">Iniciar</string>
+    <string name="tipStart">Fale seu comando, </string>
+    <string name="like_for_example">como por exemplo:</string>
+    <string name="tipEnd">Dica: fale devagar entre cada palavra ou altere o idioma de reconhecimento nas configurações.</string>
+    <string name="tipCustomizeCommands">Você pode criar comandos personalizados na sessão de comandos e alterar o idioma na sessão de configurações.</string>
+    <string name="summonerName">Nome do Invocador:</string>
+    <string name="error">Invocador ou região incorreto</string>
+    <string name="custom_commands">CRIAR COMANDOS PERSONALIZADOS</string>
+    <string name="custom_commands_type">Digite seu comando</string>
+    <string name="command_created">Comando criado</string>
+    <string name="list_commands">LISTA DE COMANDO</string>
+    <string name="explanation">Para ativar diga lane e spell ou spell e lane, por exemplo: </string>
+    <string name="normal_timer">Temporizador normal </string>
+    <string name="explanation_normal_timer">Para ativar diga um número que represente os segundos, junto com a letra S, por exemplo: </string>
+    <string name="explanation_boots">A ativação é feita clicando ou usando a palavra Boot ou Boots, junto com a pista, por exemplo: </string>
+    <string name="explanation_kindred">Para ativar diga a letra "K" junto com um número que representa os segundos, por exemplo: </string>
+    <string name="explanation_anivia">Para ativar diga: </string>
+    <string name="create">CRIAR</string>
+    <string name="custom_commands_existings">Comandos personalizados existentes</string>
+    <string name="vibrate_on_create">Vibrar ao criar um comando</string>
+    <string name="vibrate_on_end">Vibrar ao encerrar um comando</string>
+    <string name="command_exist">O comando já existe</string>
+    <string name="speak_end">Falar no final do comando</string>
+    <string name="recognition_language">Idioma de reconhecimento</string>
+    <string name="language">Idioma</string>
+    <string name="or">ou</string>
+    <string name="activate_zhonyas">Para ativar diga a letra "Z" ou "ZY" ou "ZH" junto com lane , por exemplo:</string>
+    <string name="mix_commands">Você pode misturar comandos de diferentes idiomas</string>
+    <string name="putSummonerName">Coloque seu nome de invocador</string>
+    <string name="region">Região:</string>
+</resources>

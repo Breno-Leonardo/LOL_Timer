@@ -1,8 +1,10 @@
 <resources>
+
+
     <string name="app_name">LOL Timer</string>
     <string name="title_app">LOL TIMER</string>
-    <string name="settings">SETTINGS</string>
 
+    <string name="settings">SETTINGS</string>
     <string name="commands">Commands</string>
     <string name="command">Command</string>
     <string name="inicial_commands_text">Command: Speak Your Command</string>
@@ -15,7 +17,6 @@
     <string name="tipCustomizeCommands">You can create custom commands in commands session and change language in settings session.</string>
     <string name="summonerName">Summoner Name:</string>
     <string name="error">Incorrect Summoner Or Region</string>
-    <string name="putSummonerName">The Kindred</string>
     <string name="custom_commands">CREATE CUSTOM COMMANDS</string>
     <string name="custom_commands_type">Type Your Command</string>
     <string name="command_created">Command Created</string>
@@ -23,8 +24,8 @@
     <string name="explanation">To activate say lane and spell or spell and lane, for example: </string>
     <string name="normal_timer">Normal Timer </string>
     <string name="explanation_normal_timer">To activate say a number that represents the seconds, along with the letter S, for example: </string>
-    <string name="explanation_boots">Activation is done by clicking or using the word "Boot" or "Boots", along with lane, for example: </string>
-    <string name="explanation_kindred">To activate say the letter k along with a number that represents the seconds, for example: </string>
+    <string name="explanation_boots">Activation is done by clicking or using the word Boot or Boots, along with lane, for example: </string>
+    <string name="explanation_kindred">To activate say the letter "K" along with a number that represents the seconds, for example: </string>
     <string name="explanation_anivia">To activate say: </string>
     <string name="create">CREATE</string>
     <string name="custom_commands_existings">Existing Custom Commands</string>
@@ -35,9 +36,9 @@
     <string name="recognition_language">Recognition language</string>
     <string name="language">Language</string>
     <string name="or">or</string>
-
-
-    <!--    <string name="putSummonerName">Put Your Summoner Name</string>-->
+    <string name="activate_zhonyas">To activate say the letter "Z" or "ZY" or "ZH" along with lane , for example:</string>
+    <string name="mix_commands">You can mix commands from different languages</string>
+    <string name="putSummonerName">Put Your Summoner Name</string>
     <string name="region">Region:</string>
 
 

@@ -25,25 +25,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.onerb.timerlol.api.InfosGameApiUtil;
 import com.onerb.timerlol.ui.main.MainViewModel;
 
 import java.text.Normalizer;
-import java.util.Map;
 
 public class CreateCustomCommands extends AppCompatActivity {
     private ScrollView scrollView;
     private long timeIcon, timeIcon2;
     private CountDownTimer timerIcon;
     private int rotation;
-    private ImageView icon, imageLane, imageSpell;
+    private ImageView icon, imageOption;
     private float percentulTime;
     private Spinner dropdownLane;
-    private Spinner dropdownSpell;
-    private int lane, spell;
+    private int code;
     private Button btnCreate;
     private SharedPreferences sharedPref;
-
+    private TextView txtOption;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,8 +52,8 @@ public class CreateCustomCommands extends AppCompatActivity {
         rotateIcon();
 
         sharedPref = this.getSharedPreferences("prefs",Context.MODE_PRIVATE);
-        imageLane = findViewById(R.id.createCustomLane);
-        imageSpell = findViewById(R.id.createCustomSpell);
+        imageOption = findViewById(R.id.customOption);
+        txtOption=findViewById(R.id.txtOption);
 
         dropdownLane = findViewById(R.id.spinnerLane);
         dropdownLane.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -67,46 +64,27 @@ public class CreateCustomCommands extends AppCompatActivity {
                     ((TextView) parentView.getChildAt(0)).setTextSize(20);
                     ((TextView) parentView.getChildAt(0)).setTypeface(null, Typeface.BOLD);
                 }
-                changeLane(position);
-                lane = position + 2;
-                getCommands(lane, spell);
+                changeOption(position);
+                code = position + 2;
+                getCommands(code);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                lane = 2;
+                code = 2;
             }
         });
-        String[] items = new String[]{"TOP", "JUNGLE", "MID", "ADC | BOT", "SUPPORT"};
+        String[] items = new String[]{"TOP", "JUNGLE", "MID", "BOT", "SUPPORT","FLASH", "IGNITE", "HEAL", "GHOST", "BARRIER", "EXHAUST", "TELEPORT", "CLEANSE", "BOOTS","ZHONYAS"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         dropdownLane.setAdapter(adapter);
 
-        dropdownSpell = findViewById(R.id.spinnerSpell);
-        dropdownSpell.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                if (((TextView) parentView.getChildAt(0)) != null) {
-                    ((TextView) parentView.getChildAt(0)).setTextColor(Color.BLACK);
-                    ((TextView) parentView.getChildAt(0)).setTextSize(20);
-                    ((TextView) parentView.getChildAt(0)).setTypeface(null, Typeface.BOLD);
-                }
-                changeSpell(position);
-                spell = position + 7;
-                getCommands(lane, spell);
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                spell = 7;
-            }
-        });
-        String[] items2 = new String[]{"FLASH", "IGNITE", "HEAL", "GHOST", "BARRIER", "EXHAUST", "TELEPORT", "CLEANSE", "BOOTS"};
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items2);
-        dropdownSpell.setAdapter(adapter2);
+
+
         btnCreate = findViewById(R.id.btnCreateCommand);
         EditText editTextCommand = findViewById(R.id.editTextCreateCommand);
         btnCreate.setOnClickListener(view -> {
-            putCommands(lane, spell, editTextCommand.getText().toString());
+            putCommands( code, editTextCommand.getText().toString());
         });
 
 
@@ -128,102 +106,104 @@ public class CreateCustomCommands extends AppCompatActivity {
 
     }
 
-    public void changeLane(int position) {
+    public void changeOption(int position) {
         position += 2;
         if (position == TimerActivity.TOP) {
-            imageLane.setImageDrawable(getDrawable(R.drawable.top));
+            imageOption.setImageDrawable(getDrawable(R.drawable.top));
         } else if (position == TimerActivity.JUNGLE) {
-            imageLane.setImageDrawable(getDrawable(R.drawable.jungle));
+            imageOption.setImageDrawable(getDrawable(R.drawable.jungle));
         } else if (position == TimerActivity.MID) {
-            imageLane.setImageDrawable(getDrawable(R.drawable.mid));
+            imageOption.setImageDrawable(getDrawable(R.drawable.mid));
         } else if (position == TimerActivity.ADC) {
-            imageLane.setImageDrawable(getDrawable(R.drawable.adc));
+            imageOption.setImageDrawable(getDrawable(R.drawable.adc));
         } else if (position == TimerActivity.SUPPORT) {
-            imageLane.setImageDrawable(getDrawable(R.drawable.support));
+            imageOption.setImageDrawable(getDrawable(R.drawable.support));
         }
-
-
-    }
-
-    public void changeSpell(int position) {
-        position += 7;
-        if (position == TimerActivity.FLASH) {
-            imageSpell.setImageDrawable(getDrawable(R.drawable.flash));
+        else if (position == TimerActivity.FLASH) {
+            imageOption.setImageDrawable(getDrawable(R.drawable.flash));
         } else if (position == TimerActivity.HEAL) {
-            imageSpell.setImageDrawable(getDrawable(R.drawable.heal));
+            imageOption.setImageDrawable(getDrawable(R.drawable.heal));
         } else if (position == TimerActivity.IGNITE) {
-            imageSpell.setImageDrawable(getDrawable(R.drawable.ignite));
+            imageOption.setImageDrawable(getDrawable(R.drawable.ignite));
         } else if (position == TimerActivity.GHOST) {
-            imageSpell.setImageDrawable(getDrawable(R.drawable.ghost));
+            imageOption.setImageDrawable(getDrawable(R.drawable.ghost));
         } else if (position == TimerActivity.BARRIER) {
-            imageSpell.setImageDrawable(getDrawable(R.drawable.barrier));
+            imageOption.setImageDrawable(getDrawable(R.drawable.barrier));
         } else if (position == TimerActivity.CLEANSE) {
-            imageSpell.setImageDrawable(getDrawable(R.drawable.cleanse));
+            imageOption.setImageDrawable(getDrawable(R.drawable.cleanse));
         } else if (position == TimerActivity.EXHAUST) {
-            imageSpell.setImageDrawable(getDrawable(R.drawable.exhaust));
+            imageOption.setImageDrawable(getDrawable(R.drawable.exhaust));
         } else if (position == TimerActivity.TELEPORT) {
-            imageSpell.setImageDrawable(getDrawable(R.drawable.teleport));
+            imageOption.setImageDrawable(getDrawable(R.drawable.teleport));
         } else if (position == TimerActivity.BOOTS) {
-            imageSpell.setImageDrawable(getDrawable(R.drawable.boots));
+            imageOption.setImageDrawable(getDrawable(R.drawable.boots));
         }
-
+        else if (position == TimerActivity.ZHONYAS) {
+            imageOption.setImageDrawable(getDrawable(R.drawable.zhonyas));
+        }
 
     }
 
 
 
-    public void putCommands(int lane, int spell, String command) {
+
+
+    public void putCommands(int code, String command) {
         String commands, originalCommands, existingCommands;
         String commandsCode, originalCommandsCode;
         command=command.trim();
         command=command.toLowerCase();
 //        command=removerAcentos(command);
-        String spellName = "", laneName = "";
-        if (spell == TimerActivity.FLASH) {
-            spellName = "Flash";
-        } else if (spell == TimerActivity.HEAL) {
-            spellName = "Heal";
+        String name = "";
+        if (code == TimerActivity.FLASH) {
+            name = "Flash";
+        } else if (code == TimerActivity.HEAL) {
+            name = "Heal";
 
-        } else if (spell == TimerActivity.IGNITE) {
-            spellName = "Ignite";
+        } else if (code == TimerActivity.IGNITE) {
+            name = "Ignite";
 
-        } else if (spell == TimerActivity.GHOST) {
-            spellName = "Ghost";
+        } else if (code == TimerActivity.GHOST) {
+            name = "Ghost";
 
-        } else if (spell == TimerActivity.BARRIER) {
-            spellName = "Barrier";
+        } else if (code == TimerActivity.BARRIER) {
+            name = "Barrier";
 
-        } else if (spell == TimerActivity.CLEANSE) {
-            spellName = "Cleanse";
+        } else if (code == TimerActivity.CLEANSE) {
+            name = "Cleanse";
 
-        } else if (spell == TimerActivity.EXHAUST) {
-            spellName = "Exhaust";
+        } else if (code == TimerActivity.EXHAUST) {
+            name = "Exhaust";
 
-        } else if (spell == TimerActivity.TELEPORT) {
-            spellName = "Teleport";
+        } else if (code == TimerActivity.TELEPORT) {
+            name = "Teleport";
 
-        } else if (spell == TimerActivity.BOOTS) {
-            spellName = "Boots";
+        } else if (code == TimerActivity.BOOTS) {
+            name = "Boots";
+
+        }
+        else if (code == TimerActivity.ZHONYAS) {
+            name = "Zhonyas";
 
         }
 
-        if (lane == TimerActivity.TOP) {
-            laneName = "Top";
-        } else if (lane == TimerActivity.JUNGLE) {
-            laneName = "Jungle";
+        if (code == TimerActivity.TOP) {
+            name = "Top";
+        } else if (code == TimerActivity.JUNGLE) {
+            name = "Jungle";
 
-        } else if (lane == TimerActivity.MID) {
-            laneName = "Mid";
+        } else if (code == TimerActivity.MID) {
+            name = "Mid";
 
-        } else if (lane == TimerActivity.ADC) {
-            laneName = "Adc";
+        } else if (code == TimerActivity.ADC) {
+            name = "Adc";
 
-        } else if (lane == TimerActivity.SUPPORT) {
-            laneName = "Support";
+        } else if (code == TimerActivity.SUPPORT) {
+            name = "Support";
 
         }
-        commandsCode = laneName + spellName + "Commands";
-        originalCommandsCode = laneName + spellName + "OriginalCommands";
+        commandsCode = name + "Commands";
+        originalCommandsCode =  name + "OriginalCommands";
         commands = sharedPref.getString(commandsCode, null);
         originalCommands = sharedPref.getString(originalCommandsCode, null);
         existingCommands = sharedPref.getString("existingCommands", "");
@@ -265,66 +245,71 @@ public class CreateCustomCommands extends AppCompatActivity {
 
         }
         editor.commit();
-        getCommands(lane, spell);
+        getCommands( code);
 
     }
 
-    public void getCommands(int lane, int spell) {
+    public void getCommands(int code) {
         String commands, originalCommands;
         String commandsCode, originalCommandsCode;
         LinearLayout containerCustomCommandsExisting = findViewById(R.id.containerCustomCommandsExistings);
         containerCustomCommandsExisting.removeAllViews();
         System.out.println("CreateCustomCommands.getCommands commands " + sharedPref.getAll());
-        String spellName = "", laneName = "";
-        if (spell == TimerActivity.FLASH) {
-            spellName = "Flash";
-        } else if (spell == TimerActivity.HEAL) {
-            spellName = "Heal";
+        String name = "";
+        if (this.code == TimerActivity.TOP) {
+            name = "Top";
+        } else if (this.code == TimerActivity.JUNGLE) {
+            name = "Jungle";
 
-        } else if (spell == TimerActivity.IGNITE) {
-            spellName = "Ignite";
+        } else if (this.code == TimerActivity.MID) {
+            name = "Mid";
 
-        } else if (spell == TimerActivity.GHOST) {
-            spellName = "Ghost";
+        } else if (this.code == TimerActivity.ADC) {
+            name = "Adc";
 
-        } else if (spell == TimerActivity.BARRIER) {
-            spellName = "Barrier";
+        } else if (this.code == TimerActivity.SUPPORT) {
+            name = "Support";
 
-        } else if (spell == TimerActivity.CLEANSE) {
-            spellName = "Cleanse";
+        }
+        else if (this.code == TimerActivity.FLASH) {
+            name = "Flash";
+        } else if (this.code == TimerActivity.HEAL) {
+            name = "Heal";
 
-        } else if (spell == TimerActivity.EXHAUST) {
-            spellName = "Exhaust";
+        } else if (this.code == TimerActivity.IGNITE) {
+            name = "Ignite";
 
-        } else if (spell == TimerActivity.TELEPORT) {
-            spellName = "Teleport";
+        } else if (this.code == TimerActivity.GHOST) {
+            name = "Ghost";
 
-        } else if (spell == TimerActivity.BOOTS) {
-            spellName = "Boots";
+        } else if (this.code == TimerActivity.BARRIER) {
+            name = "Barrier";
+
+        } else if (this.code == TimerActivity.CLEANSE) {
+            name = "Cleanse";
+
+        } else if (this.code == TimerActivity.EXHAUST) {
+            name = "Exhaust";
+
+        } else if (this.code == TimerActivity.TELEPORT) {
+            name = "Teleport";
+
+        } else if (this.code == TimerActivity.BOOTS) {
+            name = "Boots";
+
+        }
+        else if (this.code == TimerActivity.ZHONYAS) {
+            name = "Zhonyas";
 
         }
 
-        if (lane == TimerActivity.TOP) {
-            laneName = "Top";
-        } else if (lane == TimerActivity.JUNGLE) {
-            laneName = "Jungle";
 
-        } else if (lane == TimerActivity.MID) {
-            laneName = "Mid";
-
-        } else if (lane == TimerActivity.ADC) {
-            laneName = "Adc";
-
-        } else if (lane == TimerActivity.SUPPORT) {
-            laneName = "Support";
-
-        }
-        commandsCode = laneName + spellName + "Commands";
-        originalCommandsCode = laneName + spellName + "OriginalCommands";
+        commandsCode = name + "Commands";
+        originalCommandsCode =  name + "OriginalCommands";
         commands = sharedPref.getString(commandsCode, null);
         originalCommands = sharedPref.getString(originalCommandsCode, null);
-        System.out.println("CreateCustomCommands.getCommands  new original commands " + originalCommands);
-        System.out.println("CreateCustomCommands.getCommands  new  commands " + commands);
+//        System.out.println("CreateCustomCommands.getCommands  new original commands " + originalCommands);
+//        System.out.println("CreateCustomCommands.getCommands  new  commands " + commands);
         if (commands != null) {
             String[] aux = originalCommands.split("&7&");
             for (int i = 0; i < aux.length; i++) {

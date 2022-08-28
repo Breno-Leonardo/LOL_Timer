@@ -1,4 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <string name="settings">设置</string>
+    <string name="commands">命令</string>
+    <string name="command">命令</string>
+    <string name="inicial_commands_text">命令：说出你的命令</string>
+    <string name="permissionDenied">权限被拒绝</string>
+    <string name="givePermission">授予权限</string>
+    <string name="start">开始</string>
+    <string name="tipStart">说出你的命令，</string>
+    <string name="like_for_example">喜欢例如：</string>
+    <string name="tipEnd">提示：在每个单词之间慢慢说话或在设置中更改识别语言。</string>
+    <string name="tipCustomizeCommands">您可以在命令会话中创建自定义命令并在设置会话中更改语言。</string>
+    <string name="summonerName">召唤师姓名：</string>
+    <string name="error">不正确的召唤师或地区</string>
+    <string name="custom_commands">创建自定义命令</string>
+    <string name="custom_commands_type">输入你的命令</string>
+    <string name="command_created">命令创建</string>
+    <string name="list_commands">命令列表</string>
+    <string name="explanation">激活say lane and spell或spell and lane，例如：</string>
+    <string name="normal_timer">普通定时器</string>
+    <string name="explanation_normal_timer">激活说一个代表秒的数字，连同字母S，例如：</string>
+    <string name="explanation_boots">激活是通过单击或使用单词Boot或Boots以及lane来完成的，例如：</string>
+    <string name="explanation_kindred">激活说字母“K”和一个代表秒的数字，例如：</string>
+    <string name="explanation_anivia">激活说：</string>
+    <string name="create">创建</string>
+    <string name="custom_commands_existings">现有自定义命令</string>
+    <string name="vibrate_on_create">创建命令时振动</string>
+    <string name="vibrate_on_end">结束命令时振动</string>
+    <string name="command_exist">命令已经存在</string>
+    <string name="speak_end">在命令结束时讲话</string>
+    <string name="recognition_language">识别语言</string>
+    <string name="language">语言</string>
+    <string name="or">或</string>
+    <string name="activate_zhonyas">激活说字母“Z”或“ZY”或“ZH”以及lane，例如：</string>
+    <string name="mix_commands">你可以混合不同语言的命令</string>
+    <string name="putSummonerName">输入你的召唤师姓名</string>
+    <string name="region">地区：</string>
 </resources>

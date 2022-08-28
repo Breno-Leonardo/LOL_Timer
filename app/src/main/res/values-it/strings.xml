@@ -1,2 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+
+    <string name="settings">IMPOSTAZIONI</string>
+    <string name="commands">Comandi</string>
+    <string name="command">Comando</string>
+    <string name="inicial_commands_text">Comando: pronuncia il tuo comando</string>
+    <string name="permissionDenied">Autorizzazione negata</string>
+    <string name="givePermission">Concedi il permesso</string>
+    <string name="start">Inizia</string>
+    <string name="tipStart">Pronuncia il tuo comando, </string>
+    <string name="like_for_example">come per esempio:</string>
+    <string name="tipEnd">Suggerimento: parla lentamente tra ogni parola o cambia la lingua di riconoscimento nelle impostazioni.</string>
+    <string name="tipCustomizeCommands">Puoi creare comandi personalizzati nella sessione dei comandi e cambiare la lingua nella sessione delle impostazioni.</string>
+    <string name="summonerName">Nome evocatore:</string>
+    <string name="error">Evocatore o regione errati</string>
+    <string name="custom_commands">CREA COMANDI PERSONALIZZATI</string>
+    <string name="custom_commands_type">Digita il tuo comando</string>
+    <string name="command_created">Comando creato</string>
+    <string name="list_commands">LISTA COMANDI</string>
+    <string name="explanation">Per attivare dì corsia e incantesimo o incantesimo e corsia, ad esempio: </string>
+    <string name="normal_timer">Timer normale </string>
+    <string name="explanation_normal_timer">Per attivare pronuncia un numero che rappresenta i secondi, insieme alla lettera S, ad esempio: </string>
+    <string name="explanation_boots">L\'attivazione viene eseguita facendo clic o utilizzando la parola Boot o Boots, insieme a lane, ad esempio: </string>
+    <string name="explanation_kindred">Per attivare pronuncia la lettera "K" insieme a un numero che rappresenta i secondi, ad esempio: </string>
+    <string name="explanation_anivia">Per attivare di\': </string>
+    <string name="create">CREA</string>
+    <string name="custom_commands_existings">Comandi personalizzati esistenti</string>
+    <string name="vibrate_on_create">Vibra durante la creazione di un comando</string>
+    <string name="vibrate_on_end">Vibra alla fine di un comando</string>
+    <string name="command_exist">Il comando esiste già</string>
+    <string name="speak_end">Parla alla fine del comando</string>
+    <string name="recognition_language">Lingua di riconoscimento</string>
+    <string name="language">Lingua</string>
+    <string name="or">o</string>
+    <string name="activate_zhonyas">Per attivare pronuncia la lettera "Z" o "ZY" o "ZH" insieme a lane , ad esempio:</string>
+    <string name="mix_commands">Puoi mescolare comandi di lingue diverse</string>
+    <string name="putSummonerName">Inserisci il nome dell\'evocatore</string>
+    <string name="region">Regione:</string>
+
+</resources>

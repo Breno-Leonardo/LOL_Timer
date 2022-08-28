@@ -1,2 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+
+    <string name="settings">設定</string>
+    <string name="commands">コマンド</string>
+    <string name="command">コマンド</string>
+    <string name="inicial_commands_text">コマンド: コマンドを話してください</string>
+    <string name="permissionDenied">許可が拒否されました</string>
+    <string name="givePermission">許可を与える</string>
+    <string name="start">開始</string>
+    <string name="tipStart">コマンドを話してください、</string>
+    <string name="like_for_example">例:</string>
+    <string name="tipEnd">ヒント: 単語ごとにゆっくり話すか、設定で認識言語を変更してください。</string>
+    <string name="tipCustomizeCommands">コマンド セッションでカスタム コマンドを作成し、設定セッションで言語を変更できます。</string>
+    <string name="summonerName">サモナー名:</string>
+    <string name="error">サモナーまたは地域が正しくありません</string>
+    <string name="custom_commands">カスタム コマンドの作成</string>
+    <string name="custom_commands_type">コマンドを入力してください</string>
+    <string name="command_created">コマンドが作成されました</string>
+    <string name="list_commands">コマンドリスト</string>
+    <string name="explanation">Say レーンとスペル、またはスペルとレーンをアクティブにするには、例: </string>
+    <string name="normal_timer">通常タイマー </string>
+    <string name="explanation_normal_timer">有効にするには、秒を表す数字と文字 S を言います。例: </string>
+    <string name="explanation_boots">アクティブ化は、Boot または Boots という単語をクリックするか使用することで実行されます。例: </string>
+    <string name="explanation_kindred">有効にするには、文字「K」と秒を表す数字を言います。例: </string>
+    <string name="explanation_anivia">有効にするには: </string>
+    <string name="create">作成</string>
+    <string name="custom_commands_existings">既存のカスタム コマンド</string>
+    <string name="vibrate_on_create">コマンド作成時に振動</string>
+    <string name="vibrate_on_end">コマンド終了時に振動</string>
+    <string name="command_exist">コマンドは既に存在します</string>
+    <string name="speak_end">コマンドの最後に話す</string>
+    <string name="recognition_language">認識言語</string>
+    <string name="language">言語</string>
+    <string name="or">または</string>
+    <string name="activate_zhonyas">有効にするには、文字「Z」、「ZY」、または「ZH」をレーンと一緒に言います。例:</string>
+    <string name="mix_commands">異なる言語のコマンドを混在させることができます</string>
+    <string name="putSummonerName">あなたのサモナー名を入れてください</string>
+    <string name="region">地域:</string>
+
+</resources>

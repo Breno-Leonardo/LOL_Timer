@@ -1,2 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+
+    <string name="settings">USTAWIENIA</string>
+    <string name="commands">Polecenia</string>
+    <string name="command">Polecenie</string>
+    <string name="inicial_commands_text">Polecenie: Wypowiedz swoje polecenie</string>
+    <string name="permissionDenied">Odmowa pozwolenia</string>
+    <string name="givePermission">Udziel pozwolenia</string>
+    <string name="start">Rozpocznij</string>
+    <string name="tipStart">Wypowiedz polecenie, </string>
+    <string name="like_for_example">jak na przykład:</string>
+    <string name="tipEnd">Podpowiedź: Mów powoli między każdym słowem lub zmień język rozpoznawania w ustawieniach.</string>
+    <string name="tipCustomizeCommands">Możesz tworzyć niestandardowe polecenia w sesji poleceń i zmieniać język w sesji ustawień.</string>
+    <string name="summonerName">Imię przywoływacza:</string>
+    <string name="error">Nieprawidłowy przywoływacz lub region</string>
+    <string name="custom_commands">UTWÓRZ NIESTANDARDOWE POLECENIA</string>
+    <string name="custom_commands_type">Wpisz swoje polecenie</string>
+    <string name="command_created">Utworzono polecenie</string>
+    <string name="list_commands">LISTA POLECEŃ</string>
+    <string name="explanation">Aby aktywować wypowiedz pas i zaklęcie lub zaklęcie i pas, na przykład: </string>
+    <string name="normal_timer">Zwykły zegar </string>
+    <string name="explanation_normal_timer">Aby aktywować, wypowiedz liczbę reprezentującą sekundy wraz z literą S, na przykład: </string>
+    <string name="explanation_boots">Aktywacja odbywa się poprzez kliknięcie lub użycie słowa Boot lub Boots wraz z pasem ruchu, na przykład: </string>
+    <string name="explanation_kindred">Aby aktywować, wypowiedz literę „K” wraz z liczbą reprezentującą sekundy, na przykład: </string>
+    <string name="explanation_anivia">Aby aktywować powiedz: </string>
+    <string name="create">UTWÓRZ</string>
+    <string name="custom_commands_existings">Istniejące polecenia niestandardowe</string>
+    <string name="vibrate_on_create">Wibracje podczas tworzenia polecenia</string>
+    <string name="vibrate_on_end">Wibracje podczas kończenia polecenia</string>
+    <string name="command_exist">Polecenie już istnieje</string>
+    <string name="speak_end">Mów na końcu polecenia</string>
+    <string name="recognition_language">Język rozpoznawania</string>
+    <string name="language">Język</string>
+    <string name="or">lub</string>
+    <string name="activate_zhonyas">Aby aktywować, wypowiedz literę „Z” lub „ZY” lub „ZH” wraz z pasem , na przykład:</string>
+    <string name="mix_commands">Możesz mieszać polecenia z różnych języków</string>
+    <string name="putSummonerName">Podaj swoje imię przywoływacza</string>
+    <string name="region">Region:</string>
+
+</resources>

@@ -1,2 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+
+    <string name="settings">BEÁLLÍTÁSOK</string>
+    <string name="commands">Parancsok</string>
+    <string name="command">Parancs</string>
+    <string name="inicial_commands_text">Parancs: mondja ki a parancsot</string>
+    <string name="permissionDenied">Engedély megtagadva</string>
+    <string name="givePermission">Engedély megadása</string>
+    <string name="start">Indítás</string>
+    <string name="tipStart">Mondja ki a parancsot, </string>
+    <string name="like_for_example">mint például:</string>
+    <string name="tipEnd">Tipp: beszéljen lassan az egyes szavak között, vagy módosítsa a felismerési nyelvet a beállításokban.</string>
+    <string name="tipCustomizeCommands">Egyéni parancsokat hozhat létre a parancsok munkamenetében, és módosíthatja a nyelvet a beállítások munkamenetében.</string>
+    <string name="summonerName">Idéző neve:</string>
+    <string name="error">Helytelen idéző ​​vagy régió</string>
+    <string name="custom_commands">EGYÉNI PARANCSOK LÉTREHOZÁSA</string>
+    <string name="custom_commands_type">Írja be a parancsot</string>
+    <string name="command_created">Parancs létrehozva</string>
+    <string name="list_commands">PARANCSLISTA</string>
+    <string name="explanation">A sáv és varázslat vagy a varázslat és a sáv aktiválása, például: </string>
+    <string name="normal_timer">Normál időzítő </string>
+    <string name="explanation_normal_timer">Az aktiváláshoz mondjon ki egy számot, amely a másodperceket jelöli az S betűvel együtt, például: </string>
+    <string name="explanation_boots">Az aktiválás a Boot vagy Boots szóra kattintva vagy a sáv használatával történik, például: </string>
+    <string name="explanation_kindred">Az aktiváláshoz mondja ki a „K” betűt a másodperceket jelző számmal együtt, például: </string>
+    <string name="explanation_anivia">Az aktiváláshoz mondja ki: </string>
+    <string name="create">LÉTREHOZÁS</string>
+    <string name="custom_commands_existings">Meglévő egyéni parancsok</string>
+    <string name="vibrate_on_create">Rezgés parancs létrehozásakor</string>
+    <string name="vibrate_on_end">Rezgés a parancs befejezésekor</string>
+    <string name="command_exist">A parancs már létezik</string>
+    <string name="speak_end">Szóljon a parancs végén</string>
+    <string name="recognition_language">Felismerő nyelv</string>
+    <string name="language">Nyelv</string>
+    <string name="or">vagy</string>
+    <string name="activate_zhonyas">A "Z" vagy a "ZY" vagy a "ZH" betű és a sáv aktiválásához például:</string>
+    <string name="mix_commands">Különböző nyelvű parancsokat keverhet</string>
+    <string name="putSummonerName">Adja meg a hívó nevét</string>
+    <string name="region">Régió:</string>
+
+</resources>

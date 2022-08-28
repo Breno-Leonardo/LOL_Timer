@@ -1,2 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+
+    <string name="settings">ΡΥΘΜΙΣΕΙΣ</string>
+    <string name="commands">Εντολές</string>
+    <string name="command">Εντολή</string>
+    <string name="inicial_commands_text">Εντολή: Εκφωνήστε την εντολή σας</string>
+    <string name="permissionDenied">Απορρίφθηκε η άδεια</string>
+    <string name="givePermission">Δώστε άδεια</string>
+    <string name="start">Έναρξη</string>
+    <string name="tipStart">Πείτε την εντολή σας, </string>
+    <string name="like_for_example">μου αρέσει για παράδειγμα:</string>
+    <string name="tipEnd">Συμβουλή: Μιλήστε αργά μεταξύ κάθε λέξης ή αλλάξτε τη γλώσσα αναγνώρισης στις ρυθμίσεις.</string>
+    <string name="tipCustomizeCommands">Μπορείτε να δημιουργήσετε προσαρμοσμένες εντολές στη συνεδρία εντολών και να αλλάξετε γλώσσα στην περίοδο λειτουργίας ρυθμίσεων.</string>
+    <string name="summonerName">Όνομα Summoner:</string>
+    <string name="error">Εσφαλμένη κλήση ή περιοχή</string>
+    <string name="custom_commands">ΔΗΜΙΟΥΡΓΙΑ ΠΡΟΣΑΡΜΟΣΜΕΝΩΝ ΕΝΤΟΛΩΝ</string>
+    <string name="custom_commands_type">Πληκτρολογήστε την εντολή σας</string>
+    <string name="command_created">Η εντολή δημιουργήθηκε</string>
+    <string name="list_commands">ΛΙΣΤΑ ΕΝΤΟΛΩΝ</string>
+    <string name="explanation">Για να ενεργοποιήσετε πείτε λωρίδα και ορθογραφία ή ορθογραφία και λωρίδα, για παράδειγμα: </string>
+    <string name="normal_timer">Κανονικός χρονοδιακόπτης </string>
+    <string name="explanation_normal_timer">Για να ενεργοποιήσετε πείτε έναν αριθμό που αντιπροσωπεύει τα δευτερόλεπτα, μαζί με το γράμμα S, για παράδειγμα: </string>
+    <string name="explanation_boots">Η ενεργοποίηση πραγματοποιείται κάνοντας κλικ ή χρησιμοποιώντας τη λέξη Boot or Boots, μαζί με τη λωρίδα, για παράδειγμα: </string>
+    <string name="explanation_kindred">Για να ενεργοποιήσετε πείτε το γράμμα "K" μαζί με έναν αριθμό που αντιπροσωπεύει τα δευτερόλεπτα, για παράδειγμα: </string>
+    <string name="explanation_anivia">Για ενεργοποίηση πείτε: </string>
+    <string name="create">ΔΗΜΙΟΥΡΓΙΑ</string>
+    <string name="custom_commands_existings">Υφιστάμενες προσαρμοσμένες εντολές</string>
+    <string name="vibrate_on_create">Δόνηση κατά τη δημιουργία εντολής</string>
+    <string name="vibrate_on_end">Δόνηση κατά τον τερματισμό μιας εντολής</string>
+    <string name="command_exist">Η εντολή υπάρχει ήδη</string>
+    <string name="speak_end">Μιλήστε στο τέλος της εντολής</string>
+    <string name="recognition_language">Γλώσσα αναγνώρισης</string>
+    <string name="language">Γλώσσα</string>
+    <string name="or">ή</string>
+    <string name="activate_zhonyas">Για να ενεργοποιήσετε πείτε το γράμμα "Z" ή "ZY" ή "ZH" μαζί με τη λωρίδα , για παράδειγμα:</string>
+    <string name="mix_commands">Μπορείτε να συνδυάσετε εντολές από διαφορετικές γλώσσες</string>
+    <string name="putSummonerName">Βάλτε το όνομα του Summoner σας</string>
+    <string name="region">Περιοχή:</string>
+
+</resources>

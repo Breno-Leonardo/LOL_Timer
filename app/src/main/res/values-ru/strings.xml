@@ -1,2 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+
+    <string name="settings">НАСТРОЙКИ</string>
+    <string name="commands">Команды</string>
+    <string name="command">Команда</string>
+    <string name="inicial_commands_text">Команда: произнесите команду</string>
+    <string name="permissionDenied">Отказано в доступе</string>
+    <string name="givePermission">Дать разрешение</string>
+    <string name="start">Начать</string>
+    <string name="tipStart">Произнесите команду, </string>
+    <string name="like_for_example">например, как:</string>
+    <string name="tipEnd">Совет: говорите медленно между каждым словом или измените язык распознавания в настройках.</string>
+    <string name="tipCustomizeCommands">Вы можете создавать собственные команды в сеансе команд и менять язык в сеансе настроек.</string>
+    <string name="summonerName">Имя призывателя:</string>
+    <string name="error">Неправильный вызыватель или регион</string>
+    <string name="custom_commands">СОЗДАТЬ ПОЛЬЗОВАТЕЛЬСКИЕ КОМАНДЫ</string>
+    <string name="custom_commands_type">Введите команду</string>
+    <string name="command_created">Команда создана</string>
+    <string name="list_commands">СПИСОК КОМАНД</string>
+    <string name="explanation">Чтобы активировать скажи полосу и заклинание или заклинание и полосу, например: </string>
+    <string name="normal_timer">Обычный таймер </string>
+    <string name="explanation_normal_timer">Чтобы активировать, произнесите число, обозначающее секунды, вместе с буквой S, например: </string>
+    <string name="explanation_boots">Активация выполняется нажатием или использованием слова Boot или Boots вместе с полосой, например: </string>
+    <string name="explanation_kindred">Чтобы активировать, произнесите букву "K" вместе с цифрой, обозначающей секунды, например: </string>
+    <string name="explanation_anivia">Чтобы активировать, скажите: </string>
+    <string name="create">СОЗДАТЬ</string>
+    <string name="custom_commands_existings">Существующие пользовательские команды</string>
+    <string name="vibrate_on_create">Вибрация при создании команды</string>
+    <string name="vibrate_on_end">Вибрация при завершении команды</string>
+    <string name="command_exist">Эта команда уже существует</string>
+    <string name="speak_end">Говорить в конце команды</string>
+    <string name="recognition_language">Язык распознавания</string>
+    <string name="language">Язык</string>
+    <string name="or">или</string>
+    <string name="activate_zhonyas">Чтобы активировать, произнесите букву "Z" или "ZY" или "ZH" вместе с lane , например:</string>
+    <string name="mix_commands">Вы можете смешивать команды с разных языков</string>
+    <string name="putSummonerName">Укажите ваше имя призывателя</string>
+    <string name="region">Регион:</string>
+
+</resources>

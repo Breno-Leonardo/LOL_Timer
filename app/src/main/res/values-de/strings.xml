@@ -1,2 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+
+    <string name="settings">EINSTELLUNGEN</string>
+    <string name="commands">Befehle</string>
+    <string name="command">Befehl</string>
+    <string name="inicial_commands_text">Befehl: Sprechen Sie Ihren Befehl</string>
+    <string name="permissionDenied">Berechtigung verweigert</string>
+    <string name="givePermission">Erlaubnis erteilen</string>
+    <string name="start">Start</string>
+    <string name="tipStart">Sprich deinen Befehl, </string>
+    <string name="like_for_example">wie zum Beispiel:</string>
+    <string name="tipEnd">Tipp: Sprich langsam zwischen den einzelnen Wörtern oder ändere die Erkennungssprache in den Einstellungen.</string>
+    <string name="tipCustomizeCommands">Du kannst benutzerdefinierte Befehle in der Befehlssitzung erstellen und die Sprache in der Einstellungssitzung ändern.</string>
+    <string name="summonerName">Beschwörername:</string>
+    <string name="error">Falscher Beschwörer oder falsche Region</string>
+    <string name="custom_commands">BENUTZERDEFINIERTE BEFEHLE ERSTELLEN</string>
+    <string name="custom_commands_type">Geben Sie Ihren Befehl ein</string>
+    <string name="command_created">Befehl erstellt</string>
+    <string name="list_commands">BEFEHLSLISTE</string>
+    <string name="explanation">Zum Aktivieren sagen Sie Bahn und Zauber oder Zauber und Bahn, zum Beispiel: </string>
+    <string name="normal_timer">Normaler Timer</string>
+    <string name="explanation_normal_timer">Zum Aktivieren sagen Sie eine Zahl, die die Sekunden darstellt, zusammen mit dem Buchstaben S, zum Beispiel: </string>
+    <string name="explanation_boots">Die Aktivierung erfolgt durch Anklicken oder Verwenden des Wortes Boot oder Boots zusammen mit Lane, zum Beispiel: </string>
+    <string name="explanation_kindred">Zum Aktivieren sagen Sie den Buchstaben "K" zusammen mit einer Zahl, die die Sekunden darstellt, zum Beispiel: </string>
+    <string name="explanation_anivia">Zum Aktivieren sagen Sie: </string>
+    <string name="create">ERSTELLEN</string>
+    <string name="custom_commands_existings">Vorhandene benutzerdefinierte Befehle</string>
+    <string name="vibrate_on_create">Beim Erstellen eines Befehls vibrieren</string>
+    <string name="vibrate_on_end">Beim Beenden eines Befehls vibrieren</string>
+    <string name="command_exist">Der Befehl existiert bereits</string>
+    <string name="speak_end">Sprich am Ende des Befehls</string>
+    <string name="recognition_language">Erkennungssprache</string>
+    <string name="language">Sprache</string>
+    <string name="or">oder</string>
+    <string name="activate_zhonyas">Zum Aktivieren sagen Sie den Buchstaben "Z" oder "ZY" oder "ZH" zusammen mit der Fahrspur , zum Beispiel:</string>
+    <string name="mix_commands">Du kannst Befehle aus verschiedenen Sprachen mischen</string>
+    <string name="putSummonerName">Gib deinen Beschwörernamen ein</string>
+    <string name="region">Region:</string>
+
+</resources>

@@ -6,7 +6,9 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.graphics.Color;
@@ -29,6 +31,7 @@ import com.onerb.timerlol.api.MatchApiUtil;
 import com.onerb.timerlol.ui.main.MainViewModel;
 
 import java.io.IOException;
+import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
@@ -46,12 +49,16 @@ public class MainActivity extends AppCompatActivity {
     private Spinner dropdown;
     private int dropdownPosition = -1;
     private EditText etSummonerName;
-
+    private SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        sharedPref = this.getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor= sharedPref.edit();
+        SettingsActivity.setLocale(this,sharedPref.getString("languageApp","" + Locale.getDefault().toString().charAt(0) + Locale.getDefault().toString().charAt(1)));
+        editor.putString("languageApp", "" + Locale.getDefault().toString().charAt(0) + Locale.getDefault().toString().charAt(1));
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getSupportActionBar().hide();
 //        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -134,6 +141,9 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             return false;
         });
+
+
+
     }
     private void checkPermission() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {

@@ -1,2 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+
+    <string name="settings">AYARLAR</string>
+    <string name="commands">Komutlar</string>
+    <string name="command">Komut</string>
+    <string name="inicial_commands_text">Komut: Komutunuzu Söyleyin</string>
+    <string name="permissionDenied">İzin Reddedildi</string>
+    <string name="givePermission">İzin Ver</string>
+    <string name="start">Başlat</string>
+    <string name="tipStart">Komutunuzu söyleyin, </string>
+    <string name="like_for_example">örneğin:</string>
+    <string name="tipEnd">İpucu: Her kelime arasında yavaşça konuşun veya ayarlarda tanıma dilini değiştirin.</string>
+    <string name="tipCustomizeCommands">Komutlar oturumunda özel komutlar oluşturabilir ve ayarlar oturumunda dili değiştirebilirsiniz.</string>
+    <string name="summonerName">Sihirdar Adı:</string>
+    <string name="error">Yanlış Sihirdar Veya Bölge</string>
+    <string name="custom_commands">ÖZEL KOMUTLAR OLUŞTUR</string>
+    <string name="custom_commands_type">Komutunuzu Yazın</string>
+    <string name="command_created">Komut Oluşturuldu</string>
+    <string name="list_commands">KOMUT LİSTESİ</string>
+    <string name="explanation">Söyleme şeridini ve büyüyü veya büyü ve şeridi etkinleştirmek için, örneğin: </string>
+    <string name="normal_timer">Normal Zamanlayıcı </string>
+    <string name="explanation_normal_timer">Etkinleştirmek için S harfiyle birlikte saniyeleri temsil eden bir sayı söyleyin, örneğin: </string>
+    <string name="explanation_boots">Etkinleştirme, şerit ile birlikte Boot veya Boots kelimesi tıklanarak veya kullanılarak yapılır, örneğin: </string>
+    <string name="explanation_kindred">Etkinleştirmek için "K" harfini saniyeleri temsil eden bir sayı ile birlikte söyleyin, örneğin: </string>
+    <string name="explanation_anivia">Etkinleştirmek için şunu söyleyin: </string>
+    <string name="create">OLUŞTUR</string>
+    <string name="custom_commands_existings">Mevcut Özel Komutlar</string>
+    <string name="vibrate_on_create">Komut oluştururken titret</string>
+    <string name="vibrate_on_end">Bir komutu sonlandırırken titret</string>
+    <string name="command_exist">Komut zaten var</string>
+    <string name="speak_end">Komutun sonunda konuşun</string>
+    <string name="recognition_language">Tanıma dili</string>
+    <string name="language">Dil</string>
+    <string name="or">veya</string>
+    <string name="activate_zhonyas">Etkinleştirmek için "Z" veya "ZY" veya "ZH" harfini lane ile birlikte söyleyin, örneğin:</string>
+    <string name="mix_commands">Farklı dillerdeki komutları karıştırabilirsiniz</string>
+    <string name="putSummonerName">Sihirdar Adınızı Girin</string>
+    <string name="region">Bölge:</string>
+</resources>

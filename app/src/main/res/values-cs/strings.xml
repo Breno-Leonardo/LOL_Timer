@@ -1,2 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+
+    <string name="settings">NASTAVENÍ</string>
+    <string name="commands">Příkazy</string>
+    <string name="command">Příkaz</string>
+    <string name="inicial_commands_text">Příkaz: Vyslovte svůj příkaz</string>
+    <string name="permissionDenied">Oprávnění odepřeno</string>
+    <string name="givePermission">Udělit oprávnění</string>
+    <string name="start">Start</string>
+    <string name="tipStart">Vyslovte svůj příkaz, </string>
+    <string name="like_for_example">jako například:</string>
+    <string name="tipEnd">Rada: Mezi jednotlivými slovy mluvte pomalu nebo změňte jazyk rozpoznávání v nastavení.</string>
+    <string name="tipCustomizeCommands">V relaci příkazů můžete vytvářet vlastní příkazy a v relaci nastavení změnit jazyk.</string>
+    <string name="summonerName">Jméno vyvolávače:</string>
+    <string name="error">Nesprávný vyvolávač nebo oblast</string>
+    <string name="custom_commands">VYTVOŘIT VLASTNÍ PŘÍKAZY</string>
+    <string name="custom_commands_type">Zadejte příkaz</string>
+    <string name="command_created">Příkaz vytvořen</string>
+    <string name="list_commands">SEZNAM PŘÍKAZŮ</string>
+    <string name="explanation">Chcete-li aktivovat, řekněte například pruh a kouzlo nebo kouzlo a pruh, například: </string>
+    <string name="normal_timer">Normální časovač </string>
+    <string name="explanation_normal_timer">Chcete-li aktivovat, vyslovte číslo, které představuje sekundy, spolu s písmenem S, například: </string>
+    <string name="explanation_boots">Aktivace se provádí kliknutím nebo použitím slova Boot nebo Boots spolu s pruhem, například: </string>
+    <string name="explanation_kindred">Pro aktivaci vyslovte písmeno "K" spolu s číslem, které představuje sekundy, například: </string>
+    <string name="explanation_anivia">Pro aktivaci řekněte: </string>
+    <string name="create">VYTVOŘIT</string>
+    <string name="custom_commands_existings">Stávající vlastní příkazy</string>
+    <string name="vibrate_on_create">Při vytváření příkazu vibrovat</string>
+    <string name="vibrate_on_end">Při ukončení příkazu zavibrovat</string>
+    <string name="command_exist">Příkaz již existuje</string>
+    <string name="speak_end">Na konci příkazu mluvte</string>
+    <string name="recognition_language">Jazyk rozpoznávání</string>
+    <string name="language">Jazyk</string>
+    <string name="or">nebo</string>
+    <string name="activate_zhonyas">Chcete-li aktivovat, řekněte písmeno "Z" nebo "ZY" nebo "ZH" spolu s pruhem, například:</string>
+    <string name="mix_commands">Můžete kombinovat příkazy z různých jazyků</string>
+    <string name="putSummonerName">Zadejte své jméno Summoner</string>
+    <string name="region">Region:</string>
+
+</resources>

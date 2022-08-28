@@ -1,2 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+
+    <string name="settings">SETĂRI</string>
+    <string name="commands">Comenzi</string>
+    <string name="command">Comandă</string>
+    <string name="inicial_commands_text">Comandă: rostește comanda ta</string>
+    <string name="permissionDenied">Permisiune refuzată</string>
+    <string name="givePermission">Acordați permisiunea</string>
+    <string name="start">Începe</string>
+    <string name="tipStart">Rostiți comanda, </string>
+    <string name="like_for_example">cum ar fi, de exemplu:</string>
+    <string name="tipEnd">Sfat: vorbiți încet între fiecare cuvânt sau schimbați limba de recunoaștere în setări.</string>
+    <string name="tipCustomizeCommands">Puteți crea comenzi personalizate în sesiunea de comenzi și puteți schimba limba în sesiunea de setări.</string>
+    <string name="summonerName">Numele invocatorului:</string>
+    <string name="error">Invocator sau regiune incorect</string>
+    <string name="custom_commands">CREAȚI COMENZI PERSONALIZATE</string>
+    <string name="custom_commands_type">Tastați comanda</string>
+    <string name="command_created">Comandă creată</string>
+    <string name="list_commands">LISTA DE COMANDE</string>
+    <string name="explanation">Pentru a activa spune bandă și vrajă sau vrăjire și linie, de exemplu: </string>
+    <string name="normal_timer">Temporizator normal </string>
+    <string name="explanation_normal_timer">Pentru a activa rostiți un număr care reprezintă secundele, împreună cu litera S, de exemplu: </string>
+    <string name="explanation_boots">Activarea se face făcând clic sau folosind cuvântul Boot sau Boots, împreună cu banda, de exemplu: </string>
+    <string name="explanation_kindred">Pentru a activa, rostiți litera „K” împreună cu un număr care reprezintă secundele, de exemplu: </string>
+    <string name="explanation_anivia">Pentru a activa spune: </string>
+    <string name="create">CREATE</string>
+    <string name="custom_commands_existings">Comenzi personalizate existente</string>
+    <string name="vibrate_on_create">Vibrați când creați o comandă</string>
+    <string name="vibrate_on_end">Vibrați când terminați o comandă</string>
+    <string name="command_exist">Comanda există deja</string>
+    <string name="speak_end">Vorbiți la sfârșitul comenzii</string>
+    <string name="recognition_language">Limba de recunoaștere</string>
+    <string name="language">Limba</string>
+    <string name="or">sau</string>
+    <string name="activate_zhonyas">Pentru activare rostiți litera „Z” sau „ZY” sau „ZH” împreună cu banda , de exemplu:</string>
+    <string name="mix_commands">Puteți combina comenzi din diferite limbi</string>
+    <string name="putSummonerName">Puneți numele invocatorului dvs.</string>
+    <string name="region">Regiune:</string>
+
+</resources>

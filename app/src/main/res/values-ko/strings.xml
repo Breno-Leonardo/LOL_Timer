@@ -1,2 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+
+    <string name="settings">설정</string>
+    <string name="commands">명령</string>
+    <string name="command">명령</string>
+    <string name="inicial_commands_text">명령: 명령을 말하십시오</string>
+    <string name="permissionDenied">권한 거부됨</string>
+    <string name="givePermission">권한 부여</string>
+    <string name="start">시작</string>
+    <string name="tipStart">명령을 말하십시오. </string>
+    <string name="like_for_example">예:</string>
+    <string name="tipEnd">힌트: 각 단어 사이에 천천히 말하거나 설정에서 인식 언어를 변경하십시오.</string>
+    <string name="tipCustomizeCommands">명령 세션에서 사용자 정의 명령을 생성하고 설정 세션에서 언어를 변경할 수 있습니다.</string>
+    <string name="summonerName">소환자 이름:</string>
+    <string name="error">잘못된 소환사 또는 지역</string>
+    <string name="custom_commands">사용자 지정 명령 만들기</string>
+    <string name="custom_commands_type">명령 입력</string>
+    <string name="command_created">생성된 명령</string>
+    <string name="list_commands">명령 목록</string>
+    <string name="explanation">레인 및 스펠 또는 스펠 및 레인 활성화: </string>
+    <string name="normal_timer">일반 타이머 </string>
+    <string name="explanation_normal_timer">활성화하려면 문자 S와 함께 초를 나타내는 숫자를 말하십시오. 예: </string>
+    <string name="explanation_boots">활성화는 레인과 함께 Boot 또는 Boots라는 단어를 클릭하거나 사용하여 수행됩니다. 예: </string>
+    <string name="explanation_kindred">활성화하려면 초를 나타내는 숫자와 함께 문자 "K"를 말하십시오. 예: </string>
+    <string name="explanation_anivia">활성화하려면 다음과 같이 말하십시오. </string>
+    <string name="create">만들기</string>
+    <string name="custom_commands_existings">기존 사용자 지정 명령</string>
+    <string name="vibrate_on_create">명령 생성 시 진동</string>
+    <string name="vibrate_on_end">명령 종료 시 진동</string>
+    <string name="command_exist">명령이 이미 존재합니다.</string>
+    <string name="speak_end">명령어 끝에 말하기</string>
+    <string name="recognition_language">인식 언어</string>
+    <string name="language">언어</string>
+    <string name="or">또는</string>
+    <string name="activate_zhonyas">활성화하려면 레인과 함께 문자 "Z", "ZY" 또는 "ZH"를 말하세요. 예를 들면 다음과 같습니다.</string>
+    <string name="mix_commands">다른 언어의 명령을 혼합할 수 있습니다.</string>
+    <string name="putSummonerName">소환자 이름 입력</string>
+    <string name="region">지역:</string>
+
+</resources>

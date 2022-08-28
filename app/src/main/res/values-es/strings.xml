@@ -1,2 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+
+    <string name="settings">CONFIGURACIÓN</string>
+    <string name="commands">Comandos</string>
+    <string name="command">Comando</string>
+    <string name="inicial_commands_text">Comando: Di tu comando</string>
+    <string name="permissionDenied">Permiso denegado</string>
+    <string name="givePermission">Otorgar permiso</string>
+    <string name="start">Inicio</string>
+    <string name="tipStart">Di tu comando, </string>
+    <string name="like_for_example">como por ejemplo:</string>
+    <string name="tipEnd">Sugerencia: hable despacio entre cada palabra o cambie el idioma de reconocimiento en la configuración.</string>
+    <string name="tipCustomizeCommands">Puede crear comandos personalizados en la sesión de comandos y cambiar el idioma en la sesión de configuración.</string>
+    <string name="summonerName">Nombre del invocador:</string>
+    <string name="error">Región o invocador incorrecto</string>
+    <string name="custom_commands">CREAR COMANDOS PERSONALIZADOS</string>
+    <string name="custom_commands_type">Escriba su comando</string>
+    <string name="command_created">Comando creado</string>
+    <string name="list_commands">LISTA DE COMANDOS</string>
+    <string name="explanation">Para activar, diga carril y deletrear o deletrear y carril, por ejemplo: </string>
+    <string name="normal_timer">Temporizador normal</string>
+    <string name="explanation_normal_timer">Para activar diga un número que represente los segundos, junto con la letra S, por ejemplo: </string>
+    <string name="explanation_boots">La activación se realiza haciendo clic o usando la palabra Boot o Boots, junto con carril, por ejemplo: </string>
+    <string name="explanation_kindred">Para activar diga la letra "K" junto con un número que represente los segundos, por ejemplo: </string>
+    <string name="explanation_anivia">Para activar, diga: </string>
+    <string name="create">CREAR</string>
+    <string name="custom_commands_existings">Comandos personalizados existentes</string>
+    <string name="vibrate_on_create">Vibrar al crear un comando</string>
+    <string name="vibrate_on_end">Vibrar al finalizar un comando</string>
+    <string name="command_exist">El comando ya existe</string>
+    <string name="speak_end">Habla al final del comando</string>
+    <string name="recognition_language">Idioma de reconocimiento</string>
+    <string name="language">Idioma</string>
+    <string name="or">o</string>
+    <string name="activate_zhonyas">Para activar, diga la letra "Z" o "ZY" o "ZH" junto con carril, por ejemplo:</string>
+    <string name="mix_commands">Puedes mezclar comandos de diferentes idiomas</string>
+    <string name="putSummonerName">Pon tu nombre de invocador</string>
+    <string name="region">Región:</string>
+
+</resources>

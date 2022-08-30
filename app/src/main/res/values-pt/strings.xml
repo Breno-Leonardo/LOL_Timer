@@ -20,7 +20,7 @@
     <string name="explanation">Para ativar diga lane e spell ou spell e lane, por exemplo: </string>
     <string name="normal_timer">Temporizador normal </string>
     <string name="explanation_normal_timer">Para ativar diga um número que represente os segundos, junto com a letra S, por exemplo: </string>
-    <string name="explanation_boots">A ativação é feita clicando ou usando a palavra Boot ou Boots, junto com a pista, por exemplo: </string>
+    <string name="explanation_boots">A ativação é feita clicando ou usando a palavra Boot ou Boots, junto com a lane, por exemplo: </string>
     <string name="explanation_kindred">Para ativar diga a letra "K" junto com um número que representa os segundos, por exemplo: </string>
     <string name="explanation_anivia">Para ativar diga: </string>
     <string name="create">CRIAR</string>

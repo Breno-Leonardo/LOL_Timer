@@ -74,7 +74,7 @@ public class CreateCustomCommands extends AppCompatActivity {
                 code = 2;
             }
         });
-        String[] items = new String[]{"TOP", "JUNGLE", "MID", "BOT", "SUPPORT","FLASH", "IGNITE", "HEAL", "GHOST", "BARRIER", "EXHAUST", "TELEPORT", "CLEANSE", "BOOTS","ZHONYAS"};
+        String[] items = new String[]{"TOP", "JUNGLE", "MID", "BOT", "SUPPORT","FLASH", "IGNITE", "HEAL", "GHOST", "BARRIER", "EXHAUST", "TELEPORT", "CLEANSE", "BOOTS","ZHONYAS","RUNE"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         dropdownLane.setAdapter(adapter);
 
@@ -141,7 +141,9 @@ public class CreateCustomCommands extends AppCompatActivity {
         else if (position == TimerActivity.ZHONYAS) {
             imageOption.setImageDrawable(getDrawable(R.drawable.zhonyas));
         }
-
+        else if (position == TimerActivity.RUNE) {
+            imageOption.setImageDrawable(getDrawable(R.drawable.cosmic_insight));
+        }
     }
 
 
@@ -184,6 +186,10 @@ public class CreateCustomCommands extends AppCompatActivity {
         }
         else if (code == TimerActivity.ZHONYAS) {
             name = "Zhonyas";
+
+        }
+        else if (code == TimerActivity.RUNE) {
+            name = "Rune";
 
         }
 
@@ -300,6 +306,10 @@ public class CreateCustomCommands extends AppCompatActivity {
         }
         else if (this.code == TimerActivity.ZHONYAS) {
             name = "Zhonyas";
+
+        }
+        else if (this.code == TimerActivity.RUNE) {
+            name = "Rune";
 
         }
 

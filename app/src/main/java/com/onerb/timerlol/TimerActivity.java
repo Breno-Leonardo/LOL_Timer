@@ -24,7 +24,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -36,8 +35,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.onerb.timerlol.api.InfosGameApiUtil;
-import com.onerb.timerlol.api.MatchApiUtil;
 import com.onerb.timerlol.api.SummonerInfos;
 import com.onerb.timerlol.ui.main.MainViewModel;
 
@@ -45,7 +42,6 @@ import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
-import java.util.concurrent.ExecutionException;
 
 public class TimerActivity extends AppCompatActivity {
     private static final int RECORD_AUDIO_REQUEST_CODE = 0;
@@ -66,6 +62,13 @@ public class TimerActivity extends AppCompatActivity {
     public static final int CLEANSE = 14;
     public static final int BOOTS = 15;
     public static final int ZHONYAS = 16;
+    public static final int RUNE = 17;
+
+    private static final int KINDRED = 1;
+    private static final int ANIVIA = 18;
+    private static final int ANIVIA_TIME = 240;
+    private static final int NORMAL_TIMER = 19;
+
 
     private static final int FLASH_TIME = 300;
     private static final int IGNITE_TIME = 180;
@@ -77,11 +80,8 @@ public class TimerActivity extends AppCompatActivity {
     private static final int CLEANSE_TIME = 210;
     private static final int ZHONYAS_TIME = 120;
 
-    private static final int KINDRED = 1;
-    private static final int ANIVIA = 17;
-    private static final int ANIVIA_TIME = 240;
-    private static final int NORMAL_TIMER = 18;
-
+    private static final int RUNE_HASTE = 18;
+    private static final int BOOT_HASTE = 12;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //put the commands glued
@@ -158,23 +158,24 @@ public class TimerActivity extends AppCompatActivity {
     // new method separate commands
     // ingles en 0, portugues pt 1, alemao de 2, espanhol es 3, frances fr 4, italiano it 5, polones pl 6, grego el 7, romeno ro 8, hungaro hu 9, tcheco cs 10
     // ,japones ja 11,russo ru 12, turco tr 13, koreano ko 14, chines zh 15, comandos extras para melhorar deteccao
-    public static  String laneTopExtra = "top topo OBERE SUPERIOR HAUT SUPERIORE GÓRNA Πάνω SUS FELSŐ HORNÍ トップ ВЕРХНЯЯ ÜST 상단 上路";
-    public static  String laneJungleExtra = "jungle caçador DSCHUNGEL JUNGLA JUNGLE GIUNGLA DŻUNGLA Ζούγκλα JUNGLĂ DZSUNGEL DŽUNGLE ジャングル ЛЕС ORMANCI 정글 打野 django";
-    public static  String laneMidExtra = "mid meio MITTLERE CENTRAL MILIEU CENTRALE ŚRODKOWA Μεσαία MIJLOC KÖZÉPSŐ STŘEDOVÁ ミッド СРЕДНЯЯ ORTA 중단 中路 midi";
-    public static  String laneAdcExtra = "bot atirador UNTERE INFERIOR BAS INFERIORE DOLNA Κάτω JOS ALSÓ SPODNÍ ボット НИЖНЯЯ ALT 하단 远程物理输出 adc";
-    public static  String laneSupportExtra = "support suporte SUPPORTER APOYO SUPPORT SUPPORTO WSPARCIE Υποστηρικτής SUPORT TÁMOGATÓ PODPORA サポート ПОДДЕРЖКА DESTEK 서포터 辅助 sup super";
+    public static String laneTopExtra = "top topo OBERE SUPERIOR HAUT SUPERIORE GÓRNA Πάνω SUS FELSŐ HORNÍ トップ ВЕРХНЯЯ ÜST 상단 上路";
+    public static String laneJungleExtra = "jungle caçador DSCHUNGEL JUNGLA JUNGLE GIUNGLA DŻUNGLA Ζούγκλα JUNGLĂ DZSUNGEL DŽUNGLE ジャングル ЛЕС ORMANCI 정글 打野 django";
+    public static String laneMidExtra = "mid meio MITTLERE CENTRAL MILIEU CENTRALE ŚRODKOWA Μεσαία MIJLOC KÖZÉPSŐ STŘEDOVÁ ミッド СРЕДНЯЯ ORTA 중단 中路 midi";
+    public static String laneAdcExtra = "bot atirador UNTERE INFERIOR BAS INFERIORE DOLNA Κάτω JOS ALSÓ SPODNÍ ボット НИЖНЯЯ ALT 하단 远程物理输出 adc";
+    public static String laneSupportExtra = "support suporte SUPPORTER APOYO SUPPORT SUPPORTO WSPARCIE Υποστηρικτής SUPORT TÁMOGATÓ PODPORA サポート ПОДДЕРЖКА DESTEK 서포터 辅助 sup super";
 
-    public static  String flashExtra = "FLASH FLASH Blitz Destello Sautéclair Flash Błysk Φλας Flash Átvillanás Skok フラッシュ Скачок Sıçra 점멸 閃現";
-    public static  String igniteExtra = "IGNITE INCENDIAR Entzünden Prender Embrasement Ustione Podpalenie Ανάφλεξη Igniție Égetés Vznítit イグナイト Воспламенение Tutuştur 점화 點燃";
-    public static  String exhaustExtra = "EXHAUST EXAUSTÃO Erschöpfen Extenuación Fatigue Sfinimento Wyczerpanie Εξάντληση Epuizare Kifárasztás Vyčerpat イグゾースト Изнурение Bitkinlik 탈진 虛弱 exausto";
-    public static  String healExtra = "HEAL CURAR Heilen Curar Soins Guarigione Uzdrowienie Θεραπεία Vindecare Gyógyítás Vyléčit ヒール Исцеление Şifa 회복 治癒";
-    public static  String teleportExtra = "TELEPORT TELEPORTE Teleportation Teleportar Téléportation Teletrasporto Teleportacja Τηλεμεταφορά Teleportare Teleport Teleport テレポート Телепорт Işınlan 순간이동 傳送 TP";
-    public static  String barrierExtra = "BARRIER BARREIRA Barriere Barrera Barrière Barriera Bariera Φράγμα Barieră Pajzs Bariéra バリア Барьер Bariyer 방어막 光盾";
-    public static  String ghostExtra = "GHOST FANTASMA Geist Fantasmal Fantôme Spettralità Duch Φάντασμα Fantomă Szellem Duch ゴースト Призрак Hayalet 유체화 鬼步";
-    public static  String cleanseExtra = "CLEANSE PURIFICAR Läuterung Limpiar Purge Purificazione Oczyszczenie Εξαγνισμός Purificare Megtisztulás Očista クレンズ Очищение Arındır 정화 淨化 klinse";
-    public static  String bootExtra = "BOOT BOTA Stiefel Bota Botte Avvio Uruchomić Μπότα Boot Csomagtartó Bota ブート Ботинок Bot 신병 引导 引導";
-    public static  String bootsExtra = "BOOTS BOTAS Stiefel Botas Bottes Stivali Buty Μπότες Cizme Csizma Boty ブーツ Сапоги botayakkabı 부츠 靴子 bots";
-    public static  String zhonyasExtra = "ZH Zzz Zho Zhon Zy Zhonyas Z Z Z Z Z Z Z Z Z Z ZZ";
+    public static String flashExtra = "FLASH FLASH Blitz Destello Sautéclair Flash Błysk Φλας Flash Átvillanás Skok フラッシュ Скачок Sıçra 점멸 閃現";
+    public static String igniteExtra = "IGNITE INCENDIAR Entzünden Prender Embrasement Ustione Podpalenie Ανάφλεξη Igniție Égetés Vznítit イグナイト Воспламенение Tutuştur 점화 點燃";
+    public static String exhaustExtra = "EXHAUST EXAUSTÃO Erschöpfen Extenuación Fatigue Sfinimento Wyczerpanie Εξάντληση Epuizare Kifárasztás Vyčerpat イグゾースト Изнурение Bitkinlik 탈진 虛弱 exausto";
+    public static String healExtra = "HEAL CURAR Heilen Curar Soins Guarigione Uzdrowienie Θεραπεία Vindecare Gyógyítás Vyléčit ヒール Исцеление Şifa 회복 治癒";
+    public static String teleportExtra = "TELEPORT TELEPORTE Teleportation Teleportar Téléportation Teletrasporto Teleportacja Τηλεμεταφορά Teleportare Teleport Teleport テレポート Телепорт Işınlan 순간이동 傳送 TP";
+    public static String barrierExtra = "BARRIER BARREIRA Barriere Barrera Barrière Barriera Bariera Φράγμα Barieră Pajzs Bariéra バリア Барьер Bariyer 방어막 光盾";
+    public static String ghostExtra = "GHOST FANTASMA Geist Fantasmal Fantôme Spettralità Duch Φάντασμα Fantomă Szellem Duch ゴースト Призрак Hayalet 유체화 鬼步";
+    public static String cleanseExtra = "CLEANSE PURIFICAR Läuterung Limpiar Purge Purificazione Oczyszczenie Εξαγνισμός Purificare Megtisztulás Očista クレンズ Очищение Arındır 정화 淨化 klinse";
+    public static String bootExtra = "BOOT BOTA Stiefel Bota Botte Avvio Uruchomić Μπότα Boot Csomagtartó Bota ブート Ботинок Bot 신병 引导 引導";
+    public static String bootsExtra = "BOOTS BOTAS Stiefel Botas Bottes Stivali Buty Μπότες Cizme Csizma Boty ブーツ Сапоги botayakkabı 부츠 靴子 bots";
+    public static String zhonyasExtra = "ZH Zzz Zho Zhon Zy Zhonyas Z Z Z Z Z Z Z Z Z Z ZZ";
+    public static String runeExtra = "rune Runa Rune runa rune runa runa γράμματουρουνικούαλφάβητου rune rúna runa ルーン руна rune 룬 符文";
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private boolean topBoots = false;
@@ -182,6 +183,12 @@ public class TimerActivity extends AppCompatActivity {
     private boolean midBoots = false;
     private boolean adcBoots = false;
     private boolean supportBoots = false;
+
+    private boolean topRune = false;
+    private boolean jungleRune = false;
+    private boolean midRune = false;
+    private boolean adcRune = false;
+    private boolean supportRune = false;
 
     private int topHaste = 0;
     private int jungleHaste = 0;
@@ -395,7 +402,7 @@ public class TimerActivity extends AppCompatActivity {
                         if (i < commandMax.length)
                             text += (" " + commandMax[i]);
                     }
-                    textCommand.setText(getString(R.string.command)+": " + text);
+                    textCommand.setText(getString(R.string.command) + ": " + text);
                 }
                 if (speechRecognizer != null)
                     speechRecognizer.destroy();
@@ -455,13 +462,15 @@ public class TimerActivity extends AppCompatActivity {
 
     public void createTimer(int lane, int spell, CardView containerTimer, String speakLane, String speakSpell) {
         TextView textView = containerTimer.findViewById(R.id.textTimer);
+        ImageView iconRune = containerTimer.findViewById(R.id.iconRune);
+        ImageView iconBoot = containerTimer.findViewById(R.id.iconBoots);
         CountDownTimer timer;
         final double[] haste = {0};
-        final double[] hasteBoots = {12};
-        final double[] hasteRune = {0};
         final CountDownTimer[] timerSpeaker = new CountDownTimer[2];
         final long[] time = new long[1];
         final long[] originalTime = new long[1];
+        final long[] tempoDecorrido = new long[1];
+        tempoDecorrido[0] = 0;
 
         if (lane == TOP) {
             haste[0] = topHaste;
@@ -474,144 +483,214 @@ public class TimerActivity extends AppCompatActivity {
         } else if (lane == SUPPORT) {
             haste[0] = supportHaste;
         }
-        if (haste[0] > 0)
-            hasteRune[0] = 18;
-        if(hasteRune[0]>0)
-            containerTimer.findViewById(R.id.btnRune).setVisibility(View.VISIBLE);
+        if (haste[0] >= 18)
+            iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight));
         else
-           containerTimer.findViewById(R.id.btnRune).setVisibility(View.GONE);
+            iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight_disable));
 
 
         if (spell == FLASH) {
-            time[0] = FLASH_TIME;
+            originalTime[0] = FLASH_TIME;
         } else if (spell == HEAL) {
-            time[0] = HEAL_TIME;
+            originalTime[0] = HEAL_TIME;
         } else if (spell == GHOST) {
-            time[0] = GHOST_TIME;
+            originalTime[0] = GHOST_TIME;
         } else if (spell == BARRIER) {
-            time[0] = BARRIER_TIME;
+            originalTime[0] = BARRIER_TIME;
         } else if (spell == EXHAUST) {
-            time[0] = EXHAUST_TIME;
+            originalTime[0] = EXHAUST_TIME;
         } else if (spell == TELEPORT) {
-            time[0] = TELEPORT_TIME;
+            originalTime[0] = TELEPORT_TIME;
         } else if (spell == CLEANSE) {
-            time[0] = CLEANSE_TIME;
+            originalTime[0] = CLEANSE_TIME;
         } else if (spell == IGNITE) {
-            time[0] = IGNITE_TIME;
+            originalTime[0] = IGNITE_TIME;
+        } else if (spell == ZHONYAS) {
+            originalTime[0] = ZHONYAS_TIME;
         }
-        else if (spell == ZHONYAS) {
-            time[0] = ZHONYAS_TIME;
-        }
+
         if (lane == KINDRED || lane == NORMAL_TIMER) {
-            time[0] = -spell;
+            originalTime[0] = -spell;
         } else if (lane == ANIVIA) {
-            time[0] = ANIVIA_TIME;
+            originalTime[0] = ANIVIA_TIME;
         }
-        originalTime[0] = time[0] * 1000;
-        time[0] = time[0] * 1000;
-        time[0] -= originalTime[0] * (haste[0] / (haste[0] + 100));
-        long diferencaInicial = originalTime[0] - time[0];
-        long diferencaBoots = (long) (diferencaInicial + (originalTime[0] * (hasteRune[0] / (hasteRune[0] + 100))) - originalTime[0] * ((hasteBoots[0] + hasteRune[0]) / ((hasteBoots[0] + hasteRune[0]) + 100)));
-        if (diferencaBoots < 0)
-            diferencaBoots = -diferencaBoots;
-        long finalDiferencaBoots = diferencaBoots;
+
+        time[0] = originalTime[0] * 1000;
+
         timer = new CountDownTimer(time[0], 1000) {
 
             boolean finishing = false;//to not have an onFinish() loop
-            ImageView iconBoots = containerTimer.findViewById(R.id.iconBoots);
-            boolean change = false;
+
 
             @Override
             public void onTick(long l) {
+                if (lane == TOP && topBoots) {
+                    if (topHaste == BOOT_HASTE || topHaste == (RUNE_HASTE+BOOT_HASTE)) {
+                        topHaste -= BOOT_HASTE;
+                        iconBoot.setImageDrawable(getDrawable(R.drawable.boots_disable));
+
+                    } else {
+                        topHaste += BOOT_HASTE;
+                        iconBoot.setImageDrawable(getDrawable(R.drawable.boots));
+
+                    }
+                    topBoots=false;
+                }
+                else if (lane == JUNGLE && jungleBoots) {
+                    if (jungleHaste == BOOT_HASTE || jungleHaste == (RUNE_HASTE+BOOT_HASTE)) {
+                        jungleHaste -= BOOT_HASTE;
+                        iconBoot.setImageDrawable(getDrawable(R.drawable.boots_disable));
+
+                    } else {
+                        jungleHaste += BOOT_HASTE;
+                        iconBoot.setImageDrawable(getDrawable(R.drawable.boots));
+
+                    }
+                    jungleBoots=false;
+                }
+                else if (lane == MID && midBoots) {
+                    if (midHaste == BOOT_HASTE || midHaste == (RUNE_HASTE+BOOT_HASTE)) {
+                        midHaste -= BOOT_HASTE;
+                        iconBoot.setImageDrawable(getDrawable(R.drawable.boots_disable));
+
+                    } else {
+                        midHaste += BOOT_HASTE;
+                        iconBoot.setImageDrawable(getDrawable(R.drawable.boots));
+
+                    }
+                    midBoots=false;
+                }
+                else if (lane == ADC && adcBoots) {
+                    if (adcHaste == BOOT_HASTE || adcHaste == (RUNE_HASTE+BOOT_HASTE)) {
+                        adcHaste -= BOOT_HASTE;
+                        iconBoot.setImageDrawable(getDrawable(R.drawable.boots_disable));
+
+                    } else {
+                        adcHaste += BOOT_HASTE;
+                        iconBoot.setImageDrawable(getDrawable(R.drawable.boots));
+
+                    }
+                    adcBoots=false;
+                }
+                else if (lane == SUPPORT && supportBoots) {
+                    if (supportHaste == BOOT_HASTE || supportHaste == (RUNE_HASTE+BOOT_HASTE)) {
+                        supportHaste -= BOOT_HASTE;
+                        iconBoot.setImageDrawable(getDrawable(R.drawable.boots_disable));
+
+                    } else {
+                        supportHaste += BOOT_HASTE;
+                        iconBoot.setImageDrawable(getDrawable(R.drawable.boots));
+
+                    }
+                    supportBoots=false;
+                }
+
+
+                else if (lane == TOP && topRune) {
+                    if (topHaste == RUNE_HASTE  || topHaste == (RUNE_HASTE+BOOT_HASTE)) {
+                        topHaste -= RUNE_HASTE;
+                        iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight_disable));
+
+                    } else {
+                        topHaste += RUNE_HASTE;
+                        iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight));
+
+                    }
+                    topRune=false;
+                }
+                else if (lane == JUNGLE && jungleRune) {
+                    if (jungleHaste == RUNE_HASTE  || jungleHaste == (RUNE_HASTE+BOOT_HASTE)) {
+                        jungleHaste -= RUNE_HASTE;
+                        iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight_disable));
+
+                    } else {
+                        jungleHaste += RUNE_HASTE;
+                        iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight));
+
+                    }
+                    jungleRune=false;
+                }
+                else if (lane == MID && midRune) {
+                    if (midHaste == RUNE_HASTE  || midHaste == (RUNE_HASTE+BOOT_HASTE)) {
+                        midHaste -= RUNE_HASTE;
+                        iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight_disable));
+
+                    } else {
+                        midHaste += RUNE_HASTE;
+                        iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight));
+
+                    }
+                    midRune=false;
+                }
+                else if (lane == ADC && adcRune) {
+                    if (adcHaste == RUNE_HASTE  || adcHaste == (RUNE_HASTE+BOOT_HASTE)) {
+                        adcHaste -= RUNE_HASTE;
+                        iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight_disable));
+
+                    } else {
+                        adcHaste += RUNE_HASTE;
+                        iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight));
+
+                    }
+                    adcRune=false;
+                }
+                else if (lane == SUPPORT && supportRune) {
+                    if (supportHaste == RUNE_HASTE  || supportHaste == (RUNE_HASTE+BOOT_HASTE)) {
+                        supportHaste -= RUNE_HASTE;
+                        iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight_disable));
+
+                    } else {
+                        supportHaste += RUNE_HASTE;
+                        iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight));
+
+                    }
+                    supportRune=false;
+                }
+
+
+
+
+                if (lane == TOP) {
+                    haste[0] = topHaste;
+                } else if (lane == JUNGLE) {
+                    haste[0] = jungleHaste;
+                } else if (lane == MID) {
+                    haste[0] = midHaste;
+                } else if (lane == ADC) {
+                    haste[0] = adcHaste;
+                } else if (lane == SUPPORT) {
+                    haste[0] = supportHaste;
+                }
                 TextView textTi = containerTimer.findViewById(R.id.textTimer);
                 if (textTi == null) {
                     cancel();
                     System.out.println("TimerActivity.onTick cancel timer");
                 }
-                if (lane == TOP) {
-                    if (topBoots && !change) {
-                        haste[0] += 12;
-                        time[0] = (long) (time[0] + diferencaInicial - originalTime[0] * (haste[0] / (haste[0] + 100)));
-                        iconBoots.setImageDrawable(getDrawable(R.drawable.boots));
-                        change = true;
-
-                    }
-                    if (!topBoots && change) {
-
-                        time[0] = (long) (time[0] + finalDiferencaBoots);
-                        haste[0] -= 12;
-                        iconBoots.setImageDrawable(getDrawable(R.drawable.boots_disable));
-                        change = false;
-
-                    }
-                } else if (lane == JUNGLE) {
-                    if (jungleBoots && !change) {
-                        haste[0] += 12;
-                        time[0] = (long) (time[0] + diferencaInicial - originalTime[0] * (haste[0] / (haste[0] + 100)));
-                        iconBoots.setImageDrawable(getDrawable(R.drawable.boots));
-                        change = true;
-                    }
-                    if (!jungleBoots && change) {
-
-                        time[0] = (long) (time[0] + originalTime[0] * (hasteBoots[0] / (hasteBoots[0] + 100)));
-                        haste[0] -= 12;
-                        iconBoots.setImageDrawable(getDrawable(R.drawable.boots_disable));
-                        change = false;
-
-                    }
-                } else if (lane == MID) {
-                    if (midBoots && !change) {
-                        haste[0] += 12;
-                        time[0] = (long) (time[0] + diferencaInicial - originalTime[0] * (haste[0] / (haste[0] + 100)));
-                        iconBoots.setImageDrawable(getDrawable(R.drawable.boots));
-                        change = true;
-                    }
-                    if (!midBoots && change) {
-
-                        time[0] = (long) (time[0] + finalDiferencaBoots);
-                        haste[0] -= 12;
-                        iconBoots.setImageDrawable(getDrawable(R.drawable.boots_disable));
-                        change = false;
-
-                    }
-                } else if (lane == ADC) {
-                    if (adcBoots && !change) {
-                        haste[0] += 12;
-                        time[0] = (long) (time[0] + diferencaInicial - originalTime[0] * (haste[0] / (haste[0] + 100)));
-                        iconBoots.setImageDrawable(getDrawable(R.drawable.boots));
-                        change = true;
-                    }
-                    if (!adcBoots && change) {
-
-                        time[0] = (long) (time[0] + originalTime[0] * (hasteBoots[0] / (hasteBoots[0] + 100)));
-                        haste[0] -= 12;
-                        iconBoots.setImageDrawable(getDrawable(R.drawable.boots_disable));
-                        change = false;
-
-                    }
-                } else if (lane == SUPPORT) {
-                    if (supportBoots && !change) {
-                        haste[0] += 12;
-                        time[0] = (long) (time[0] + diferencaInicial - originalTime[0] * (haste[0] / (haste[0] + 100)));
-                        iconBoots.setImageDrawable(getDrawable(R.drawable.boots));
-                        change = true;
-                    }
-                    if (!supportBoots && change) {
-
-                        time[0] = (long) (time[0] + originalTime[0] * (hasteBoots[0] / (hasteBoots[0] + 100)));
-                        haste[0] -= 12;
-                        iconBoots.setImageDrawable(getDrawable(R.drawable.boots_disable));
-                        change = false;
-
-                    }
+                if (lane != KINDRED && lane != NORMAL_TIMER && lane != ANIVIA && lane != ZHONYAS) {
+                    double cdr = haste[0] / (haste[0] + 100) * 100;
+                    double cdrEmTempo=(originalTime[0] * 1000 * cdr/100);
+                    System.out.println("TimerActivity.onTick cdr"+cdr+" cdremtempo"+cdrEmTempo);
+                    System.out.println("TimerActivity.onTick entrou aq cdr:"+cdr);
+                    time[0]= (long) (originalTime[0] * 1000 -cdrEmTempo - tempoDecorrido[0]);
                 }
+                if(lane==ZHONYAS){
+                    if(haste[0]==RUNE_HASTE|| haste[0]==(RUNE_HASTE+BOOT_HASTE)){
+                        double cdr = 10 / (10 + 100) * 100;
+                        double cdrEmTempo=(originalTime[0] * 1000 * cdr/100);
+                        time[0]= (long) (originalTime[0] * 1000 -cdrEmTempo - tempoDecorrido[0]);
+                    }
+
+                }
+
 
                 if (time[0] <= 0 && !finishing) {
                     onFinish();
                     finishing = true;
                     cancel();
-                } else if (time[0] > 0)
+                } else if (time[0] > 0) {
                     time[0] -= 1000;
+                    tempoDecorrido[0] += 1000;
+                }
                 updateTextTime(time[0], textView);
             }
 
@@ -627,13 +706,13 @@ public class TimerActivity extends AppCompatActivity {
                 txtReturnSpell.setVisibility(View.VISIBLE);
 
                 Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                if (sharedPref.getBoolean("vibrateFinish", true)){
+                if (sharedPref.getBoolean("vibrateFinish", true)) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         v.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
                     } else {
                         v.vibrate(1000);
                     }
-            }
+                }
                 final boolean[] secondVibrate = {true};
                 final TextView[] txtHistory = {null};
                 if (lane != NORMAL_TIMER) {
@@ -720,7 +799,7 @@ public class TimerActivity extends AppCompatActivity {
     public boolean verifyCommands(String command, String commands) {
 
         boolean in = false;
-        if (commands != null && command!="") {
+        if (commands != null && command != "") {
 
             String[] laneCommands = commands.split(" ");
             for (String c :
@@ -913,19 +992,19 @@ public class TimerActivity extends AppCompatActivity {
             }
 
             //Barrier
-            else if (verifyCommands(command, commandsTopBarrier)  ) {
+            else if (verifyCommands(command, commandsTopBarrier)) {
                 lane = TOP;
                 spell = BARRIER;
-            } else if (verifyCommands(command, commandsJungleBarrier) ) {
+            } else if (verifyCommands(command, commandsJungleBarrier)) {
                 lane = JUNGLE;
                 spell = BARRIER;
-            } else if (verifyCommands(command, commandsMidBarrier) ) {
+            } else if (verifyCommands(command, commandsMidBarrier)) {
                 lane = MID;
                 spell = BARRIER;
-            } else if (verifyCommands(command, commandsAdcBarrier) ) {
+            } else if (verifyCommands(command, commandsAdcBarrier)) {
                 lane = ADC;
                 spell = BARRIER;
-            } else if (verifyCommands(command, commandsSupportBarrier) ) {
+            } else if (verifyCommands(command, commandsSupportBarrier)) {
                 lane = SUPPORT;
                 spell = BARRIER;
             }
@@ -1137,8 +1216,7 @@ public class TimerActivity extends AppCompatActivity {
                     spell = -(Integer.parseInt(normalTimer));
                 }
             }
-        }
-        else if ((word2.equalsIgnoreCase("segundos") || word2.equalsIgnoreCase("seconds"))) {
+        } else if ((word2.equalsIgnoreCase("segundos") || word2.equalsIgnoreCase("seconds"))) {
             if (word1.matches("[+-]?\\d*(\\.\\d+)?")) {
                 lane = NORMAL_TIMER;
                 spell = -(Integer.parseInt(word1));
@@ -1230,45 +1308,174 @@ public class TimerActivity extends AppCompatActivity {
 
             }
         }
+        else if (verifyCommands(word1, runeExtra) || verifyCommands(word2, runeExtra)) {
+            if (lane == 2) {
+
+                topRune = !topRune;
+                return;
+            } else if (lane == 3) {
+
+                jungleRune = !jungleRune;
+                return;
+
+            } else if (lane == 4) {
+
+                midRune = !midRune;
+                return;
+
+            } else if (lane == 5) {
+
+                adcRune = !adcRune;
+                return;
+
+            } else if (lane == 6) {
+
+                supportRune = !supportRune;
+                return;
+
+            }
+        }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if (lane != 0 && spell != 0) {
             CardView containerTimer;
-            CardView btnBoots;
+            CardView btnBoots, btnRune;
             String speakLane = "", speakSpell = "";
             containerTimer = (CardView) getLayoutInflater().inflate(R.layout.view_timer, container, false);
             btnBoots = containerTimer.findViewById(R.id.btnBoots);
-
+            btnRune = containerTimer.findViewById(R.id.btnRune);
 
             containerTimer.setOnTouchListener((view, motionEvent) -> {
                 System.out.println("TimerActivity.checkCommand containertimer" + motionEvent.getAction());
                 currentTouch = containerTimer;
                 return false;
             });
+            ImageView iconRune = containerTimer.findViewById(R.id.iconRune);
+            ImageView iconBoot = containerTimer.findViewById(R.id.iconBoots);
 
             int finalLane = lane;
+            btnBoots.setOnClickListener(view -> {
+                if (finalLane == TOP) {
+                    if (topHaste == BOOT_HASTE || topHaste == (RUNE_HASTE+BOOT_HASTE)) {
+                        topHaste -= BOOT_HASTE;
+                        iconBoot.setImageDrawable(getDrawable(R.drawable.boots_disable));
 
-            btnBoots.setOnTouchListener((view, motionEvent) -> {
-                CountDownTimer btnTimer;
+                    } else {
+                        topHaste += BOOT_HASTE;
+                        iconBoot.setImageDrawable(getDrawable(R.drawable.boots));
 
-
-                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    if (finalLane == TOP) {
-                        topBoots = !topBoots;
-                    } else if (finalLane == JUNGLE) {
-                        jungleBoots = !jungleBoots;
-                    } else if (finalLane == MID) {
-                        midBoots = !midBoots;
-                    } else if (finalLane == ADC) {
-                        adcBoots = !adcBoots;
                     }
-                    if (finalLane == SUPPORT) {
-                        supportBoots = !supportBoots;
-                    }
-
                 }
-                return false;
+                else if (finalLane == JUNGLE) {
+                    if (jungleHaste == BOOT_HASTE || jungleHaste == (RUNE_HASTE+BOOT_HASTE)) {
+                        jungleHaste -= BOOT_HASTE;
+                        iconBoot.setImageDrawable(getDrawable(R.drawable.boots_disable));
+
+                    } else {
+                        jungleHaste += BOOT_HASTE;
+                        iconBoot.setImageDrawable(getDrawable(R.drawable.boots));
+
+                    }
+                }
+                else if (finalLane == MID) {
+                    if (midHaste == BOOT_HASTE || midHaste == (RUNE_HASTE+BOOT_HASTE)) {
+                        midHaste -= BOOT_HASTE;
+                        iconBoot.setImageDrawable(getDrawable(R.drawable.boots_disable));
+
+                    } else {
+                        midHaste += BOOT_HASTE;
+                        iconBoot.setImageDrawable(getDrawable(R.drawable.boots));
+
+                    }
+                }
+                else if (finalLane == ADC) {
+                    if (adcHaste == BOOT_HASTE || adcHaste == (RUNE_HASTE+BOOT_HASTE)) {
+                        adcHaste -= BOOT_HASTE;
+                        iconBoot.setImageDrawable(getDrawable(R.drawable.boots_disable));
+
+                    } else {
+                        adcHaste += BOOT_HASTE;
+                        iconBoot.setImageDrawable(getDrawable(R.drawable.boots));
+
+                    }
+                }
+               else if (finalLane == SUPPORT) {
+                    if (supportHaste == BOOT_HASTE || supportHaste == (RUNE_HASTE+BOOT_HASTE)) {
+                        supportHaste -= BOOT_HASTE;
+                        iconBoot.setImageDrawable(getDrawable(R.drawable.boots_disable));
+
+                    } else {
+                        supportHaste += BOOT_HASTE;
+                        iconBoot.setImageDrawable(getDrawable(R.drawable.boots));
+
+                    }
+                }
+                return;
             });
+            btnRune.setOnClickListener(view -> {
+
+
+                if (finalLane == TOP) {
+                    if (topHaste == RUNE_HASTE  || topHaste == (RUNE_HASTE+BOOT_HASTE)) {
+                        topHaste -= RUNE_HASTE;
+                        iconBoot.setImageDrawable(getDrawable(R.drawable.cosmic_insight_disable));
+
+                    } else {
+                        topHaste += RUNE_HASTE;
+                        iconBoot.setImageDrawable(getDrawable(R.drawable.cosmic_insight));
+
+                    }
+                }
+                else if (finalLane == JUNGLE) {
+                    if (jungleHaste == RUNE_HASTE  || jungleHaste == (RUNE_HASTE+BOOT_HASTE)) {
+                        jungleHaste -= RUNE_HASTE;
+                        iconBoot.setImageDrawable(getDrawable(R.drawable.cosmic_insight_disable));
+
+                    } else {
+                        jungleHaste += RUNE_HASTE;
+                        iconBoot.setImageDrawable(getDrawable(R.drawable.cosmic_insight));
+
+                    }
+                }
+                else if (finalLane == MID) {
+                    if (midHaste == RUNE_HASTE  || midHaste == (RUNE_HASTE+BOOT_HASTE)) {
+                        midHaste -= RUNE_HASTE;
+                        iconBoot.setImageDrawable(getDrawable(R.drawable.cosmic_insight_disable));
+
+                    } else {
+                        midHaste += RUNE_HASTE;
+                        iconBoot.setImageDrawable(getDrawable(R.drawable.cosmic_insight));
+
+                    }
+                }
+                else if (finalLane == ADC) {
+                    if (adcHaste == RUNE_HASTE  || adcHaste == (RUNE_HASTE+BOOT_HASTE)) {
+                        adcHaste -= RUNE_HASTE;
+                        iconBoot.setImageDrawable(getDrawable(R.drawable.cosmic_insight_disable));
+
+                    } else {
+                        adcHaste += RUNE_HASTE;
+                        iconBoot.setImageDrawable(getDrawable(R.drawable.cosmic_insight));
+
+                    }
+                }
+                else if (finalLane == SUPPORT) {
+                    if (supportHaste == RUNE_HASTE  || supportHaste == (RUNE_HASTE+BOOT_HASTE)) {
+                        supportHaste -= RUNE_HASTE;
+                        iconBoot.setImageDrawable(getDrawable(R.drawable.cosmic_insight_disable));
+
+                    } else {
+                        supportHaste += RUNE_HASTE;
+                        iconBoot.setImageDrawable(getDrawable(R.drawable.cosmic_insight));
+
+                    }
+                }
+
+
+
+                return;
+            });
+
             ImageView laneIcon = containerTimer.findViewById(R.id.iconLane);
             ImageView spellIcon = containerTimer.findViewById(R.id.iconSpell);
             if (lane == TOP) {
@@ -1313,12 +1520,10 @@ public class TimerActivity extends AppCompatActivity {
             } else if (spell == IGNITE) {
                 spellIcon.setImageDrawable(getDrawable(R.drawable.ignite));
                 speakSpell = "Ignite";
-            }
-            else if (spell == ZHONYAS) {
+            } else if (spell == ZHONYAS) {
                 spellIcon.setImageDrawable(getDrawable(R.drawable.zhonyas));
                 speakSpell = "Zhonyas";
-            }
-            else if (lane == KINDRED) {
+            } else if (lane == KINDRED) {
                 laneIcon.setImageDrawable(getDrawable(R.drawable.kindred));
                 speakLane = "Kindred";
                 spellIcon.setImageDrawable(getDrawable(R.drawable.kindred_passive));
@@ -1417,25 +1622,26 @@ public class TimerActivity extends AppCompatActivity {
 //        return new int[]{0, 0};
 //    }
 
-    public void addCustomCommands(){
-        laneTopExtra+=" "+sharedPref.getString("TopCommands","");
-        laneJungleExtra+=" "+sharedPref.getString("JungleCommands","");
-        laneMidExtra+=" "+sharedPref.getString("MidCommands","");
-        laneAdcExtra+=" "+sharedPref.getString("AdcCommands","");
-        laneSupportExtra+=" "+sharedPref.getString("SupportCommands","");
+    public void addCustomCommands() {
+        laneTopExtra += " " + sharedPref.getString("TopCommands", "");
+        laneJungleExtra += " " + sharedPref.getString("JungleCommands", "");
+        laneMidExtra += " " + sharedPref.getString("MidCommands", "");
+        laneAdcExtra += " " + sharedPref.getString("AdcCommands", "");
+        laneSupportExtra += " " + sharedPref.getString("SupportCommands", "");
 
-        flashExtra+=" "+sharedPref.getString("FlashCommands","");
-        igniteExtra+=" "+sharedPref.getString("IgniteCommands","");
-        exhaustExtra+=" "+sharedPref.getString("ExhaustCommands","");
-        teleportExtra+=" "+sharedPref.getString("TeleportCommands","");
-        healExtra+=" "+sharedPref.getString("HealCommands","");
-        cleanseExtra+=" "+sharedPref.getString("CleanseCommands","");
-        ghostExtra+=" "+sharedPref.getString("GhostCommands","");
-        bootsExtra+=" "+sharedPref.getString("BootsCommands","");
-        barrierExtra+=" "+sharedPref.getString("BarrierCommands","");
-        zhonyasExtra+=" "+sharedPref.getString("ZhonyasCommands","");
-
+        flashExtra += " " + sharedPref.getString("FlashCommands", "");
+        igniteExtra += " " + sharedPref.getString("IgniteCommands", "");
+        exhaustExtra += " " + sharedPref.getString("ExhaustCommands", "");
+        teleportExtra += " " + sharedPref.getString("TeleportCommands", "");
+        healExtra += " " + sharedPref.getString("HealCommands", "");
+        cleanseExtra += " " + sharedPref.getString("CleanseCommands", "");
+        ghostExtra += " " + sharedPref.getString("GhostCommands", "");
+        bootsExtra += " " + sharedPref.getString("BootsCommands", "");
+        barrierExtra += " " + sharedPref.getString("BarrierCommands", "");
+        zhonyasExtra += " " + sharedPref.getString("ZhonyasCommands", "");
+        runeExtra += " " + sharedPref.getString("RuneCommands", "");
     }
+
     public void mute() {
         try {
             AudioManager audioManager =

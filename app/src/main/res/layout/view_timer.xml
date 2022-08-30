@@ -55,8 +55,8 @@
             android:id="@id/textTimer"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginLeft="14dp"
-            android:layout_marginRight="14dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
             android:text="00:00"
             android:gravity="center"
             android:textColor="@color/black"
@@ -66,7 +66,7 @@
 
         <LinearLayout
             android:id="@+id/layoutBootsAndRune"
-            android:layout_width="65dp"
+            android:layout_width="79dp"
             android:layout_marginTop="3dp"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -92,15 +92,15 @@
                     ></ImageView>
             </androidx.cardview.widget.CardView>
             <LinearLayout
-                android:layout_width="15dp"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 >
                 <androidx.cardview.widget.CardView
                     android:id="@+id/btnRune"
-                    android:layout_width="15dp"
+                    android:layout_width="30dp"
                     android:layout_marginTop="700dp"
-                    android:layout_height="15dp"
+                    android:layout_height="30dp"
                     app:cardCornerRadius="100dp"
                     android:layout_gravity="start"
                     >

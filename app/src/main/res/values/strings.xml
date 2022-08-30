@@ -42,6 +42,8 @@
     <string name="putSummonerName">Put Your Summoner Name</string>
     <string name="region">Region:</string>
 
+    <string name="explanation_rune">Activation is done by clicking or using the word Rune, along with lane , for example: </string>
+    <string name="rune">Rune</string>
 
 
 </resources>

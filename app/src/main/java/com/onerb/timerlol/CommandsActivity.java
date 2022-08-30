@@ -35,7 +35,7 @@ private Spinner dropdownLanguage;
         });
         TextView[] txts= {findViewById(R.id.txtTop),findViewById(R.id.txtJungle),findViewById(R.id.txtMid),findViewById(R.id.txtBot),findViewById(R.id.txtSuport),
                 findViewById(R.id.txtFlash),findViewById(R.id.txtIgnite),findViewById(R.id.txtTeleport),findViewById(R.id.txtHeal),findViewById(R.id.txtExhaust),
-                findViewById(R.id.txtBarrier),findViewById(R.id.txtGhost),findViewById(R.id.txtCleanse),findViewById(R.id.txtBoots)};
+                findViewById(R.id.txtBarrier),findViewById(R.id.txtGhost),findViewById(R.id.txtCleanse),findViewById(R.id.txtBoots),findViewById(R.id.txtRune)};
         dropdownLanguage = findViewById(R.id.spinnerLanguageInCommands);
         dropdownLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -61,11 +61,15 @@ private Spinner dropdownLanguage;
                 txts[11].setText(TimerActivity.ghostExtra.split(" ")[position].toUpperCase());
                 txts[12].setText(TimerActivity.cleanseExtra.split(" ")[position].toUpperCase());
                 txts[13].setText(TimerActivity.bootExtra.split(" ")[position].toUpperCase());
+                txts[14].setText(TimerActivity.runeExtra.split(" ")[position].toUpperCase());
                 TextView example= findViewById(R.id.activateExample);
                 example.setText("\""+txts[2].getText()+" "+txts[5].getText()+"\" "+getString(R.string.or)+" \"" +txts[5].getText()+" "+txts[2].getText()+"\" ");
 
                 TextView exampleZhonyas= findViewById(R.id.activateExampleZhonyas);
                 exampleZhonyas.setText("\""+txts[2].getText()+" "+"ZY"+"\" "+getString(R.string.or)+" \"" +"ZY"+" "+txts[2].getText()+"\" ");
+
+                TextView exampleRune= findViewById(R.id.activateExampleRune);
+                exampleRune.setText("\""+txts[2].getText()+" "+txts[14].getText()+"\" "+getString(R.string.or)+" \"" +txts[14].getText()+" "+txts[2].getText()+"\" ");
 
                 TextView exampleBoots= findViewById(R.id.activateExampleBoots);
                 exampleBoots.setText("\""+txts[2].getText()+" "+txts[13].getText()+"\" "+getString(R.string.or)+" \"" +txts[13].getText()+" "+txts[2].getText()+"\" "

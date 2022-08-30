@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.onerb.timerlol.BuildConfig;
 import com.onerb.timerlol.ui.main.MainViewModel;
 
 import java.io.IOException;
@@ -50,7 +51,7 @@ public class InfosGameApiUtil extends AsyncTask<Void, Void, String> {
     private String summonerId = null;
     private String summonerName = null;
     private String name = "mainmidbr";
-    private String keyApi = "RGAPI-055128c3-7447-4bf0-a0be-ab1f69624c66";
+    private String keyApi = BuildConfig.API_KEY;
     private int respCode = -1;
     private StringBuilder respSummonerId;
     private StringBuilder respParticipants;

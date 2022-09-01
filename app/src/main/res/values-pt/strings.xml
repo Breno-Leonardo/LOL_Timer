@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="settings">CONFIGURAÇÕES</string>
+    <string name="settings">CONFIGS</string>
     <string name="commands">Comandos</string>
     <string name="command">Comando</string>
     <string name="inicial_commands_text">Comando: Fale seu comando</string>

@@ -36,7 +36,10 @@
         <activity android:name="com.onerb.timerlol.CommandsActivity" android:launchMode="singleInstance"  android:screenOrientation="portrait"></activity>
         <activity android:name="com.onerb.timerlol.SettingsActivity" android:launchMode="singleInstance" android:screenOrientation="portrait"></activity>
         <activity android:name="com.onerb.timerlol.CreateCustomCommands" android:launchMode="singleInstance" android:screenOrientation="portrait"></activity>
-
+        <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-5476119661051114~1542768807"/>
     </application>
 
 </manifest>

@@ -9,6 +9,9 @@
     android:fillViewport="true"
     >
 
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <LinearLayout
 
@@ -18,7 +21,6 @@
         android:background="@color/white"
         android:orientation="vertical"
         tools:context=".TimerActivity">
-
 
         <TextView
             android:id="@+id/textTimer"
@@ -106,4 +108,18 @@
         </TextView>
 
     </LinearLayout>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adViewTimerActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        app:adSize="SMART_BANNER"
+        app:adUnitId="ca-app-pub-5476119661051114/8515920005"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"></com.google.android.gms.ads.AdView>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>

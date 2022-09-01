@@ -15,11 +15,19 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+
 import java.util.ArrayList;
 import java.util.Locale;
 
 public class CommandsActivity extends AppCompatActivity {
-private Spinner dropdownLanguage;
+    private Spinner dropdownLanguage;
+    private AdView mAdView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,14 +36,25 @@ private Spinner dropdownLanguage;
 //        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_commands);
 
+
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        mAdView = findViewById(R.id.adViewCommands);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+
         findViewById(R.id.btnCreateCommandInCommands).setOnTouchListener((view, motionEvent) -> {
             Intent intent = new Intent(CommandsActivity.this, CreateCustomCommands.class);
             startActivity(intent);
             return false;
         });
-        TextView[] txts= {findViewById(R.id.txtTop),findViewById(R.id.txtJungle),findViewById(R.id.txtMid),findViewById(R.id.txtBot),findViewById(R.id.txtSuport),
-                findViewById(R.id.txtFlash),findViewById(R.id.txtIgnite),findViewById(R.id.txtTeleport),findViewById(R.id.txtHeal),findViewById(R.id.txtExhaust),
-                findViewById(R.id.txtBarrier),findViewById(R.id.txtGhost),findViewById(R.id.txtCleanse),findViewById(R.id.txtBoots),findViewById(R.id.txtRune)};
+        TextView[] txts = {findViewById(R.id.txtTop), findViewById(R.id.txtJungle), findViewById(R.id.txtMid), findViewById(R.id.txtBot), findViewById(R.id.txtSuport),
+                findViewById(R.id.txtFlash), findViewById(R.id.txtIgnite), findViewById(R.id.txtTeleport), findViewById(R.id.txtHeal), findViewById(R.id.txtExhaust),
+                findViewById(R.id.txtBarrier), findViewById(R.id.txtGhost), findViewById(R.id.txtCleanse), findViewById(R.id.txtBoots), findViewById(R.id.txtRune)};
         dropdownLanguage = findViewById(R.id.spinnerLanguageInCommands);
         dropdownLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -62,19 +81,19 @@ private Spinner dropdownLanguage;
                 txts[12].setText(TimerActivity.cleanseExtra.split(" ")[position].toUpperCase());
                 txts[13].setText(TimerActivity.bootExtra.split(" ")[position].toUpperCase());
                 txts[14].setText(TimerActivity.runeExtra.split(" ")[position].toUpperCase());
-                TextView example= findViewById(R.id.activateExample);
-                example.setText("\""+txts[2].getText()+" "+txts[5].getText()+"\" "+getString(R.string.or)+" \"" +txts[5].getText()+" "+txts[2].getText()+"\" ");
+                TextView example = findViewById(R.id.activateExample);
+                example.setText("\"" + txts[2].getText() + " " + txts[5].getText() + "\" " + getString(R.string.or) + " \"" + txts[5].getText() + " " + txts[2].getText() + "\" ");
 
-                TextView exampleZhonyas= findViewById(R.id.activateExampleZhonyas);
-                exampleZhonyas.setText("\""+txts[2].getText()+" "+"ZY"+"\" "+getString(R.string.or)+" \"" +"ZY"+" "+txts[2].getText()+"\" ");
+                TextView exampleZhonyas = findViewById(R.id.activateExampleZhonyas);
+                exampleZhonyas.setText("\"" + txts[2].getText() + " " + "ZY" + "\" " + getString(R.string.or) + " \"" + "ZY" + " " + txts[2].getText() + "\" ");
 
-                TextView exampleRune= findViewById(R.id.activateExampleRune);
-                exampleRune.setText("\""+txts[2].getText()+" "+txts[14].getText()+"\" "+getString(R.string.or)+" \"" +txts[14].getText()+" "+txts[2].getText()+"\" ");
+                TextView exampleRune = findViewById(R.id.activateExampleRune);
+                exampleRune.setText("\"" + txts[2].getText() + " " + txts[14].getText() + "\" " + getString(R.string.or) + " \"" + txts[14].getText() + " " + txts[2].getText() + "\" ");
 
-                TextView exampleBoots= findViewById(R.id.activateExampleBoots);
-                exampleBoots.setText("\""+txts[2].getText()+" "+txts[13].getText()+"\" "+getString(R.string.or)+" \"" +txts[13].getText()+" "+txts[2].getText()+"\" "
-                        +getString(R.string.or)+" \""+txts[2].getText()+" "+TimerActivity.bootsExtra.split(" ")[position]+"\" "+getString(R.string.or)+" \""
-                        +TimerActivity.bootsExtra.split(" ")[position]+" "+txts[2].getText()+"\" ");
+                TextView exampleBoots = findViewById(R.id.activateExampleBoots);
+                exampleBoots.setText("\"" + txts[2].getText() + " " + txts[13].getText() + "\" " + getString(R.string.or) + " \"" + txts[13].getText() + " " + txts[2].getText() + "\" "
+                        + getString(R.string.or) + " \"" + txts[2].getText() + " " + TimerActivity.bootsExtra.split(" ")[position] + "\" " + getString(R.string.or) + " \""
+                        + TimerActivity.bootsExtra.split(" ")[position] + " " + txts[2].getText() + "\" ");
             }
 
             @Override
@@ -82,7 +101,7 @@ private Spinner dropdownLanguage;
 
             }
         });
-        String[] languages={"EN","PT","DE","ES","FR","IT","PL","EL","RO","HU","CS","JA","RU","TR","KO","ZH"};
+        String[] languages = {"EN", "PT", "DE", "ES", "FR", "IT", "PL", "EL", "RO", "HU", "CS", "JA", "RU", "TR", "KO", "ZH"};
 
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, languages);
@@ -93,16 +112,15 @@ private Spinner dropdownLanguage;
     }
 
 
-
     @Override
     protected void onStop() {
         super.onStop();
         try {
             AudioManager audioManager =
                     (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-            audioManager.adjustStreamVolume(AudioManager.STREAM_NOTIFICATION,AudioManager.ADJUST_UNMUTE,
+            audioManager.adjustStreamVolume(AudioManager.STREAM_NOTIFICATION, AudioManager.ADJUST_UNMUTE,
                     AudioManager.FLAG_VIBRATE);
-        }catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
 
         }
 

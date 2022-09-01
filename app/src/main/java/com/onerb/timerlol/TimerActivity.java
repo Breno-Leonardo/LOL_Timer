@@ -35,6 +35,11 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.onerb.timerlol.api.SummonerInfos;
 import com.onerb.timerlol.ui.main.MainViewModel;
 
@@ -211,6 +216,7 @@ public class TimerActivity extends AppCompatActivity {
     private SharedPreferences sharedPref;
     private int apiRespCode = -1;
     private String language;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -249,6 +255,17 @@ public class TimerActivity extends AppCompatActivity {
 
 
         setContentView(R.layout.activity_timer);
+
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        mAdView = findViewById(R.id.adViewTimerActivity);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+
         sharedPref = this.getSharedPreferences("prefs", Context.MODE_PRIVATE);
         // add commands
         addCustomCommands();
@@ -324,8 +341,19 @@ public class TimerActivity extends AppCompatActivity {
             }
         });
 
+        new CountDownTimer(1000, 100) {
+            @Override
+            public void onTick(long l) {
 
-        StartListening();
+            }
+
+            @Override
+            public void onFinish() {
+
+                StartListening();
+
+            }
+        };
 
     }
 
@@ -669,8 +697,8 @@ public class TimerActivity extends AppCompatActivity {
                 if (lane != KINDRED && lane != NORMAL_TIMER && lane != ANIVIA && lane != ZHONYAS) {
                     double cdr = haste[0] / (haste[0] + 100) * 100;
                     double cdrEmTempo=(originalTime[0] * 1000 * cdr/100);
-                    System.out.println("TimerActivity.onTick cdr"+cdr+" cdremtempo"+cdrEmTempo);
-                    System.out.println("TimerActivity.onTick entrou aq cdr:"+cdr);
+//                    System.out.println("TimerActivity.onTick cdr"+cdr+" cdremtempo"+cdrEmTempo);
+//                    System.out.println("TimerActivity.onTick entrou aq cdr:"+cdr);
                     time[0]= (long) (originalTime[0] * 1000 -cdrEmTempo - tempoDecorrido[0]);
                 }
                 if(lane==ZHONYAS){
@@ -1418,55 +1446,55 @@ public class TimerActivity extends AppCompatActivity {
                 if (finalLane == TOP) {
                     if (topHaste == RUNE_HASTE  || topHaste == (RUNE_HASTE+BOOT_HASTE)) {
                         topHaste -= RUNE_HASTE;
-                        iconBoot.setImageDrawable(getDrawable(R.drawable.cosmic_insight_disable));
+                        iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight_disable));
 
                     } else {
                         topHaste += RUNE_HASTE;
-                        iconBoot.setImageDrawable(getDrawable(R.drawable.cosmic_insight));
+                        iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight));
 
                     }
                 }
                 else if (finalLane == JUNGLE) {
                     if (jungleHaste == RUNE_HASTE  || jungleHaste == (RUNE_HASTE+BOOT_HASTE)) {
                         jungleHaste -= RUNE_HASTE;
-                        iconBoot.setImageDrawable(getDrawable(R.drawable.cosmic_insight_disable));
+                        iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight_disable));
 
                     } else {
                         jungleHaste += RUNE_HASTE;
-                        iconBoot.setImageDrawable(getDrawable(R.drawable.cosmic_insight));
+                        iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight));
 
                     }
                 }
                 else if (finalLane == MID) {
                     if (midHaste == RUNE_HASTE  || midHaste == (RUNE_HASTE+BOOT_HASTE)) {
                         midHaste -= RUNE_HASTE;
-                        iconBoot.setImageDrawable(getDrawable(R.drawable.cosmic_insight_disable));
+                        iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight_disable));
 
                     } else {
                         midHaste += RUNE_HASTE;
-                        iconBoot.setImageDrawable(getDrawable(R.drawable.cosmic_insight));
+                        iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight));
 
                     }
                 }
                 else if (finalLane == ADC) {
                     if (adcHaste == RUNE_HASTE  || adcHaste == (RUNE_HASTE+BOOT_HASTE)) {
                         adcHaste -= RUNE_HASTE;
-                        iconBoot.setImageDrawable(getDrawable(R.drawable.cosmic_insight_disable));
+                        iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight_disable));
 
                     } else {
                         adcHaste += RUNE_HASTE;
-                        iconBoot.setImageDrawable(getDrawable(R.drawable.cosmic_insight));
+                        iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight));
 
                     }
                 }
                 else if (finalLane == SUPPORT) {
                     if (supportHaste == RUNE_HASTE  || supportHaste == (RUNE_HASTE+BOOT_HASTE)) {
                         supportHaste -= RUNE_HASTE;
-                        iconBoot.setImageDrawable(getDrawable(R.drawable.cosmic_insight_disable));
+                        iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight_disable));
 
                     } else {
                         supportHaste += RUNE_HASTE;
-                        iconBoot.setImageDrawable(getDrawable(R.drawable.cosmic_insight));
+                        iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight));
 
                     }
                 }

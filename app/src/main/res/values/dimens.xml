@@ -2,5 +2,6 @@
 <resources>
     <dimen name="heightLayoutTimer">90dp</dimen>
     <dimen name="spellAndPositions">50dp</dimen>
-
+    <dimen name="buttons">180dp</dimen>
+    <dimen name="buttonsShadow">183dp</dimen>
 </resources>

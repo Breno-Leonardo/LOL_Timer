@@ -13,7 +13,6 @@
         android:background="@color/white"
         android:orientation="vertical">
 
-
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
             android:layout_width="match_parent"
@@ -21,6 +20,7 @@
             android:layout_marginLeft="7dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="7dp"
+
 
             android:backgroundTint="@color/white"
             app:cardCornerRadius="20dp"
@@ -90,19 +90,32 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adViewCommands"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            app:adSize="SMART_BANNER"
+            app:adUnitId="ca-app-pub-5476119661051114/9330308225"
+            app:layout_constraintTop_toBottomOf="@+id/cardView"></com.google.android.gms.ads.AdView>
+
+
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="7dp"
-            android:layout_marginTop="10dp"
             android:layout_marginRight="7dp"
+            android:layout_marginTop="10dp"
             android:backgroundTint="@color/white"
             app:cardCornerRadius="20dp"
-            app:cardElevation="10dp"
 
+            app:cardElevation="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView">
+            app:layout_constraintTop_toBottomOf="@+id/adViewCommands">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -704,6 +717,7 @@
                         android:typeface="monospace">
 
                     </TextView>
+
                     <TextView
                         android:id="@+id/mix"
                         android:layout_width="match_parent"
@@ -761,8 +775,7 @@
                         <androidx.cardview.widget.CardView
                             android:layout_width="45dp"
                             android:layout_height="45dp"
-                            android:background="@color/white"
-                            >
+                            android:background="@color/white">
 
                             <ImageView
                                 android:layout_width="45dp"

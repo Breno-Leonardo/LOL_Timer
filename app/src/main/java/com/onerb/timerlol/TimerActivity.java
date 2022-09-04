@@ -548,134 +548,163 @@ public class TimerActivity extends AppCompatActivity {
         timer = new CountDownTimer(time[0], 1000) {
 
             boolean finishing = false;//to not have an onFinish() loop
-
+            boolean changeBoot = false;
+            boolean changeRune = false;
 
             @Override
             public void onTick(long l) {
-                if (lane == TOP && topBoots) {
-                    if (topHaste == BOOT_HASTE || topHaste == (RUNE_HASTE+BOOT_HASTE)) {
-                        topHaste -= BOOT_HASTE;
+                if (lane == TOP) {
+                    if (changeBoot && !topBoots) {
+                        if ((topHaste == BOOT_HASTE || topHaste == (RUNE_HASTE + BOOT_HASTE)))
+                            topHaste -= BOOT_HASTE;
                         iconBoot.setImageDrawable(getDrawable(R.drawable.boots_disable));
+                        changeBoot = false;
 
-                    } else {
-                        topHaste += BOOT_HASTE;
+                    } else if (!changeBoot && topBoots) {
+                        if (topHaste != BOOT_HASTE && topHaste != (RUNE_HASTE + BOOT_HASTE))
+                            topHaste += BOOT_HASTE;
                         iconBoot.setImageDrawable(getDrawable(R.drawable.boots));
-
+                        changeBoot = true;
                     }
-                    topBoots=false;
-                }
-                else if (lane == JUNGLE && jungleBoots) {
-                    if (jungleHaste == BOOT_HASTE || jungleHaste == (RUNE_HASTE+BOOT_HASTE)) {
-                        jungleHaste -= BOOT_HASTE;
+
+
+                } else if (lane == JUNGLE ) {
+                    if (changeBoot && !jungleBoots) {
+                        if ((jungleHaste == BOOT_HASTE || jungleHaste == (RUNE_HASTE + BOOT_HASTE)))
+                            jungleHaste -= BOOT_HASTE;
                         iconBoot.setImageDrawable(getDrawable(R.drawable.boots_disable));
+                        changeBoot = false;
 
-                    } else {
-                        jungleHaste += BOOT_HASTE;
+                    } else if (!changeBoot && jungleBoots) {
+                        if (jungleHaste != BOOT_HASTE && jungleHaste != (RUNE_HASTE + BOOT_HASTE))
+                            jungleHaste += BOOT_HASTE;
                         iconBoot.setImageDrawable(getDrawable(R.drawable.boots));
-
+                        changeBoot = true;
                     }
-                    jungleBoots=false;
-                }
-                else if (lane == MID && midBoots) {
-                    if (midHaste == BOOT_HASTE || midHaste == (RUNE_HASTE+BOOT_HASTE)) {
-                        midHaste -= BOOT_HASTE;
+
+                } else if (lane == MID ) {
+                    if (changeBoot && !midBoots) {
+                        if ((midHaste == BOOT_HASTE || midHaste == (RUNE_HASTE + BOOT_HASTE)))
+                            midHaste -= BOOT_HASTE;
                         iconBoot.setImageDrawable(getDrawable(R.drawable.boots_disable));
+                        changeBoot = false;
 
-                    } else {
-                        midHaste += BOOT_HASTE;
+                    } else if (!changeBoot && midBoots) {
+                        if (midHaste != BOOT_HASTE && midHaste != (RUNE_HASTE + BOOT_HASTE))
+                            midHaste += BOOT_HASTE;
                         iconBoot.setImageDrawable(getDrawable(R.drawable.boots));
-
+                        changeBoot = true;
                     }
-                    midBoots=false;
-                }
-                else if (lane == ADC && adcBoots) {
-                    if (adcHaste == BOOT_HASTE || adcHaste == (RUNE_HASTE+BOOT_HASTE)) {
-                        adcHaste -= BOOT_HASTE;
+
+                } else if (lane == ADC ) {
+                    if (changeBoot && !adcBoots) {
+                        if ((adcHaste == BOOT_HASTE || adcHaste == (RUNE_HASTE + BOOT_HASTE)))
+                            adcHaste -= BOOT_HASTE;
                         iconBoot.setImageDrawable(getDrawable(R.drawable.boots_disable));
+                        changeBoot = false;
 
-                    } else {
-                        adcHaste += BOOT_HASTE;
+                    } else if (!changeBoot && adcBoots) {
+                        if (adcHaste != BOOT_HASTE && adcHaste != (RUNE_HASTE + BOOT_HASTE))
+                            adcHaste += BOOT_HASTE;
                         iconBoot.setImageDrawable(getDrawable(R.drawable.boots));
-
+                        changeBoot = true;
                     }
-                    adcBoots=false;
-                }
-                else if (lane == SUPPORT && supportBoots) {
-                    if (supportHaste == BOOT_HASTE || supportHaste == (RUNE_HASTE+BOOT_HASTE)) {
-                        supportHaste -= BOOT_HASTE;
+
+
+                } else if (lane == SUPPORT ) {
+                    if (changeBoot && !supportBoots) {
+                        if ((supportHaste == BOOT_HASTE || supportHaste == (RUNE_HASTE + BOOT_HASTE)))
+                            supportHaste -= BOOT_HASTE;
                         iconBoot.setImageDrawable(getDrawable(R.drawable.boots_disable));
+                        changeBoot = false;
 
-                    } else {
-                        supportHaste += BOOT_HASTE;
+                    } else if (!changeBoot && supportBoots) {
+                        if (supportHaste != BOOT_HASTE && supportHaste != (RUNE_HASTE + BOOT_HASTE))
+                            supportHaste += BOOT_HASTE;
                         iconBoot.setImageDrawable(getDrawable(R.drawable.boots));
-
+                        changeBoot = true;
                     }
-                    supportBoots=false;
+
+
                 }
 
+                if (lane == TOP ) {
 
-                else if (lane == TOP && topRune) {
-                    if (topHaste == RUNE_HASTE  || topHaste == (RUNE_HASTE+BOOT_HASTE)) {
-                        topHaste -= RUNE_HASTE;
+                    if (changeRune && !topRune) {
+                        if ((topHaste == RUNE_HASTE || topHaste == (RUNE_HASTE + BOOT_HASTE)))
+                            topHaste -= RUNE_HASTE;
                         iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight_disable));
+                        changeRune = false;
 
-                    } else {
-                        topHaste += RUNE_HASTE;
+                    } else if (!changeRune && topRune) {
+                        if (topHaste != RUNE_HASTE && topHaste != (RUNE_HASTE + BOOT_HASTE))
+                            topHaste += RUNE_HASTE;
                         iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight));
-
+                        changeRune = true;
                     }
-                    topRune=false;
-                }
-                else if (lane == JUNGLE && jungleRune) {
-                    if (jungleHaste == RUNE_HASTE  || jungleHaste == (RUNE_HASTE+BOOT_HASTE)) {
-                        jungleHaste -= RUNE_HASTE;
+
+                } else if (lane == JUNGLE ) {
+                    if (changeRune && !jungleRune) {
+                        if ((jungleHaste == RUNE_HASTE || jungleHaste == (RUNE_HASTE + BOOT_HASTE)))
+                            jungleHaste -= RUNE_HASTE;
                         iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight_disable));
+                        changeRune = false;
 
-                    } else {
-                        jungleHaste += RUNE_HASTE;
+                    } else if (!changeRune && jungleRune) {
+                        if (jungleHaste != RUNE_HASTE && jungleHaste != (RUNE_HASTE + BOOT_HASTE))
+                            jungleHaste += RUNE_HASTE;
                         iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight));
-
+                        changeRune = true;
                     }
-                    jungleRune=false;
-                }
-                else if (lane == MID && midRune) {
-                    if (midHaste == RUNE_HASTE  || midHaste == (RUNE_HASTE+BOOT_HASTE)) {
-                        midHaste -= RUNE_HASTE;
+
+
+
+                } else if (lane == MID ) {
+                    if (changeRune && !midRune) {
+                        if ((midHaste == RUNE_HASTE || midHaste == (RUNE_HASTE + BOOT_HASTE)))
+                            midHaste -= RUNE_HASTE;
                         iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight_disable));
+                        changeRune = false;
 
-                    } else {
-                        midHaste += RUNE_HASTE;
+                    } else if (!changeRune && midRune) {
+                        if (midHaste != RUNE_HASTE && midHaste != (RUNE_HASTE + BOOT_HASTE))
+                            midHaste += RUNE_HASTE;
                         iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight));
-
+                        changeRune = true;
                     }
-                    midRune=false;
-                }
-                else if (lane == ADC && adcRune) {
-                    if (adcHaste == RUNE_HASTE  || adcHaste == (RUNE_HASTE+BOOT_HASTE)) {
-                        adcHaste -= RUNE_HASTE;
+
+
+                } else if (lane == ADC ) {
+                    if (changeRune && !adcRune) {
+                        if ((adcHaste == RUNE_HASTE || adcHaste == (RUNE_HASTE + BOOT_HASTE)))
+                            adcHaste -= RUNE_HASTE;
                         iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight_disable));
+                        changeRune = false;
 
-                    } else {
-                        adcHaste += RUNE_HASTE;
+                    } else if (!changeRune && adcRune) {
+                        if (adcHaste != RUNE_HASTE && adcHaste != (RUNE_HASTE + BOOT_HASTE))
+                            adcHaste += RUNE_HASTE;
                         iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight));
-
+                        changeRune = true;
                     }
-                    adcRune=false;
-                }
-                else if (lane == SUPPORT && supportRune) {
-                    if (supportHaste == RUNE_HASTE  || supportHaste == (RUNE_HASTE+BOOT_HASTE)) {
-                        supportHaste -= RUNE_HASTE;
+
+
+                } else if (lane == SUPPORT ) {
+                    if (changeRune && !supportRune) {
+                        if ((supportHaste == RUNE_HASTE || supportHaste == (RUNE_HASTE + BOOT_HASTE)))
+                            supportHaste -= RUNE_HASTE;
                         iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight_disable));
+                        changeRune = false;
 
-                    } else {
-                        supportHaste += RUNE_HASTE;
+                    } else if (!changeRune && supportRune) {
+                        if (supportHaste != RUNE_HASTE && supportHaste != (RUNE_HASTE + BOOT_HASTE))
+                            supportHaste += RUNE_HASTE;
                         iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight));
-
+                        changeRune = true;
                     }
-                    supportRune=false;
+
+
                 }
-
-
 
 
                 if (lane == TOP) {
@@ -696,16 +725,16 @@ public class TimerActivity extends AppCompatActivity {
                 }
                 if (lane != KINDRED && lane != NORMAL_TIMER && lane != ANIVIA && lane != ZHONYAS) {
                     double cdr = haste[0] / (haste[0] + 100) * 100;
-                    double cdrEmTempo=(originalTime[0] * 1000 * cdr/100);
+                    double cdrEmTempo = (originalTime[0] * 1000 * cdr / 100);
 //                    System.out.println("TimerActivity.onTick cdr"+cdr+" cdremtempo"+cdrEmTempo);
 //                    System.out.println("TimerActivity.onTick entrou aq cdr:"+cdr);
-                    time[0]= (long) (originalTime[0] * 1000 -cdrEmTempo - tempoDecorrido[0]);
+                    time[0] = (long) (originalTime[0] * 1000 - cdrEmTempo - tempoDecorrido[0]);
                 }
-                if(lane==ZHONYAS){
-                    if(haste[0]==RUNE_HASTE|| haste[0]==(RUNE_HASTE+BOOT_HASTE)){
+                if (lane == ZHONYAS) {
+                    if (haste[0] == RUNE_HASTE || haste[0] == (RUNE_HASTE + BOOT_HASTE)) {
                         double cdr = 10 / (10 + 100) * 100;
-                        double cdrEmTempo=(originalTime[0] * 1000 * cdr/100);
-                        time[0]= (long) (originalTime[0] * 1000 -cdrEmTempo - tempoDecorrido[0]);
+                        double cdrEmTempo = (originalTime[0] * 1000 * cdr / 100);
+                        time[0] = (long) (originalTime[0] * 1000 - cdrEmTempo - tempoDecorrido[0]);
                     }
 
                 }
@@ -1335,8 +1364,7 @@ public class TimerActivity extends AppCompatActivity {
                 return;
 
             }
-        }
-        else if (verifyCommands(word1, runeExtra) || verifyCommands(word2, runeExtra)) {
+        } else if (verifyCommands(word1, runeExtra) || verifyCommands(word2, runeExtra)) {
             if (lane == 2) {
 
                 topRune = !topRune;
@@ -1384,59 +1412,15 @@ public class TimerActivity extends AppCompatActivity {
             int finalLane = lane;
             btnBoots.setOnClickListener(view -> {
                 if (finalLane == TOP) {
-                    if (topHaste == BOOT_HASTE || topHaste == (RUNE_HASTE+BOOT_HASTE)) {
-                        topHaste -= BOOT_HASTE;
-                        iconBoot.setImageDrawable(getDrawable(R.drawable.boots_disable));
-
-                    } else {
-                        topHaste += BOOT_HASTE;
-                        iconBoot.setImageDrawable(getDrawable(R.drawable.boots));
-
-                    }
-                }
-                else if (finalLane == JUNGLE) {
-                    if (jungleHaste == BOOT_HASTE || jungleHaste == (RUNE_HASTE+BOOT_HASTE)) {
-                        jungleHaste -= BOOT_HASTE;
-                        iconBoot.setImageDrawable(getDrawable(R.drawable.boots_disable));
-
-                    } else {
-                        jungleHaste += BOOT_HASTE;
-                        iconBoot.setImageDrawable(getDrawable(R.drawable.boots));
-
-                    }
-                }
-                else if (finalLane == MID) {
-                    if (midHaste == BOOT_HASTE || midHaste == (RUNE_HASTE+BOOT_HASTE)) {
-                        midHaste -= BOOT_HASTE;
-                        iconBoot.setImageDrawable(getDrawable(R.drawable.boots_disable));
-
-                    } else {
-                        midHaste += BOOT_HASTE;
-                        iconBoot.setImageDrawable(getDrawable(R.drawable.boots));
-
-                    }
-                }
-                else if (finalLane == ADC) {
-                    if (adcHaste == BOOT_HASTE || adcHaste == (RUNE_HASTE+BOOT_HASTE)) {
-                        adcHaste -= BOOT_HASTE;
-                        iconBoot.setImageDrawable(getDrawable(R.drawable.boots_disable));
-
-                    } else {
-                        adcHaste += BOOT_HASTE;
-                        iconBoot.setImageDrawable(getDrawable(R.drawable.boots));
-
-                    }
-                }
-               else if (finalLane == SUPPORT) {
-                    if (supportHaste == BOOT_HASTE || supportHaste == (RUNE_HASTE+BOOT_HASTE)) {
-                        supportHaste -= BOOT_HASTE;
-                        iconBoot.setImageDrawable(getDrawable(R.drawable.boots_disable));
-
-                    } else {
-                        supportHaste += BOOT_HASTE;
-                        iconBoot.setImageDrawable(getDrawable(R.drawable.boots));
-
-                    }
+                    topBoots = !topBoots;
+                } else if (finalLane == JUNGLE) {
+                    jungleBoots = !jungleBoots;
+                } else if (finalLane == MID) {
+                    midBoots = !midBoots;
+                } else if (finalLane == ADC) {
+                    adcBoots = !adcBoots;
+                } else if (finalLane == SUPPORT) {
+                    supportBoots = !supportBoots;
                 }
                 return;
             });
@@ -1444,61 +1428,16 @@ public class TimerActivity extends AppCompatActivity {
 
 
                 if (finalLane == TOP) {
-                    if (topHaste == RUNE_HASTE  || topHaste == (RUNE_HASTE+BOOT_HASTE)) {
-                        topHaste -= RUNE_HASTE;
-                        iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight_disable));
-
-                    } else {
-                        topHaste += RUNE_HASTE;
-                        iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight));
-
-                    }
+                    topRune = !topRune;
+                } else if (finalLane == JUNGLE) {
+                    jungleRune = !jungleRune;
+                } else if (finalLane == MID) {
+                    midRune = !midRune;
+                } else if (finalLane == ADC) {
+                    adcRune = !adcRune;
+                } else if (finalLane == SUPPORT) {
+                    supportRune = !supportRune;
                 }
-                else if (finalLane == JUNGLE) {
-                    if (jungleHaste == RUNE_HASTE  || jungleHaste == (RUNE_HASTE+BOOT_HASTE)) {
-                        jungleHaste -= RUNE_HASTE;
-                        iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight_disable));
-
-                    } else {
-                        jungleHaste += RUNE_HASTE;
-                        iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight));
-
-                    }
-                }
-                else if (finalLane == MID) {
-                    if (midHaste == RUNE_HASTE  || midHaste == (RUNE_HASTE+BOOT_HASTE)) {
-                        midHaste -= RUNE_HASTE;
-                        iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight_disable));
-
-                    } else {
-                        midHaste += RUNE_HASTE;
-                        iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight));
-
-                    }
-                }
-                else if (finalLane == ADC) {
-                    if (adcHaste == RUNE_HASTE  || adcHaste == (RUNE_HASTE+BOOT_HASTE)) {
-                        adcHaste -= RUNE_HASTE;
-                        iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight_disable));
-
-                    } else {
-                        adcHaste += RUNE_HASTE;
-                        iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight));
-
-                    }
-                }
-                else if (finalLane == SUPPORT) {
-                    if (supportHaste == RUNE_HASTE  || supportHaste == (RUNE_HASTE+BOOT_HASTE)) {
-                        supportHaste -= RUNE_HASTE;
-                        iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight_disable));
-
-                    } else {
-                        supportHaste += RUNE_HASTE;
-                        iconRune.setImageDrawable(getDrawable(R.drawable.cosmic_insight));
-
-                    }
-                }
-
 
 
                 return;

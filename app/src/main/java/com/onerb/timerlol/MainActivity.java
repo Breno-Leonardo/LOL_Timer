@@ -24,9 +24,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.onerb.timerlol.api.InfosGameApiUtil;
 import com.onerb.timerlol.api.MatchApiUtil;
 import com.onerb.timerlol.ui.main.MainViewModel;
 
@@ -98,8 +96,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.btnStartInCard).setOnTouchListener((view, motionEvent) -> {
-            System.out.println("MainActivity.onCreate route: " + InfosGameApiUtil.REGIONS_ROUTES[dropdownPosition]);
-            MatchApiUtil matchApiUtil = new MatchApiUtil(getViewModel(), etSummonerName.getText().toString(), InfosGameApiUtil.REGIONS_ROUTES[dropdownPosition]);
+            System.out.println("MainActivity.onCreate route: " + MatchApiUtil.REGIONS_ROUTES[dropdownPosition]);
+            MatchApiUtil matchApiUtil = new MatchApiUtil(getViewModel(), etSummonerName.getText().toString(), MatchApiUtil.REGIONS_ROUTES[dropdownPosition]);
 
             try {
                 matchApiUtil.execute().get();
@@ -178,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        String[] items = new String[]{InfosGameApiUtil.BRAZIL, InfosGameApiUtil.EUNE, InfosGameApiUtil.EUW1, InfosGameApiUtil.JP1, InfosGameApiUtil.KR, InfosGameApiUtil.LA1, InfosGameApiUtil.LA2, InfosGameApiUtil.NA1, InfosGameApiUtil.OC1, InfosGameApiUtil.TR1, InfosGameApiUtil.RU};
+        String[] items = new String[]{MatchApiUtil.BRAZIL, MatchApiUtil.EUNE, MatchApiUtil.EUW1, MatchApiUtil.JP1, MatchApiUtil.KR, MatchApiUtil.LA1, MatchApiUtil.LA2, MatchApiUtil.NA1, MatchApiUtil.OC1, MatchApiUtil.TR1, MatchApiUtil.RU};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
     }

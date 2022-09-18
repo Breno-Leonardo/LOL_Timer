@@ -37,5 +37,12 @@
     <string name="mix_commands">Вы можете смешивать команды с разных языков</string>
     <string name="putSummonerName">Укажите ваше имя призывателя</string>
     <string name="region">Регион:</string>
+    <string name="explanation_rune">Активация выполняется нажатием или использованием слова Rune вместе с lane , например: </string>
+    <string name="rune">Руна</string>
+    <string name="goOffline">Начать автономный режим</string>
+    <string name="error_conection">Ошибка подключения</string>
+    <string name="change">Изменить</string>
+    <string name="change_summoner_name">Изменить имя призывателя</string>
+    <string name="with_rune">С руной:</string>
 
 </resources>

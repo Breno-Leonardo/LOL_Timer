@@ -37,5 +37,12 @@
     <string name="mix_commands">다른 언어의 명령을 혼합할 수 있습니다.</string>
     <string name="putSummonerName">소환자 이름 입력</string>
     <string name="region">지역:</string>
+    <string name="explanation_rune">활성화는 레인과 함께 Rune이라는 단어를 클릭하거나 사용하여 수행됩니다. 예: </string>
+    <string name="rune">룬</string>
+    <string name="goOffline">오프라인 시작</string>
+    <string name="error_conection">연결 오류</string>
+    <string name="change">변경</string>
+    <string name="change_summoner_name">소환사 이름 변경</string>
+    <string name="with_rune">룬 사용:</string>
 
 </resources>

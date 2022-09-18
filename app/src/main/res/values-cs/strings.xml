@@ -37,5 +37,11 @@
     <string name="mix_commands">Můžete kombinovat příkazy z různých jazyků</string>
     <string name="putSummonerName">Zadejte své jméno Summoner</string>
     <string name="region">Region:</string>
-
+    <string name="explanation_rune">Aktivace se provádí kliknutím nebo použitím slova Rune spolu s pruhem, například: </string>
+    <string name="rune">Runa</string>
+    <string name="goOffline">Zahájit režim offline</string>
+    <string name="error_conection">Chyba připojení</string>
+    <string name="change">Změnit</string>
+    <string name="change_summoner_name">Změnit jméno vyvolávače</string>
+    <string name="with_rune">S runou:</string>
 </resources>

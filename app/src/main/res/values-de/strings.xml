@@ -37,5 +37,13 @@
     <string name="mix_commands">Du kannst Befehle aus verschiedenen Sprachen mischen</string>
     <string name="putSummonerName">Gib deinen Beschwörernamen ein</string>
     <string name="region">Region:</string>
+    <string name="explanation_rune">Die Aktivierung erfolgt durch Anklicken oder Verwenden des Wortes Rune zusammen mit Lane , zum Beispiel: </string>
+    <string name="rune">Rune</string>
+    <string name="goOffline">Offline starten</string>
+    <string name="error_conection">Verbindungsfehler</string>
+    <string name="change">Ändern</string>
+    <string name="change_summoner_name">Beschwörernamen ändern</string>
+    <string name="with_rune">Mit der Rune:</string>
+
 
 </resources>

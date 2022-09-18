@@ -37,5 +37,12 @@
     <string name="mix_commands">Możesz mieszać polecenia z różnych języków</string>
     <string name="putSummonerName">Podaj swoje imię przywoływacza</string>
     <string name="region">Region:</string>
+    <string name="explanation_rune">Aktywacja odbywa się poprzez kliknięcie lub użycie słowa Rune wraz z pasem , na przykład: </string>
+    <string name="rune">Ruki</string>
+    <string name="goOffline">Uruchom offline</string>
+    <string name="error_conection">Błąd połączenia</string>
+    <string name="change">Zmień</string>
+    <string name="change_summoner_name">Zmień imię przywoływacza</string>
+    <string name="with_rune">Z runą:</string>
 
 </resources>

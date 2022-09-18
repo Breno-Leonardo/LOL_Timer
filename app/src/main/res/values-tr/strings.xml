@@ -37,4 +37,11 @@
     <string name="mix_commands">Farklı dillerdeki komutları karıştırabilirsiniz</string>
     <string name="putSummonerName">Sihirdar Adınızı Girin</string>
     <string name="region">Bölge:</string>
+    <string name="explanation_rune">Etkinleştirme, Lane ile birlikte Rune kelimesi tıklanarak veya kullanılarak yapılır, örneğin: </string>
+    <string name="rune">Rün</string>
+    <string name="goOffline">Çevrimdışı Başlat</string>
+    <string name="error_conection">Bağlantı Hatası</string>
+    <string name="change">Değiştir</string>
+    <string name="change_summoner_name">Sihirdar Adını Değiştir</string>
+    <string name="with_rune">Rün ile:</string>
 </resources>

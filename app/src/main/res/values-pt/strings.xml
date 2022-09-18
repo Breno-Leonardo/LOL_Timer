@@ -36,4 +36,11 @@
     <string name="mix_commands">Você pode misturar comandos de diferentes idiomas</string>
     <string name="putSummonerName">Coloque seu nome de invocador</string>
     <string name="region">Região:</string>
+    <string name="explanation_rune">A ativação é feita clicando ou usando a palavra Rune, junto com lane, por exemplo: </string>
+    <string name="rune">Runa</string>
+    <string name="goOffline">Iniciar offline</string>
+    <string name="error_conection">Erro de conexão</string>
+    <string name="change">Alterar</string>
+    <string name="change_summoner_name">Alterar Nome do Invocador</string>
+    <string name="with_rune">Com a runa:</string>
 </resources>

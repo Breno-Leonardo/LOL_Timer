@@ -37,5 +37,12 @@
     <string name="mix_commands">異なる言語のコマンドを混在させることができます</string>
     <string name="putSummonerName">あなたのサモナー名を入れてください</string>
     <string name="region">地域:</string>
+    <string name="explanation_rune">アクティブ化は、Rune という単語をクリックするか、lane と一緒に使用することで行われます。例: </string>
+    <string name="rune">ルーン</string>
+    <string name="goOffline">オフラインで開始</string>
+    <string name="error_conection">接続エラー</string>
+    <string name="change">変更</string>
+    <string name="change_summoner_name">サモナー名を変更</string>
+    <string name="with_rune">ルーンで:</string>
 
 </resources>

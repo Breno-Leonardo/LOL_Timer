@@ -36,4 +36,11 @@
     <string name="mix_commands">你可以混合不同语言的命令</string>
     <string name="putSummonerName">输入你的召唤师姓名</string>
     <string name="region">地区：</string>
+    <string name="explanation_rune">激活是通过点击或使用 Rune 这个词和 lane 来完成的，例如：</string>
+    <string name="rune">符文</string>
+    <string name="goOffline">开始离线</string>
+    <string name="error_conection">连接错误</string>
+    <string name="change">更改</string>
+    <string name="change_summoner_name">更改召唤师名称</string>
+    <string name="with_rune">用符文：</string>
 </resources>

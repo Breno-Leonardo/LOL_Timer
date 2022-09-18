@@ -37,5 +37,12 @@
     <string name="mix_commands">Különböző nyelvű parancsokat keverhet</string>
     <string name="putSummonerName">Adja meg a hívó nevét</string>
     <string name="region">Régió:</string>
+    <string name="explanation_rune">Az aktiválás a Rune szóra kattintva vagy a lane melletti használatával történik, például: </string>
+    <string name="rune">Rúna</string>
+    <string name="goOffline">Indítsa el az offline módot</string>
+    <string name="error_conection">Kapcsolódási hiba</string>
+    <string name="change">Módosítás</string>
+    <string name="change_summoner_name">Idéző nevének módosítása</string>
+    <string name="with_rune">A rúnával:</string>
 
 </resources>

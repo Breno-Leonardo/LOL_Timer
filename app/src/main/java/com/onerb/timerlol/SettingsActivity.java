@@ -16,6 +16,8 @@ import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -27,16 +29,20 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.onerb.timerlol.api.MatchApiUtil;
 
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.concurrent.ExecutionException;
 
 public class SettingsActivity extends AppCompatActivity {
     private Spinner dropdownLanguage, dropdownLanguageApp;
     private SharedPreferences sharedPref;
     private Activity activity;
     private AdView mAdView;
-
+    private Spinner dropdown;
+    private EditText etSummonerName;
+    private int dropdownPosition = -1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,7 +110,7 @@ public class SettingsActivity extends AppCompatActivity {
             return false;
         });
 
-
+        verifySummonerAndRegion();
         dropdownLanguage = findViewById(R.id.spinnerLanguage);
         dropdownLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -191,8 +197,90 @@ public class SettingsActivity extends AppCompatActivity {
         TextView txtLanguageApp= findViewById(R.id.languageAppTxt);
         txtLanguageApp.setText(txtLanguageApp.getText()+" App");
 
+        findViewById(R.id.btnCancel).setOnClickListener(view -> {
+            findViewById(R.id.cardIdAndRegionSettings).setVisibility(View.GONE);
+
+        });
+        findViewById(R.id.btnChangeSummoner).setOnClickListener(view -> {
+            findViewById(R.id.cardIdAndRegionSettings).setVisibility(View.VISIBLE);
+
+        });
+        Button btnCancel= findViewById(R.id.btnCancel);
+        btnCancel.setText(getString(android.R.string.cancel));
+        findViewById(R.id.btnChange).setOnClickListener(view -> {
+            System.out.println("MainActivity.onCreate route: " + MatchApiUtil.REGIONS_ROUTES[dropdownPosition]);
+            MatchApiUtil matchApiUtil = new MatchApiUtil( etSummonerName.getText().toString(), MatchApiUtil.REGIONS_ROUTES[dropdownPosition]);
+
+            try {
+                matchApiUtil.execute().get();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            if (matchApiUtil.getRespCode() == 200) {//sucesss
+                editor.putBoolean("offline",false );
+                String name= String.valueOf(etSummonerName.getText());
+                name.replace(" ","");
+                System.out.println("MainActivity.onCreate o nome é "+name);
+                editor.putString("name",name );
+                editor.putString("route",MatchApiUtil.REGIONS_ROUTES[dropdownPosition] );
+                editor.commit();
+                findViewById(R.id.cardIdAndRegionSettings).setVisibility(View.GONE);
+            } else if (matchApiUtil.getRespCode() == 404) {
+                findViewById(R.id.textErrorInCard).setVisibility(View.VISIBLE);
+                TextView txt=findViewById(R.id.textErrorInCard);
+                txt.setText(R.string.error);
+            }
+            else {
+                TextView txt=findViewById(R.id.textErrorInCard);
+                txt.setText(R.string.error_conection);
+                findViewById(R.id.textErrorInCard).setVisibility(View.VISIBLE);
+            }
+            System.out.println("MainActivity.onCreate resposta: " + matchApiUtil.getRespCode());
+
+        });
+
+    }
+    public void verifySummonerAndRegion() {
+        etSummonerName = findViewById(R.id.editTextSummonerName);
+        etSummonerName.setOnTouchListener((view, motionEvent) -> {
+            if (etSummonerName.getText().toString().equals(getResources().getString(R.string.putSummonerName)))
+                etSummonerName.setText("");
+            return false;
+        });
+        dropdown = findViewById(R.id.spinnerRegion);
+        dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                if (((TextView) parentView.getChildAt(0)) != null)
+                    ((TextView) parentView.getChildAt(0)).setTextColor(Color.BLACK);
+                dropdownPosition = position;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        String[] items = new String[]{MatchApiUtil.BRAZIL, MatchApiUtil.EUNE, MatchApiUtil.EUW1, MatchApiUtil.JP1, MatchApiUtil.KR, MatchApiUtil.LA1, MatchApiUtil.LA2, MatchApiUtil.NA1, MatchApiUtil.OC1, MatchApiUtil.TR1, MatchApiUtil.RU};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        dropdown.setAdapter(adapter);
     }
 
+    public void showCardIdAndRegion(boolean bool) {
+        if(bool) {
+            findViewById(R.id.btnStart).setEnabled(false);
+            findViewById(R.id.btnCommands).setEnabled(false);
+            findViewById(R.id.btnSettings).setEnabled(false);
+            findViewById(R.id.shadowLayout).setVisibility(View.VISIBLE);
+            findViewById(R.id.cardIdAndRegion).setVisibility(View.VISIBLE);
+        }
+        else{
+
+        }
+    }
     public static void setLocale(Activity activity, String languageCode) {
         Locale locale = new Locale(languageCode);
         Locale.setDefault(locale);

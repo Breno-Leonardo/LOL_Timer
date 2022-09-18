@@ -40,6 +40,7 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.onerb.timerlol.api.MatchApiUtil;
 import com.onerb.timerlol.api.SummonerInfos;
 import com.onerb.timerlol.ui.main.MainViewModel;
 
@@ -47,6 +48,7 @@ import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.concurrent.ExecutionException;
 
 public class TimerActivity extends AppCompatActivity {
     private static final int RECORD_AUDIO_REQUEST_CODE = 0;
@@ -212,11 +214,11 @@ public class TimerActivity extends AppCompatActivity {
     private LinearLayout container, containerInfos;
     private CardView currentTouch;//to know which timer is playing
     private HashMap<CardView, CountDownTimer> timers = new HashMap<>();//to cancel the timer by dragging to the right
-    private SummonerInfos.Participants[] participantsInfos = null;
     private SharedPreferences sharedPref;
     private int apiRespCode = -1;
     private String language;
     private AdView mAdView;
+    private boolean gameStart=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -267,6 +269,7 @@ public class TimerActivity extends AppCompatActivity {
 
 
         sharedPref = this.getSharedPreferences("prefs", Context.MODE_PRIVATE);
+
         // add commands
         addCustomCommands();
 
@@ -355,6 +358,13 @@ public class TimerActivity extends AppCompatActivity {
             }
         };
 
+
+          new Runnable() {
+            public void run() {
+               checkRunes();
+
+            }
+        }.run();
     }
 
     public MainViewModel getViewModel() {
@@ -456,6 +466,45 @@ public class TimerActivity extends AppCompatActivity {
 
         });
         speechRecognizer.startListening(intent);
+    }
+    private void checkRunes(){
+        if (!sharedPref.getBoolean("offline",true) ) {
+            MatchApiUtil matchApiUtil = new MatchApiUtil(sharedPref.getString("name", "asfasfasfasfasfasfasfafasfafasf"), sharedPref.getString("route", "asfasfasfasfasfasfasfafasfafasf"));
+
+            matchApiUtil.execute();
+            SummonerInfos.Participants[] participantsInfos = null;
+
+            if (matchApiUtil.getRespCode() == 200) {//sucesss
+                participantsInfos=matchApiUtil.participantsInfos;
+                int teamid=-1;
+                for (int i = 0; i < 10; i++) {
+                    if(participantsInfos[i].getSummonerName().equals(sharedPref.getString("name","fsdfsdfsdfsdfsdfsfsddfsdf"))){
+                        if(participantsInfos[i].getTeamID()==100)
+                            teamid=200;
+                        else if(participantsInfos[i].getTeamID()==200)
+                            teamid=100;
+                    }
+
+                }
+
+            } else if (matchApiUtil.getRespCode() == 404) {
+                System.out.println("TimerActivity.checkRunes erro");
+            }
+
+            new CountDownTimer(10000, 1000) {
+                @Override
+                public void onTick(long l) {
+
+                }
+
+
+                @Override
+                public void onFinish() {
+                    checkRunes();
+
+                }
+            }.start();
+        }
     }
 
 
@@ -748,6 +797,7 @@ public class TimerActivity extends AppCompatActivity {
                     time[0] -= 1000;
                     tempoDecorrido[0] += 1000;
                 }
+
                 updateTextTime(time[0], textView);
             }
 
@@ -1519,6 +1569,26 @@ public class TimerActivity extends AppCompatActivity {
                     v.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
                 } else {
                     v.vibrate(1000);
+                }
+            }
+            // checando runas
+            if (!sharedPref.getBoolean("offline", true)) {
+                MatchApiUtil matchApiUtil = new MatchApiUtil(sharedPref.getString("name","Not contain this name &*&*(¨*("), sharedPref.getString("route","Not contain this name &*&*(¨*("));
+                try {
+                    matchApiUtil.execute().get();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                if (matchApiUtil.getRespCode() == 200) {//sucesss
+
+                } else if (matchApiUtil.getRespCode() == 404) {
+
+                }
+                else {
+
                 }
             }
         }

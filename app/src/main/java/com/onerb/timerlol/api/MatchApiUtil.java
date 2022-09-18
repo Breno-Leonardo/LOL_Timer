@@ -45,8 +45,7 @@ public class MatchApiUtil extends AsyncTask<Void, Void, String> {
     public static final int CODE_SUMMONER_ID = 1;
     public static final int CODE_PARTICIPANTS = 2;
 
-    private MainViewModel viewModel;
-    private SummonerInfos.Participants[] participantsInfos = null;
+    public SummonerInfos.Participants[] participantsInfos = null;
 
     private String summonerId = null;
     private String summonerName = null;
@@ -57,18 +56,17 @@ public class MatchApiUtil extends AsyncTask<Void, Void, String> {
     private StringBuilder respParticipants;
 
 
-    public MatchApiUtil(MainViewModel viewModel, String summonerName, String summonerRegionRoute) {
-        this.viewModel = viewModel;
+    public MatchApiUtil( String summonerName, String summonerRegionRoute) {
         this.summonerName = summonerName;
         this.summonerRegionRoute = summonerRegionRoute;
     }
 
 
     @Override
-    protected String doInBackground(Void... voids) {
+    public String doInBackground(Void... voids) {
         if (summonerId == null)
             summonerId = getSummonerId();
-        if (summonerId == null)
+        if (summonerId != null)
             return getPaticipants();
 
         return null;
@@ -112,7 +110,7 @@ public class MatchApiUtil extends AsyncTask<Void, Void, String> {
         return null;
     }
 
-    private String getPaticipants() {
+    public String getPaticipants() {
         if (summonerId != null) {
             respParticipants = new StringBuilder();
 
@@ -145,12 +143,10 @@ public class MatchApiUtil extends AsyncTask<Void, Void, String> {
                 for (int i = 5; i < participants.length; i++) {
                     System.out.println("TimerActivity.onCreate paticipant " + i + " perks:" + participants[i].getPerks().perkIds.toString());
                 }
-                for (int i = 5; i < participants.length; i++) {
-                    System.out.println("TimerActivity.onCreate paticipant " + i + " perks:" + participants[i].getPerks().perkIds.toString());
-                }
 
+                System.out.println("MatchApiUtil.getPaticipants summonerId: "+summonerId);
             } else
-                return "null";
+                return "data";
         }
         return "null";
     }

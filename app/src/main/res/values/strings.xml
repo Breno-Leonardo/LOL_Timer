@@ -1,8 +1,8 @@
 <resources>
 
 
-    <string name="app_name">LOL Timer</string>
-    <string name="title_app">LOL TIMER</string>
+    <string name="app_name">LoLTimer</string>
+    <string name="title_app">LoLTimer</string>
 
 
     <string name="settings">SETTINGS</string>
@@ -44,6 +44,9 @@
 
     <string name="explanation_rune">Activation is done by clicking or using the word Rune, along with lane, for example: </string>
     <string name="rune">Rune</string>
-
+    <string name="goOffline">Start Offline</string>
+    <string name="error_conection">Connection Error</string>
+    <string name="change">Change</string>
+    <string name="change_summoner_name">Change Summoner Name</string>
 
 </resources>

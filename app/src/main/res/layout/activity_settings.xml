@@ -89,15 +89,16 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="7dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="7dp"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="10dp"
             android:backgroundTint="@color/white"
+            app:cardCornerRadius="20dp"
 
+            app:cardElevation="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView">
@@ -106,13 +107,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginBottom="7dp">
+                android:layout_marginBottom="7dp"
+                android:orientation="vertical">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="7dp">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -125,11 +127,12 @@
                         android:typeface="monospace">
 
                     </TextView>
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
                         android:layout_marginLeft="1dp"
+                        android:layout_marginTop="5dp"
                         android:gravity="center"
                         android:text="@string/settings"
                         android:textColor="@color/greenTime"
@@ -152,9 +155,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginLeft="15dp">
-
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="20dp">
 
 
                         <TextView
@@ -168,6 +170,7 @@
                             android:typeface="monospace">
 
                         </TextView>
+
                         <Spinner
                             android:id="@+id/spinnerLanguage"
                             android:layout_width="match_parent"
@@ -183,15 +186,13 @@
                             android:theme="@style/spinnerTheme" />
 
 
-
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginLeft="15dp">
-
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="20dp">
 
 
                         <TextView
@@ -205,25 +206,24 @@
                             android:typeface="monospace">
 
                         </TextView>
+
                         <Switch
                             android:id="@+id/switchVibrateOnFinish"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:scaleX="1.2"
-                            android:scaleY="1.2"
-                            >
+                            android:scaleY="1.2">
 
                         </Switch>
 
 
-
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginLeft="15dp">
-
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="20dp">
 
 
                         <TextView
@@ -237,28 +237,25 @@
                             android:typeface="monospace">
 
                         </TextView>
+
                         <Switch
                             android:id="@+id/switchVibrateOnCreate"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:scaleX="1.2"
-                            android:scaleY="1.2"
-                            >
+                            android:scaleY="1.2">
 
                         </Switch>
-
 
 
                     </LinearLayout>
 
 
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginLeft="15dp">
-
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="20dp">
 
 
                         <TextView
@@ -272,16 +269,15 @@
                             android:typeface="monospace">
 
                         </TextView>
+
                         <Switch
                             android:id="@+id/switchSpeakOnEnd"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:scaleX="1.2"
-                            android:scaleY="1.2"
-                            >
+                            android:scaleY="1.2">
 
                         </Switch>
-
 
 
                     </LinearLayout>
@@ -289,9 +285,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginLeft="15dp">
-
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="20dp">
 
 
                         <TextView
@@ -306,6 +301,7 @@
                             android:typeface="monospace">
 
                         </TextView>
+
                         <Spinner
                             android:id="@+id/spinnerLanguageApp"
                             android:layout_width="match_parent"
@@ -321,18 +317,175 @@
                             android:theme="@style/spinnerTheme" />
 
 
-
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="20dp">
 
 
+                        <TextView
+                            android:layout_width="230dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:text="@string/change_summoner_name"
+                            android:textColor="@color/black"
+                            android:textSize="17dp"
+                            android:textStyle="bold"
+                            android:typeface="monospace">
+
+                        </TextView>
+
+                        <Button
+                            android:id="@+id/btnChangeSummoner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="60dp"
+                            android:layout_marginLeft="10dp"
+                            android:backgroundTint="@color/greenTime"
+                            android:drawableLeft="@drawable/ic_text_box_edit_outline"
+                            android:shadowColor="@color/white"
+                            android:shadowRadius="50"
+                            android:text="@string/change"
+
+                            android:textColor="@color/black"
+                            android:textSize="15dp"
+                            android:textStyle="bold"
+
+                            />
 
 
+                    </LinearLayout>
                 </LinearLayout>
 
 
             </LinearLayout>
 
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardIdAndRegionSettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:translationZ="70dp"
+            android:visibility="gone"
+            app:cardBackgroundColor="@color/black"
+            app:cardCornerRadius="20dp"
+
+            app:layout_constraintBottom_toBottomOf="@+id/adViewSettingsActivity"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/summonerName"
+                    android:textColor="@color/greenTime"
+                    android:textSize="15dp"
+                    android:textStyle="bold">
+
+                </TextView>
+
+                <EditText
+                    android:id="@+id/editTextSummonerName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:backgroundTint="@color/greenTime"
+                    android:text="@string/putSummonerName"
+                    android:textColor="@color/greenTime">
+
+                </EditText>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/region"
+                    android:textColor="@color/greenTime"
+                    android:textColorHighlight="@color/white"
+                    android:textSize="15dp"
+                    android:textStyle="bold">
+
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/spinnerRegion"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="50dp"
+                    android:background="@android:drawable/btn_dropdown"
+                    android:backgroundTint="@color/greenTime"
+                    android:backgroundTintMode="multiply"
+                    android:popupBackground="@color/greenTime"
+                    android:spinnerMode="dropdown"
+                    android:textAlignment="center"
+                    android:theme="@style/spinnerTheme" />
+
+                <Button
+                    android:id="@+id/btnChange"
+                    android:layout_width="170dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="25dp"
+                    android:backgroundTint="@color/greenTime"
+                    android:drawableLeft="@drawable/ic_text_box_edit_outline"
+                    android:shadowColor="@color/white"
+                    android:shadowRadius="50"
+                    android:text="@string/change"
+
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+
+                    />
+
+                <Button
+                    android:id="@+id/btnCancel"
+                    android:layout_width="170dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="15dp"
+                    android:backgroundTint="@color/greenTime"
+                    android:drawableLeft="@drawable/ic_close_box"
+                    android:shadowColor="@color/white"
+                    android:shadowRadius="50"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:visibility="visible"
+
+                    />
+
+                <TextView
+                    android:id="@+id/textErrorInCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/error"
+                    android:textColor="@color/greenTime"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:visibility="gone">
+
+                </TextView>
+
+            </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <com.google.android.gms.ads.AdView

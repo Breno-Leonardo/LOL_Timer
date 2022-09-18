@@ -3,10 +3,14 @@ package com.onerb.timerlol;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -20,6 +24,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -64,9 +69,10 @@ public class MainActivity extends AppCompatActivity {
 
         viewModel = getViewModel();
         viewModel.showImages.setValue(true);
+        Button btnStartOff= findViewById(R.id.btnStartInCardOffline);
+        btnStartOff.setText(getString(R.string.start)+" Offline");
 
-
-//        verifySummonerAndRegion();
+        verifySummonerAndRegion();
 
 
                 am = getApplicationContext().getAssets();
@@ -84,20 +90,49 @@ public class MainActivity extends AppCompatActivity {
             checkPermission();
         }
 
-        findViewById(R.id.btnStart).setOnTouchListener((view, motionEvent) -> {
-//            if ((viewModel.summonerName.getValue() != null) && (viewModel.region.getValue() != null)) {
+        findViewById(R.id.btnStart).setOnClickListener(view -> {
+            if (!sharedPref.getBoolean("offline",true) ) {
+                MatchApiUtil matchApiUtil = new MatchApiUtil(sharedPref.getString("name","Not contain this name &*&*(¨*("), sharedPref.getString("route","Not contain this name &*&*(¨*("));
+                System.out.println("MainActivity.onCreate Nome: "+sharedPref.getString("name","Not contain this name &*&*(¨*(")+ " Route:"+sharedPref.getString("route","Not contain this name &*&*(¨*("));
+                try {
+                    matchApiUtil.execute().get();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (matchApiUtil.getRespCode() == 404) {
+                    showCardIdAndRegion();
+                    findViewById(R.id.textErrorInCard).setVisibility(View.VISIBLE);
+                    TextView txt=findViewById(R.id.textErrorInCard);
+                    txt.setText(R.string.error);
+                    btnStartOff.setVisibility(View.VISIBLE);
+                }
                 viewModel.showImages.setValue(false);
                 Intent intent = new Intent(MainActivity.this, TimerActivity.class);
                 startActivity(intent);
-//            } else {
-//                showCardIdAndRegion();
-//            }
-            return false;
+            }
+            else if(sharedPref.getBoolean("offline",false)){
+                viewModel.showImages.setValue(false);
+                Intent intent = new Intent(MainActivity.this, TimerActivity.class);
+                startActivity(intent);
+            }
+            else {
+                showCardIdAndRegion();
+            }
+        });
+        findViewById(R.id.btnStartInCardOffline).setOnClickListener(view -> {
+            editor.putBoolean("offline", true);
+            editor.commit();
+            viewModel.showImages.setValue(false);
+            Intent intent = new Intent(MainActivity.this, TimerActivity.class);
+            startActivity(intent);
+
         });
 
-        findViewById(R.id.btnStartInCard).setOnTouchListener((view, motionEvent) -> {
+        findViewById(R.id.btnStartInCard).setOnClickListener(view -> {
             System.out.println("MainActivity.onCreate route: " + MatchApiUtil.REGIONS_ROUTES[dropdownPosition]);
-            MatchApiUtil matchApiUtil = new MatchApiUtil(getViewModel(), etSummonerName.getText().toString(), MatchApiUtil.REGIONS_ROUTES[dropdownPosition]);
+            MatchApiUtil matchApiUtil = new MatchApiUtil( etSummonerName.getText().toString(), MatchApiUtil.REGIONS_ROUTES[dropdownPosition]);
 
             try {
                 matchApiUtil.execute().get();
@@ -107,37 +142,46 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            if (matchApiUtil.getRespCode() == 200) {
+            if (matchApiUtil.getRespCode() == 200) {//sucesss
+                editor.putBoolean("offline",false );
+                String name= String.valueOf(etSummonerName.getText());
+                name.replace(" ","");
+                System.out.println("MainActivity.onCreate o nome é "+name);
+                editor.putString("name",name );
+                editor.putString("route",MatchApiUtil.REGIONS_ROUTES[dropdownPosition] );
+                editor.commit();
                 viewModel.showImages.setValue(false);
                 Intent intent = new Intent(MainActivity.this, TimerActivity.class);
                 startActivity(intent);
             } else if (matchApiUtil.getRespCode() == 404) {
                 findViewById(R.id.textErrorInCard).setVisibility(View.VISIBLE);
+                TextView txt=findViewById(R.id.textErrorInCard);
+                txt.setText(R.string.error);
+                btnStartOff.setVisibility(View.VISIBLE);
             }
-//             else if (matchApiUtil.getRespCode() == 403) {
-//                 findViewById(R.id.textErrorInCard).setVisibility(View.VISIBLE);
-//             }
+             else {
+                btnStartOff.setVisibility(View.VISIBLE);
+                TextView txt=findViewById(R.id.textErrorInCard);
+                txt.setText(R.string.error_conection);
+                 findViewById(R.id.textErrorInCard).setVisibility(View.VISIBLE);
+             }
             System.out.println("MainActivity.onCreate resposta: " + matchApiUtil.getRespCode());
             if ((viewModel.summonerName.getValue() != null) && (viewModel.region.getValue() != null)) {
 
             }
-
-            return false;
         });
 
 
-        findViewById(R.id.btnCommands).setOnTouchListener((view, motionEvent) -> {
+        findViewById(R.id.btnCommands).setOnClickListener(view -> {
             viewModel.showImages.setValue(false);
             Intent intent = new Intent(MainActivity.this, CommandsActivity.class);
             startActivity(intent);
-            return false;
         });
 
-        findViewById(R.id.btnSettings).setOnTouchListener((view, motionEvent) -> {
+        findViewById(R.id.btnSettings).setOnClickListener(view -> {
             viewModel.showImages.setValue(false);
             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
             startActivity(intent);
-            return false;
         });
 
 

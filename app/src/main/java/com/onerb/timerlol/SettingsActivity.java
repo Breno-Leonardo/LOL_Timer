@@ -23,6 +23,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -30,6 +31,7 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.onerb.timerlol.api.MatchApiUtil;
+import com.onerb.timerlol.ui.main.MainViewModel;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -208,8 +210,9 @@ public class SettingsActivity extends AppCompatActivity {
         Button btnCancel= findViewById(R.id.btnCancel);
         btnCancel.setText(getString(android.R.string.cancel));
         findViewById(R.id.btnChange).setOnClickListener(view -> {
+            getViewModel().summonerId.setValue(null);
             System.out.println("MainActivity.onCreate route: " + MatchApiUtil.REGIONS_ROUTES[dropdownPosition]);
-            MatchApiUtil matchApiUtil = new MatchApiUtil( etSummonerName.getText().toString(), MatchApiUtil.REGIONS_ROUTES[dropdownPosition]);
+            MatchApiUtil matchApiUtil = new MatchApiUtil( getViewModel(),etSummonerName.getText().toString(), MatchApiUtil.REGIONS_ROUTES[dropdownPosition]);
 
             try {
                 matchApiUtil.execute().get();
@@ -219,7 +222,7 @@ public class SettingsActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            if (matchApiUtil.getRespCode() == 200) {//sucesss
+            if (matchApiUtil.getRespCodeSumonnerId() == 200) {//sucesss
                 editor.putBoolean("offline",false );
                 String name= String.valueOf(etSummonerName.getText());
                 name.replace(" ","");
@@ -228,7 +231,7 @@ public class SettingsActivity extends AppCompatActivity {
                 editor.putString("route",MatchApiUtil.REGIONS_ROUTES[dropdownPosition] );
                 editor.commit();
                 findViewById(R.id.cardIdAndRegionSettings).setVisibility(View.GONE);
-            } else if (matchApiUtil.getRespCode() == 404) {
+            } else if (matchApiUtil.getRespCodeSumonnerId() == 404) {
                 findViewById(R.id.textErrorInCard).setVisibility(View.VISIBLE);
                 TextView txt=findViewById(R.id.textErrorInCard);
                 txt.setText(R.string.error);
@@ -238,7 +241,6 @@ public class SettingsActivity extends AppCompatActivity {
                 txt.setText(R.string.error_conection);
                 findViewById(R.id.textErrorInCard).setVisibility(View.VISIBLE);
             }
-            System.out.println("MainActivity.onCreate resposta: " + matchApiUtil.getRespCode());
 
         });
 
@@ -303,7 +305,9 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
     }
-
+    public MainViewModel getViewModel() {
+        return new ViewModelProvider(this).get(MainViewModel.class);
+    }
     @Override
     protected void onStop() {
         super.onStop();

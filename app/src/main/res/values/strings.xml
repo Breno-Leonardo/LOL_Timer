@@ -48,5 +48,6 @@
     <string name="error_conection">Connection Error</string>
     <string name="change">Change</string>
     <string name="change_summoner_name">Change Summoner Name</string>
+    <string name="with_rune">With the rune:</string>
 
 </resources>

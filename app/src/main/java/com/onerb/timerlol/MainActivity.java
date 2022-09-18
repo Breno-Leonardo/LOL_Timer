@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
         findViewById(R.id.btnStart).setOnClickListener(view -> {
             if (!sharedPref.getBoolean("offline",true) ) {
-                MatchApiUtil matchApiUtil = new MatchApiUtil(sharedPref.getString("name","Not contain this name &*&*(¨*("), sharedPref.getString("route","Not contain this name &*&*(¨*("));
+                MatchApiUtil matchApiUtil = new MatchApiUtil(getViewModel(),sharedPref.getString("name","Not contain this name &*&*(¨*("), sharedPref.getString("route","Not contain this name &*&*(¨*("));
                 System.out.println("MainActivity.onCreate Nome: "+sharedPref.getString("name","Not contain this name &*&*(¨*(")+ " Route:"+sharedPref.getString("route","Not contain this name &*&*(¨*("));
                 try {
                     matchApiUtil.execute().get();
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                if (matchApiUtil.getRespCode() == 404) {
+                if (matchApiUtil.getRespCodeSumonnerId() == 404) {
                     showCardIdAndRegion();
                     findViewById(R.id.textErrorInCard).setVisibility(View.VISIBLE);
                     TextView txt=findViewById(R.id.textErrorInCard);
@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
 
         findViewById(R.id.btnStartInCard).setOnClickListener(view -> {
             System.out.println("MainActivity.onCreate route: " + MatchApiUtil.REGIONS_ROUTES[dropdownPosition]);
-            MatchApiUtil matchApiUtil = new MatchApiUtil( etSummonerName.getText().toString(), MatchApiUtil.REGIONS_ROUTES[dropdownPosition]);
+            MatchApiUtil matchApiUtil = new MatchApiUtil(getViewModel(), etSummonerName.getText().toString(), MatchApiUtil.REGIONS_ROUTES[dropdownPosition]);
 
             try {
                 matchApiUtil.execute().get();
@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            if (matchApiUtil.getRespCode() == 200) {//sucesss
+            if (matchApiUtil.getRespCodeSumonnerId() == 200) {//sucesss
                 editor.putBoolean("offline",false );
                 String name= String.valueOf(etSummonerName.getText());
                 name.replace(" ","");
@@ -151,9 +151,11 @@ public class MainActivity extends AppCompatActivity {
                 editor.putString("route",MatchApiUtil.REGIONS_ROUTES[dropdownPosition] );
                 editor.commit();
                 viewModel.showImages.setValue(false);
+                findViewById(R.id.textErrorInCard).setVisibility(View.GONE);
+
                 Intent intent = new Intent(MainActivity.this, TimerActivity.class);
                 startActivity(intent);
-            } else if (matchApiUtil.getRespCode() == 404) {
+            } else if (matchApiUtil.getRespCodeSumonnerId() == 404) {
                 findViewById(R.id.textErrorInCard).setVisibility(View.VISIBLE);
                 TextView txt=findViewById(R.id.textErrorInCard);
                 txt.setText(R.string.error);
@@ -165,10 +167,7 @@ public class MainActivity extends AppCompatActivity {
                 txt.setText(R.string.error_conection);
                  findViewById(R.id.textErrorInCard).setVisibility(View.VISIBLE);
              }
-            System.out.println("MainActivity.onCreate resposta: " + matchApiUtil.getRespCode());
-            if ((viewModel.summonerName.getValue() != null) && (viewModel.region.getValue() != null)) {
 
-            }
         });
 
 

@@ -215,10 +215,9 @@ public class TimerActivity extends AppCompatActivity {
     private CardView currentTouch;//to know which timer is playing
     private HashMap<CardView, CountDownTimer> timers = new HashMap<>();//to cancel the timer by dragging to the right
     private SharedPreferences sharedPref;
-    private int apiRespCode = -1;
+    private int apiRespCode = 404;
     private String language;
     private AdView mAdView;
-    private boolean gameStart=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -333,6 +332,23 @@ public class TimerActivity extends AppCompatActivity {
 //            startActivity(intent);
             return false;
         });
+        findViewById(R.id.btnTeste).setOnTouchListener((view, motionEvent) -> {
+//            for (CardView c:
+//                    timers.keySet()) {
+//                c.setVisibility(View.GONE);
+//            }
+//            for (CountDownTimer c:
+//                    timers.values()) {
+//                c.cancel();
+//            }
+//            Intent intent = getIntent();
+//            finish();
+//            intent = new Intent(TimerActivity.this, TimerActivity.class);
+//            startActivity(intent);
+            return false;
+        });
+
+
 
         textToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
@@ -359,9 +375,9 @@ public class TimerActivity extends AppCompatActivity {
         };
 
 
-          new Runnable() {
+        new Runnable() {
             public void run() {
-               checkRunes();
+                checkRunes();
 
             }
         }.run();
@@ -467,39 +483,70 @@ public class TimerActivity extends AppCompatActivity {
         });
         speechRecognizer.startListening(intent);
     }
-    private void checkRunes(){
-        if (!sharedPref.getBoolean("offline",true) ) {
-            MatchApiUtil matchApiUtil = new MatchApiUtil(sharedPref.getString("name", "asfasfasfasfasfasfasfafasfafasf"), sharedPref.getString("route", "asfasfasfasfasfasfasfafasfafasf"));
+
+    private void checkRunes() {
+        if (!sharedPref.getBoolean("offline", true)) {
+            MatchApiUtil matchApiUtil = new MatchApiUtil(getViewModel(), sharedPref.getString("name", "asfasfasfasfasfasfasfafasfafasf"), sharedPref.getString("route", "asfasfasfasfasfasfasfafasfafasf"));
 
             matchApiUtil.execute();
             SummonerInfos.Participants[] participantsInfos = null;
 
-            if (matchApiUtil.getRespCode() == 200) {//sucesss
-                participantsInfos=matchApiUtil.participantsInfos;
-                int teamid=-1;
-                for (int i = 0; i < 10; i++) {
-                    if(participantsInfos[i].getSummonerName().equals(sharedPref.getString("name","fsdfsdfsdfsdfsdfsfsddfsdf"))){
-                        if(participantsInfos[i].getTeamID()==100)
-                            teamid=200;
-                        else if(participantsInfos[i].getTeamID()==200)
-                            teamid=100;
-                    }
-
-                }
-
-            } else if (matchApiUtil.getRespCode() == 404) {
-                System.out.println("TimerActivity.checkRunes erro");
-            }
-
-            new CountDownTimer(10000, 1000) {
+            new CountDownTimer(2500, 1000) {
                 @Override
                 public void onTick(long l) {
 
                 }
 
+                @Override
+                public void onFinish() {
+                    if (matchApiUtil.getRespCodeParticipants() == 200) {//sucesss
+                        apiRespCode=200;
+
+                    }
+                    else if ((matchApiUtil.getRespCodeParticipants() == 404) && (apiRespCode==200)) {
+                        System.out.println("TimerActivity.checkRunes Terminou o jogo");
+
+                        for (CardView c:
+                                timers.keySet()) {
+                            c.setVisibility(View.GONE);
+                        }
+                        for (CountDownTimer c:
+                                timers.values()) {
+                            c.cancel();
+                        }
+                        Intent intent = getIntent();
+                        finish();
+                        intent = new Intent(TimerActivity.this, TimerActivity.class);
+                        startActivity(intent);
+
+                    }
+                    else if (matchApiUtil.getRespCodeParticipants() == 404) {
+                        System.out.println("TimerActivity.checkRunes jogo nao encontrado");
+                    }
+
+                }
+            }.start();
+
+
+
+            new CountDownTimer(60000, 1000) {
+                @Override
+                public void onTick(long l) {
+                    if (matchApiUtil.getChampionsWithRune() != null) {
+
+                        TextView txtchmapRunes=findViewById(R.id.textChampionsWithRune);
+                        txtchmapRunes.setVisibility(View.VISIBLE);
+//                        txtchmapRunes.setText(getString(R.string.with_rune)+matchApiUtil.getChampionsWithRune());
+                        txtchmapRunes.setText(getString(R.string.with_rune)+matchApiUtil.getChampionsWithRune());
+                    }
+                }
+
 
                 @Override
                 public void onFinish() {
+                    getViewModel().summonerId.setValue(matchApiUtil.getSummonerId());
+                    getViewModel().championsInfos.setValue(matchApiUtil.getChampionsInfos());
+
                     checkRunes();
 
                 }
@@ -531,6 +578,14 @@ public class TimerActivity extends AppCompatActivity {
         if (speechRecognizer != null)
             speechRecognizer.destroy();
         speechRecognizer = null;
+        for (CardView c:
+             timers.keySet()) {
+            c.setVisibility(View.GONE);
+        }
+        for (CountDownTimer c:
+                timers.values()) {
+            c.cancel();
+        }
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
 
@@ -617,7 +672,7 @@ public class TimerActivity extends AppCompatActivity {
                     }
 
 
-                } else if (lane == JUNGLE ) {
+                } else if (lane == JUNGLE) {
                     if (changeBoot && !jungleBoots) {
                         if ((jungleHaste == BOOT_HASTE || jungleHaste == (RUNE_HASTE + BOOT_HASTE)))
                             jungleHaste -= BOOT_HASTE;
@@ -631,7 +686,7 @@ public class TimerActivity extends AppCompatActivity {
                         changeBoot = true;
                     }
 
-                } else if (lane == MID ) {
+                } else if (lane == MID) {
                     if (changeBoot && !midBoots) {
                         if ((midHaste == BOOT_HASTE || midHaste == (RUNE_HASTE + BOOT_HASTE)))
                             midHaste -= BOOT_HASTE;
@@ -645,7 +700,7 @@ public class TimerActivity extends AppCompatActivity {
                         changeBoot = true;
                     }
 
-                } else if (lane == ADC ) {
+                } else if (lane == ADC) {
                     if (changeBoot && !adcBoots) {
                         if ((adcHaste == BOOT_HASTE || adcHaste == (RUNE_HASTE + BOOT_HASTE)))
                             adcHaste -= BOOT_HASTE;
@@ -660,7 +715,7 @@ public class TimerActivity extends AppCompatActivity {
                     }
 
 
-                } else if (lane == SUPPORT ) {
+                } else if (lane == SUPPORT) {
                     if (changeBoot && !supportBoots) {
                         if ((supportHaste == BOOT_HASTE || supportHaste == (RUNE_HASTE + BOOT_HASTE)))
                             supportHaste -= BOOT_HASTE;
@@ -677,7 +732,7 @@ public class TimerActivity extends AppCompatActivity {
 
                 }
 
-                if (lane == TOP ) {
+                if (lane == TOP) {
 
                     if (changeRune && !topRune) {
                         if ((topHaste == RUNE_HASTE || topHaste == (RUNE_HASTE + BOOT_HASTE)))
@@ -692,7 +747,7 @@ public class TimerActivity extends AppCompatActivity {
                         changeRune = true;
                     }
 
-                } else if (lane == JUNGLE ) {
+                } else if (lane == JUNGLE) {
                     if (changeRune && !jungleRune) {
                         if ((jungleHaste == RUNE_HASTE || jungleHaste == (RUNE_HASTE + BOOT_HASTE)))
                             jungleHaste -= RUNE_HASTE;
@@ -707,8 +762,7 @@ public class TimerActivity extends AppCompatActivity {
                     }
 
 
-
-                } else if (lane == MID ) {
+                } else if (lane == MID) {
                     if (changeRune && !midRune) {
                         if ((midHaste == RUNE_HASTE || midHaste == (RUNE_HASTE + BOOT_HASTE)))
                             midHaste -= RUNE_HASTE;
@@ -723,7 +777,7 @@ public class TimerActivity extends AppCompatActivity {
                     }
 
 
-                } else if (lane == ADC ) {
+                } else if (lane == ADC) {
                     if (changeRune && !adcRune) {
                         if ((adcHaste == RUNE_HASTE || adcHaste == (RUNE_HASTE + BOOT_HASTE)))
                             adcHaste -= RUNE_HASTE;
@@ -738,7 +792,7 @@ public class TimerActivity extends AppCompatActivity {
                     }
 
 
-                } else if (lane == SUPPORT ) {
+                } else if (lane == SUPPORT) {
                     if (changeRune && !supportRune) {
                         if ((supportHaste == RUNE_HASTE || supportHaste == (RUNE_HASTE + BOOT_HASTE)))
                             supportHaste -= RUNE_HASTE;
@@ -807,6 +861,8 @@ public class TimerActivity extends AppCompatActivity {
                     speechRecognizer.destroy();
                 speechRecognizer = null;
                 TextView txtReturnSpell = findViewById(R.id.spellReturn);
+                updateTextTime(0, textView);
+
                 String speak = speakLane + " " + speakSpell + " return ";
 
                 txtReturnSpell.setText(speak);
@@ -1573,7 +1629,7 @@ public class TimerActivity extends AppCompatActivity {
             }
             // checando runas
             if (!sharedPref.getBoolean("offline", true)) {
-                MatchApiUtil matchApiUtil = new MatchApiUtil(sharedPref.getString("name","Not contain this name &*&*(¨*("), sharedPref.getString("route","Not contain this name &*&*(¨*("));
+                MatchApiUtil matchApiUtil = new MatchApiUtil(getViewModel(), sharedPref.getString("name", "Not contain this name &*&*(¨*("), sharedPref.getString("route", "Not contain this name &*&*(¨*("));
                 try {
                     matchApiUtil.execute().get();
                 } catch (ExecutionException e) {
@@ -1582,12 +1638,11 @@ public class TimerActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                if (matchApiUtil.getRespCode() == 200) {//sucesss
+                if (matchApiUtil.getRespCodeParticipants() == 200) {//sucesss
 
-                } else if (matchApiUtil.getRespCode() == 404) {
+                } else if (matchApiUtil.getRespCodeParticipants() == 404) {
 
-                }
-                else {
+                } else {
 
                 }
             }

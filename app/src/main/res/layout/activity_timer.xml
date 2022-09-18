@@ -21,6 +21,34 @@
         android:background="@color/white"
         android:orientation="vertical"
         tools:context=".TimerActivity">
+        <Button
+            android:id="@+id/btnTeste"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/greenTime"
+            android:gravity="center"
+            android:visibility="gone"
+            android:text="TESTE"
+            android:textColor="@color/black"
+            android:textSize="20dp">
+
+        </Button>
+        <TextView
+            android:id="@+id/textChampionsWithRune"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:gravity="center"
+            android:text=""
+            android:visibility="gone"
+            android:textColor="@color/teal_700"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textTimer"

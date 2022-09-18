@@ -13,4 +13,6 @@ public class MainViewModel extends ViewModel {
     public MutableLiveData<String> summonerName = new MutableLiveData<>(null);
     public MutableLiveData<String> summonerId = new MutableLiveData<>(null);
 
+    public MutableLiveData<StringBuilder> championsInfos = new MutableLiveData<>(null);
+
 }

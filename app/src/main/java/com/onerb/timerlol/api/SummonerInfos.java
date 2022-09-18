@@ -14,7 +14,7 @@ public class SummonerInfos {
     }
 
     public class Participants{
-        private int teamID;
+        private int teamId;
         private int  championId;
         private String summonerName;
         private Perks perks;
@@ -27,12 +27,12 @@ public class SummonerInfos {
             this.perks = perks;
         }
 
-        public int getTeamID() {
-            return teamID;
+        public int getTeamId() {
+            return teamId;
         }
 
         public void setTeamID(int teamID) {
-            this.teamID = teamID;
+            this.teamId = teamID;
         }
 
         public int getChampionId() {

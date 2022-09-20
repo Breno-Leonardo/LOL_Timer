@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -375,6 +376,7 @@ public class TimerActivity extends AppCompatActivity {
         };
 
 
+
         new Runnable() {
             public void run() {
                 checkRunes();
@@ -489,7 +491,16 @@ public class TimerActivity extends AppCompatActivity {
             System.out.println("TimerActivity.checkRunes checando runa");
             MatchApiUtil matchApiUtil = new MatchApiUtil(getViewModel(), sharedPref.getString("name", "asfasfasfasfasfasfasfafasfafasf"), sharedPref.getString("route", "asfasfasfasfasfasfasfafasfafasf"));
 
-            matchApiUtil.execute();
+            new Runnable() {
+                public void run() {
+                    try{
+                        matchApiUtil.execute();
+                    } catch (Exception e){}
+
+                }
+            };
+
+
 
             new CountDownTimer(5000, 1000) {
                 @Override
@@ -529,7 +540,7 @@ public class TimerActivity extends AppCompatActivity {
 
 
 
-            new CountDownTimer(60000, 1000) {
+            new CountDownTimer(60000, 10000) {
                 @Override
                 public void onTick(long l) {
                     if (matchApiUtil.getChampionsWithRune() != null) {
@@ -1629,25 +1640,7 @@ public class TimerActivity extends AppCompatActivity {
                     v.vibrate(1000);
                 }
             }
-            // checando runas
-            if (!sharedPref.getBoolean("offline", true)) {
-                MatchApiUtil matchApiUtil = new MatchApiUtil(getViewModel(), sharedPref.getString("name", "Not contain this name &*&*(¨*("), sharedPref.getString("route", "Not contain this name &*&*(¨*("));
-                try {
-                    matchApiUtil.execute().get();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                if (matchApiUtil.getRespCodeParticipants() == 200) {//sucesss
-
-                } else if (matchApiUtil.getRespCodeParticipants() == 404) {
-
-                } else {
-
-                }
-            }
+            
         }
     }
 

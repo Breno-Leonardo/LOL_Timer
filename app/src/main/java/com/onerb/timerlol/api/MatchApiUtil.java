@@ -62,7 +62,7 @@ public class MatchApiUtil extends AsyncTask<Void, Void, String> {
     private StringBuilder versionInfos = null;
     private String version = null;
     private static final int ID_RUNE = 8347;
-    private String championsWithRune;
+    private String championsWithRune=null;
 
     public String getChampionsWithRune() {
         return championsWithRune;
@@ -185,7 +185,7 @@ public class MatchApiUtil extends AsyncTask<Void, Void, String> {
 //                }
                 int teamid = -1;
                 for (int i = 0; i < 10; i++) {
-                    if (participantsInfos[i].getSummonerName().replace(" ","").equalsIgnoreCase(summonerName)) {
+                    if (participantsInfos[i].getSummonerName().replace(" ","").equalsIgnoreCase(summonerName.replace(" ",""))) {
                         if (participantsInfos[i].getTeamId() == 100)
                             teamid = 200;
                         else if (participantsInfos[i].getTeamId() == 200)
@@ -193,13 +193,17 @@ public class MatchApiUtil extends AsyncTask<Void, Void, String> {
                     }
 
                 }
+
+
                 for (int i = 0; i < participantsInfos.length; i++) {
                     for (int j = 0; j < participantsInfos[i].getPerks().getPerkIds().length; j++) {
-//                        System.out.println("TimerActivity.onCreate paticipant " + participantsInfos[i].getSummonerName() + " perks:" + participantsInfos[i].getPerks().getPerkIds()[j]);
                         if(participantsInfos[i].getTeamId()==teamid){
                             if (participantsInfos[i].getPerks().getPerkIds()[j] == ID_RUNE) {
-                                if(championsWithRune==null)
-                                    championsWithRune="";
+
+                                if(championsWithRune==null) {
+                                    championsWithRune = "";
+
+                                }
                                 championsWithRune+=" "+nameChampion(String.valueOf(participantsInfos[i].getChampionId()));
                             }
                         }

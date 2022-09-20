@@ -34,21 +34,67 @@
             android:textSize="20dp">
 
         </Button>
-        <TextView
-            android:id="@+id/textChampionsWithRune"
+        <LinearLayout
+            android:id="@+id/containerRuneAlert"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:clickable="true"
             android:gravity="center"
-            android:text=""
             android:visibility="gone"
-            android:textColor="@color/teal_700"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginTop="5dp"
+
+            >
+            <ImageView
+                android:id="@+id/iconRune"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/cosmic_insight"
+                ></ImageView>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|center_vertical"
+
+                >
+
+                <TextView
+                    android:id="@+id/textChampionsWithRuneShadow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginTop="2dp"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textChampionsWithRune"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/greenTime"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="@+id/textChampionsWithRuneShadow"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+
+
 
         <TextView
             android:id="@+id/textTimer"

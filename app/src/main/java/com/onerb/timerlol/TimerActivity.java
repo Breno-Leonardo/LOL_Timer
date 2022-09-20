@@ -486,12 +486,12 @@ public class TimerActivity extends AppCompatActivity {
 
     private void checkRunes() {
         if (!sharedPref.getBoolean("offline", true)) {
+            System.out.println("TimerActivity.checkRunes checando runa");
             MatchApiUtil matchApiUtil = new MatchApiUtil(getViewModel(), sharedPref.getString("name", "asfasfasfasfasfasfasfafasfafasf"), sharedPref.getString("route", "asfasfasfasfasfasfasfafasfafasf"));
 
             matchApiUtil.execute();
-            SummonerInfos.Participants[] participantsInfos = null;
 
-            new CountDownTimer(2500, 1000) {
+            new CountDownTimer(5000, 1000) {
                 @Override
                 public void onTick(long l) {
 
@@ -535,9 +535,11 @@ public class TimerActivity extends AppCompatActivity {
                     if (matchApiUtil.getChampionsWithRune() != null) {
 
                         TextView txtchmapRunes=findViewById(R.id.textChampionsWithRune);
-                        txtchmapRunes.setVisibility(View.VISIBLE);
-//                        txtchmapRunes.setText(getString(R.string.with_rune)+matchApiUtil.getChampionsWithRune());
+                        TextView txtchmapRunesShadow=findViewById(R.id.textChampionsWithRuneShadow);
+
                         txtchmapRunes.setText(getString(R.string.with_rune)+matchApiUtil.getChampionsWithRune());
+                        txtchmapRunesShadow.setText(getString(R.string.with_rune)+matchApiUtil.getChampionsWithRune());
+                        findViewById(R.id.containerRuneAlert).setVisibility(View.VISIBLE);
                     }
                 }
 

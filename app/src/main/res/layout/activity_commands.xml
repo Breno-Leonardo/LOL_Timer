@@ -98,7 +98,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             app:adSize="SMART_BANNER"
-            app:adUnitId="ca-app-pub-5476119661051114/9330308225"
+            app:adUnitId="ca-app-pub-5476119661051114/5760648164"
             app:layout_constraintTop_toBottomOf="@+id/cardView"></com.google.android.gms.ads.AdView>
 
 

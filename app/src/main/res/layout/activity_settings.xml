@@ -495,7 +495,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             app:adSize="SMART_BANNER"
-            app:adUnitId="ca-app-pub-5476119661051114/1330143679"
+            app:adUnitId="ca-app-pub-5476119661051114/1821403153"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"></com.google.android.gms.ads.AdView>

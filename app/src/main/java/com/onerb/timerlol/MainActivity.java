@@ -30,6 +30,11 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.onerb.timerlol.api.MatchApiUtil;
 import com.onerb.timerlol.ui.main.MainViewModel;
 
@@ -53,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     private int dropdownPosition = -1;
     private EditText etSummonerName;
     private SharedPreferences sharedPref;
-
+    private AdView mAdView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -66,6 +71,16 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 //        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        mAdView = findViewById(R.id.adViewMainActivity);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
 
         viewModel = getViewModel();
         viewModel.showImages.setValue(true);

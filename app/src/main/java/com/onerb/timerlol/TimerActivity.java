@@ -491,14 +491,9 @@ public class TimerActivity extends AppCompatActivity {
             System.out.println("TimerActivity.checkRunes checando runa");
             MatchApiUtil matchApiUtil = new MatchApiUtil(getViewModel(), sharedPref.getString("name", "asfasfasfasfasfasfasfafasfafasf"), sharedPref.getString("route", "asfasfasfasfasfasfasfafasfafasf"));
 
-            new Runnable() {
-                public void run() {
-                    try{
-                        matchApiUtil.execute();
-                    } catch (Exception e){}
 
-                }
-            };
+                        matchApiUtil.execute();
+
 
 
 
@@ -1640,7 +1635,7 @@ public class TimerActivity extends AppCompatActivity {
                     v.vibrate(1000);
                 }
             }
-            
+
         }
     }
 

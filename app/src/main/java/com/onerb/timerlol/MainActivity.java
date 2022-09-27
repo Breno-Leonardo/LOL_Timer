@@ -29,16 +29,21 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.RequestConfiguration;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.onerb.timerlol.api.MatchApiUtil;
 import com.onerb.timerlol.ui.main.MainViewModel;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
@@ -77,9 +82,46 @@ public class MainActivity extends AppCompatActivity {
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
+//        RequestConfiguration requestConfiguration
+//                = new RequestConfiguration.Builder()
+//                .setTestDeviceIds(Arrays.asList("9D691801B248B7CD47A496DC7442254D"))
+//                .build();
+//        MobileAds.setRequestConfiguration(requestConfiguration);
+
         mAdView = findViewById(R.id.adViewMainActivity);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+
+//        mAdView.setAdListener(new AdListener() {
+//            @Override
+//            public void onAdLoaded() {
+//                // Code to be executed when an ad finishes loading.
+//            }
+//            @Override
+//            public void onAdFailedToLoad(LoadAdError adError) {
+//                Toast.makeText(MainActivity.this, " Banner AdError is " + adError,
+//                        Toast.LENGTH_LONG).show();
+//            }
+//
+//            @Override
+//            public void onAdOpened() {
+//                // Code to be executed when an ad opens an overlay that
+//                // covers the screen.
+//            }
+//
+//            @Override
+//            public void onAdClicked() {
+//                // Code to be executed when the user clicks on an ad.
+//            }
+//
+//
+//            @Override
+//            public void onAdClosed() {
+//                // Code to be executed when the user is about to return
+//                // to the app after tapping on an ad.
+//            }
+//        });
+
 
 
         viewModel = getViewModel();
